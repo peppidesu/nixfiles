@@ -17,7 +17,7 @@
     # inputs.hardware.nixosModules.common-ssd
 
     ./dns.nix
-    ./hw.nix
+    ./hardware-configuration.nix
     ./hardening.nix
   ];
 
@@ -69,7 +69,17 @@
 
   boot = {
      kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
-     initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+     initrd.availableKernelModules = {
+       dw-hdmi = lib.mkForce false;
+       dw-mipi-dsi = lib.mkForce false;
+       rockchipdrm = lib.mkForce false;
+       rockchip-rga = lib.mkForce false;
+       phy-rockchip-pcie = lib.mkForce false;
+       pcie-rockchip-host = lib.mkForce false;
+       pwm-sun4i = lib.mkForce false;
+       sun4i-drm = lib.mkForce false;
+       sun8i-mixer = lib.mkForce false;
+     };
      loader = {
        grub.enable = false;
        generic-extlinux-compatible.enable = true;

@@ -19,7 +19,7 @@
     ./jellystack.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
-    ./hw.nix
+    ./hardware-configuration.nix
   ];
   home-manager.users."peppidesu" = ../../home-manager/peppidesu.nix;
   home-manager.extraSpecialArgs = { inherit inputs; };

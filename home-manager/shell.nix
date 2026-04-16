@@ -19,7 +19,6 @@
         "colorize"
         "colored-man-pages"
         "docker"
-        "thefuck"
         "grc"
         "sudo"
       ];
@@ -41,6 +40,8 @@
         fi
       '')
       ];
+
+    theme = "powerlevel10k/powerlevel10k";
     envExtra = ''
       HYPHEN_INSENSITIVE="true"
       HIST_STAMPS="yyyy-mm-dd"

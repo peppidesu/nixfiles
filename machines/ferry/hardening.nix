@@ -1,12 +1,12 @@
 {...}: {
   # Hide kptrs even for processes with CAP_SYSLOG
-  boot.kernel.sysctl."kernel.kptr_restrict" = "2";
+  # boot.kernel.sysctl."kernel.kptr_restrict" = "2";
 
   # Disable bpf() JIT (to eliminate spray attacks)
-  boot.kernel.sysctl."net.core.bpf_jit_enable" = false;
+  # boot.kernel.sysctl."net.core.bpf_jit_enable" = false;
 
   # Disable ftrace debugging
-  boot.kernel.sysctl."kernel.ftrace_enabled" = false;
+  # boot.kernel.sysctl."kernel.ftrace_enabled" = false;
 
   # Enable strict reverse path filtering (that is, do not attempt to route
   # packets that "obviously" do not belong to the iface's network; dropped
@@ -56,18 +56,18 @@
    # "slab_nomerge"
 
    # Overwrite free'd pages
-   "page_poison=1"
+   # "page_poison=1"
 
    # Enable page allocator randomization
-   "page_alloc.shuffle=1"
+   # "page_alloc.shuffle=1"
 
    # Disable debugfs
-   "debugfs=off"
+   # "debugfs=off"
   ];
 
-  security.protectKernelImage = true;
-  security.forcePageTableIsolation = true;
-  security.apparmor.enable = true;
-  security.apparmor.killUnconfinedConfinables = true;
+  #security.protectKernelImage = true;
+  #security.forcePageTableIsolation = true;
+  #security.apparmor.enable = true;
+  #security.apparmor.killUnconfinedConfinables = true;
   # environment.memoryAllocator.provider = "graphene-hardened";
 }

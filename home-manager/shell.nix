@@ -28,15 +28,19 @@
       zed = lib.mkIf config.programs.zed-editor.enable "zeditor";
     };
 
-    initContent = ''
-      source ${./p10k.sh}
+    initContent = lib.mkMerge [
+      (lib.mkOrder 500 ''
+        source ${./p10k.sh}
+      '')
 
-      if [[ "$TERM" == 'xterm-kitty' ]]; then
-        alias ssh="kitty +kitten ssh"
-        alias ssh-slow="infocmp -a xterm-kitty | ssh myserver tic -x -o \~/.terminfo /dev/stdin"
-        alias ssh-bare="/bin/ssh"
-      fi
-    '';
+      (lib.mkOrder 1500 ''
+        if [[ "$TERM" == 'xterm-kitty' ]]; then
+          alias ssh="kitty +kitten ssh"
+          alias ssh-slow="infocmp -a xterm-kitty | ssh myserver tic -x -o \~/.terminfo /dev/stdin"
+          alias ssh-bare="/bin/ssh"
+        fi
+      '')
+      ];
     envExtra = ''
       HYPHEN_INSENSITIVE="true"
       HIST_STAMPS="yyyy-mm-dd"

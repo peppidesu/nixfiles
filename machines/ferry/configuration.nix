@@ -44,6 +44,7 @@
       allowUnfree = true;
     };
   };
+  home-manager.users."peppidesu" = ../../home-manager/peppidesu.nix;
 
   nix = let
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;

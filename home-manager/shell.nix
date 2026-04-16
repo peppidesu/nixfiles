@@ -52,11 +52,11 @@
     colors = {
       user = "red";
       group = "grey";
-    };
-    date = {
-      hour-old = "cyan";
-      day-old = "blue";
-      older = "dark_blue";
+      date = {
+        hour-old = "cyan";
+        day-old = "blue";
+        older = "dark_blue";
+      };
     };
     enableZshIntegration = true;
   };

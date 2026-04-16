@@ -14,6 +14,16 @@
     oh-my-zsh = {
       enable = true;
       plugins = [
+        {
+          name = "powerlevel10k-config";
+          src = ./p10k;
+          file = "p10k.zsh";
+        }
+        {
+          name = "zsh-powerlevel10k";
+          src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/";
+          file = "powerlevel10k.zsh-theme";
+        }
         "git"
         "alias-finder"
         "colorize"
@@ -28,19 +38,13 @@
       zed = lib.mkIf config.programs.zed-editor.enable "zeditor";
     };
 
-    initContent = lib.mkMerge [
-      (lib.mkOrder 500 ''
-        source ${./p10k.sh}
-      '')
-
-      (lib.mkOrder 1500 ''
-        if [[ "$TERM" == 'xterm-kitty' ]]; then
-          alias ssh="kitty +kitten ssh"
-          alias ssh-slow="infocmp -a xterm-kitty | ssh myserver tic -x -o \~/.terminfo /dev/stdin"
-          alias ssh-bare="/bin/ssh"
-        fi
-      '')
-      ];
+    initContent = ''
+      if [[ "$TERM" == 'xterm-kitty' ]]; then
+        alias ssh="kitty +kitten ssh"
+        alias ssh-slow="infocmp -a xterm-kitty | ssh myserver tic -x -o \~/.terminfo /dev/stdin"
+        alias ssh-bare="/bin/ssh"
+      fi
+    '';
 
     envExtra = ''
       HYPHEN_INSENSITIVE="true"

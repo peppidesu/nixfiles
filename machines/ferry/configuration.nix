@@ -133,8 +133,6 @@
   age.secrets.wg-key-ferry = {
     file = "${inputs.self.outPath}/secrets/wg-key-ferry.age";
     mode = "640";
-    owner = "systemd-network";
-    group = "systemd-network";
   };
 
   networking.wireguard.interfaces = {
@@ -147,14 +145,6 @@
         {
           publicKey = "tpajiBBjNW6RBahfZCttqCxEBu536ZqmuUMzCm93bxI=";
           allowedIPs = [ "10.90.0.2/32" "fc00:90:90:90::0:2/128" ];
-        }
-        {
-          publicKey = "";
-          allowedIPs = [ "10.90.1.1/32" "fc00:90:90:90::1:1/128" ];
-        }
-        {
-          publicKey = "";
-          allowedIPs = [ "10.90.1.2/32" "fc00:90:90:90::1:2/128" ];
         }
       ];
     };

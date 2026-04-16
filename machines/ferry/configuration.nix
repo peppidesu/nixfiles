@@ -82,6 +82,7 @@
     allowedUDPPorts = [ ];
   };
 
+  programs.zsh.enable = true;
   users.users = {
     peppidesu = {
       # TODO: You can set an initial password for your user.
@@ -95,9 +96,9 @@
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
       extraGroups = ["wheel" "networkmanager"];
+      shell = pkgs.zsh;
     };
   };
-  users.defaultUserShell = pkgs.zsh;
 
   services.openssh = {
     enable = true;

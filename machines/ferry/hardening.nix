@@ -53,7 +53,7 @@
   ];
   boot.kernelParams = [
    # Don't merge slabs
-   "slab_nomerge"
+   # "slab_nomerge"
 
    # Overwrite free'd pages
    "page_poison=1"
@@ -69,5 +69,5 @@
   security.forcePageTableIsolation = true;
   security.apparmor.enable = true;
   security.apparmor.killUnconfinedConfinables = true;
-  environment.memoryAllocator.provider = "graphene-hardened";
+  # environment.memoryAllocator.provider = "graphene-hardened";
 }

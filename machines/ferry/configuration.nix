@@ -86,12 +86,20 @@
      };
    };
 
-  networking.hostName = "ferry";
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 80 443 ];
-    allowedUDPPorts = [ ];
+  networking = {
+    hostName = "ferry";
+    nameservers = [ "127.0.0.1" "::1" ];
+
+    networkmanager.enable = true;
+    networkmanager.dns = "none";
+
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 80 443 ];
+      allowedUDPPorts = [ ];
+    };
   };
+  services.resolved.enable = false;
 
   programs.zsh.enable = true;
   users.users = {
@@ -125,13 +133,13 @@
   age.secrets.wg-key-ferry.file = "${inputs.self.outPath}/secrets/wg-key-ferry.age";
   networking.wireguard.interfaces = {
     wg0 = {
-      ips = [ "10.90.0.1/16" "fc00:90:90:90::0:1/64" ];      
+      ips = [ "10.90.0.1/16" "fc00:90:90:90::0:1/64" ];
       listenPort = 51820;
       privateKeyFile = config.age.secrets.wg-key-ferry.path;
 
       peers = [
         {
-          publicKey = "";
+          publicKey = "eM7HjJ6MHsGs0N5HhkaDU0QJHc/d/LOQGvQ2YjwbPXo=";
           allowedIPs = [ "10.90.0.2/32" "fc00:90:90:90::0:2/128" ];
         }
         {

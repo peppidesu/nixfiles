@@ -6,7 +6,11 @@ in
   # Wireguard private key for Mullvad VPN
   "wg-key-mullvad.age".publicKeys = [ lagoon ];
 
-  # Wireguard private key for home VPN via ferry.
+  # Wireguard private key for home VPN - lagoon.
+  # Public key: eM7HjJ6MHsGs0N5HhkaDU0QJHc/d/LOQGvQ2YjwbPXo=
+  "wg-key-lagoon.age".publicKeys = [ lagoon ];
+
+  # Wireguard private keys for home VPN - ferry.
   # Public key: xqhLjwC4Jngd9L6jp2C2QiSqPfCw+Sjo8KtLpmyq5lQ=
   "wg-key-ferry.age".publicKeys = [ ferry ];
 }

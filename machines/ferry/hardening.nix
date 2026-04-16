@@ -1,6 +1,6 @@
 {...}: {
   # Hide kptrs even for processes with CAP_SYSLOG
-  # boot.kernel.sysctl."kernel.kptr_restrict" = "2";
+  boot.kernel.sysctl."kernel.kptr_restrict" = "2";
 
   # Disable bpf() JIT (to eliminate spray attacks)
   # boot.kernel.sysctl."net.core.bpf_jit_enable" = false;

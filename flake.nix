@@ -65,7 +65,7 @@
         modules = [
           ./machines/lagoon/configuration.nix
           agenix.nixosModules.default
-          nixvim.nixosModules.default
+          nixvim.nixosModules.nixvim
           home-manager.nixosModules.default
         ];
       };
@@ -74,7 +74,7 @@
         modules = [
           ./machines/ferry/configuration.nix
           agenix.nixosModules.default
-          nixvim.nixosModules.default
+          nixvim.nixosModules.nixvim
           home-manager.nixosModules.default
         ];
       };

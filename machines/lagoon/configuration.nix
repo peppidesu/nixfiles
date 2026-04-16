@@ -121,7 +121,7 @@
     dns = [ "10.64.0.1" ];
     privateKeyFile = config.age.secrets.wg-key-lagoon.path;
     peers = [{
-      publicKey = "xqhLjwC4Jngd9L6jp2C2QiSqPfCw+Sjo8KtLpmyq5lQ=";
+      publicKey = "NNeWO/cXpvBci9n/K1W93jKN4wTeHUXZxsELI2XpWQM=";
       allowedIPs = [ "fc00:90:90:90::0:1/64" ];
       endpoint = "193.32.249.66:3002";
     }];

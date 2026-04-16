@@ -1,16 +1,17 @@
 let
-  lagoon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII4G1z6SbYjCyAkDoHo0unU2idrRRIT33UCWuAKeHArQ peppidesu@lagoon";
+  lagoon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDdOBUoHQDv4CrJjsfI8/iriz3+PnESu0scvVl+65iec root@lagoon";
   ferry = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOgGkPR0z519KpHWGUdASL1vn1O+dazxuW7tjEL7hULh root@ferry";
+  peppidesu-dreadnought = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO97Yve7hz7krbWA2FOgEihMAoGNmb2PhiwrUB3vXPzS peppidesu@dreadnought";
 in
 {
   # Wireguard private key for Mullvad VPN
-  "wg-key-mullvad.age".publicKeys = [ lagoon ];
+  "wg-key-mullvad.age".publicKeys = [ lagoon peppidesu-dreadnought ];
 
   # Wireguard private key for home VPN - lagoon.
-  # Public key: eM7HjJ6MHsGs0N5HhkaDU0QJHc/d/LOQGvQ2YjwbPXo=
-  "wg-key-lagoon.age".publicKeys = [ lagoon ];
+  # Public key: tpajiBBjNW6RBahfZCttqCxEBu536ZqmuUMzCm93bxI=
+  "wg-key-lagoon.age".publicKeys = [ lagoon peppidesu-dreadnought ];
 
   # Wireguard private keys for home VPN - ferry.
-  # Public key: xqhLjwC4Jngd9L6jp2C2QiSqPfCw+Sjo8KtLpmyq5lQ=
-  "wg-key-ferry.age".publicKeys = [ ferry ];
+  # Public key: NNeWO/cXpvBci9n/K1W93jKN4wTeHUXZxsELI2XpWQM=
+  "wg-key-ferry.age".publicKeys = [ ferry peppidesu-dreadnought ];
 }

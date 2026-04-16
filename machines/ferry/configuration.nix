@@ -130,7 +130,13 @@
     };
   };
 
-  age.secrets.wg-key-ferry.file = "${inputs.self.outPath}/secrets/wg-key-ferry.age";
+  age.secrets.wg-key-ferry = {
+    file = "${inputs.self.outPath}/secrets/wg-key-ferry.age";
+    mode = "640";
+    owner = "systemd-network";
+    group = "systemd-network";
+  };
+
   networking.wireguard.interfaces = {
     wg0 = {
       ips = [ "10.90.0.1/16" "fc00:90:90:90::0:1/64" ];
@@ -139,7 +145,7 @@
 
       peers = [
         {
-          publicKey = "eM7HjJ6MHsGs0N5HhkaDU0QJHc/d/LOQGvQ2YjwbPXo=";
+          publicKey = "tpajiBBjNW6RBahfZCttqCxEBu536ZqmuUMzCm93bxI=";
           allowedIPs = [ "10.90.0.2/32" "fc00:90:90:90::0:2/128" ];
         }
         {

@@ -21,6 +21,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hw.nix
   ];
+  home-manager.users."peppidesu" = import ../../home-manager/peppidesu.nix;
 
   nixpkgs = {
     # You can add overlays here

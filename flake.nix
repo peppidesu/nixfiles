@@ -64,6 +64,7 @@
         modules = [
           ./machines/lagoon/configuration.nix
           agenix.nixosModules.default
+          home-manager.nixosModules.default
         ];
       };
       ferry = nixpkgs.lib.nixosSystem {
@@ -71,28 +72,7 @@
         modules = [
           ./machines/ferry/configuration.nix
           agenix.nixosModules.default
-        ];
-      };
-    };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      # FIXME replace with your username@hostname
-      "peppidesu@lagoon" = home-manager.lib.homeManagerConfiguration {
-        # Home-manager requires 'pkgs' instance
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./home-manager/peppidesu.nix
-        ];
-      };
-      "peppidesu@ferry" = home-manager.lib.homeManagerConfiguration {
-        # Home-manager requires 'pkgs' instance
-        pkgs = nixpkgs.legacyPackages.aarch64-linux;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./home-manager/peppidesu.nix
+          home-manager.nixosModules.default
         ];
       };
     };

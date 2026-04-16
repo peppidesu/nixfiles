@@ -25,6 +25,7 @@
     self,
     nixpkgs,
     home-manager,
+    nixvim,
     agenix,
     ...
   } @ inputs: let
@@ -64,6 +65,7 @@
         modules = [
           ./machines/lagoon/configuration.nix
           agenix.nixosModules.default
+          nixvim.nixosModules.default
           home-manager.nixosModules.default
         ];
       };
@@ -72,6 +74,7 @@
         modules = [
           ./machines/ferry/configuration.nix
           agenix.nixosModules.default
+          nixvim.nixosModules.default
           home-manager.nixosModules.default
         ];
       };

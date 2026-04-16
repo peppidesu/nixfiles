@@ -26,8 +26,6 @@
     };
     shellAliases = {
       zed = lib.mkIf config.programs.zed-editor.enable "zeditor";
-      ls = "lsd";
-      l = "lsd -la";
     };
 
     initContent = ''

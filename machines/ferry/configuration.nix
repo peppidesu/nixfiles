@@ -97,6 +97,7 @@
       extraGroups = ["wheel" "networkmanager"];
     };
   };
+  users.defaultUserShell = pkgs.zsh;
 
   services.openssh = {
     enable = true;

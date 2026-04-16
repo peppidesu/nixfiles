@@ -45,6 +45,7 @@
     };
   };
   home-manager.users."peppidesu" = ../../home-manager/peppidesu.nix;
+  home-manager.extraSpecialArgs = { inherit inputs; };
 
   nix = let
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;

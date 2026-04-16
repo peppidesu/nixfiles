@@ -22,6 +22,7 @@
     ./hw.nix
   ];
   home-manager.users."peppidesu" = ../../home-manager/peppidesu.nix;
+  home-manager.extraSpecialArgs = { inherit inputs; };
 
   nixpkgs = {
     # You can add overlays here

@@ -64,4 +64,10 @@
    # Disable debugfs
    "debugfs=off"
   ];
+
+  security.protectKernelImage = true;
+  security.forcePageTableIsolation = true;
+  security.apparmor.enable = true;
+  security.apparmor.killUnconfinedConfinables = true;
+  environment.memoryAllocator.provider = "graphene-hardened";
 }

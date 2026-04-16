@@ -18,7 +18,7 @@
 
     ./dns.nix
     ./hw.nix
-    # ./hardening.nix
+    ./hardening.nix
   ];
 
   nixpkgs = {
@@ -135,8 +135,6 @@
       ];
     };
   };
-
-  security.protectKernelImage = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";

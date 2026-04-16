@@ -125,7 +125,7 @@
   age.secrets.wg-key-ferry.file = "${inputs.self.outPath}/secrets/wg-key-ferry.age";
   networking.wireguard.interfaces = {
     wg0 = {
-      ips = [ "10.90.0.1/16" "fc00:90:90:90::0:1/64" ];
+      ips = [ "10.90.0.1/16" "fc00:90:90:90::0:1/64" ];      
       listenPort = 51820;
       privateKeyFile = config.age.secrets.wg-key-ferry.path;
 

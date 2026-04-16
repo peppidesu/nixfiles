@@ -95,8 +95,8 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 80 443 ];
-      allowedUDPPorts = [ ];
+      allowedTCPPorts = [ ];
+      allowedUDPPorts = [ 53 ];
     };
   };
   services.resolved.enable = false;

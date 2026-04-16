@@ -30,7 +30,7 @@
   } @ inputs: let
     # Supported systems for your flake packages, shell, etc.
     systems = [
-      # "aarch64-linux"
+      "aarch64-linux"
       # "i686-linux"
       "x86_64-linux"
       # "aarch64-darwin"
@@ -62,8 +62,14 @@
       lagoon = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
-          # > Our main nixos configuration file <
           ./machines/lagoon/configuration.nix
+          agenix.nixosModules.default
+        ];
+      };
+      ferry = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./machines/ferry/configuration.nix
           agenix.nixosModules.default
         ];
       };
@@ -73,12 +79,19 @@
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
       # FIXME replace with your username@hostname
-      "peppidesu" = home-manager.lib.homeManagerConfiguration {
+      "peppidesu@lagoon" = home-manager.lib.homeManagerConfiguration {
         # Home-manager requires 'pkgs' instance
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # FIXME replace x86_64-linux with your architecure
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs;};
         modules = [
-          # > Our main home-manager configuration file <
+          ./home-manager/peppidesu.nix
+        ];
+      };
+      "peppidesu@ferry" = home-manager.lib.homeManagerConfiguration {
+        # Home-manager requires 'pkgs' instance
+        pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
           ./home-manager/peppidesu.nix
         ];
       };

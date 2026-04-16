@@ -16,9 +16,7 @@
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
-    ./jellystack.nix
-
-    # Import your generated (nixos-generate-config) hardware configuration
+    ./dns.nix
     ./hw.nix
   ];
 
@@ -66,7 +64,7 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
-  networking.hostName = "lagoon";
+  networking.hostName = "ferry";
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 80 443 ];
@@ -81,6 +79,7 @@
       initialPassword = "correcthorsebatterystaple";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO97Yve7hz7krbWA2FOgEihMAoGNmb2PhiwrUB3vXPzS peppidesu@dreadnought"
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
@@ -99,28 +98,28 @@
     };
   };
 
-  services.caddy = {
-    enable = true;
-    package = pkgs.caddy.withPlugins {
-      plugins = [
-        "github.com/caddy-dns/cloudflare@v0.2.4"
-      ];
-      hash = "replace-this";
-    };
-  };
+  age.secrets.wg-key-ferry.file = "${inputs.self.outPath}/secrets/wg-key-ferry.age";
+  networking.wireguard.interfaces = {
+    wg0 = {
+      ips = [ "10.90.0.1/16" "fc00:90:90:90::0:1/64" ];
+      listenPort = 51820;
+      privateKeyFile = config.age.secrets.wg-key-ferry.path;
 
-  networking.wg-quick.interfaces.wg0 = {
-    address = [
-      "10.64.108.27/32"
-      "fc00:90:90:90::0:2/128"
-    ];
-    dns = [ "10.64.0.1" ];
-    privateKeyFile = config.age.secrets.wg-key-lagoon.path;
-    peers = [{
-      publicKey = "";
-      allowedIPs = [ "fc00:90:90:90::0:1/64" ];
-      endpoint = "193.32.249.66:3002";
-    }];
+      peers = [
+        {
+          publicKey = "";
+          allowedIPs = [ "10.90.0.2/32" "fc00:90:90:90::0:2/128" ];
+        }
+        {
+          publicKey = "";
+          allowedIPs = [ "10.90.1.1/32" "fc00:90:90:90::1:1/128" ];
+        }
+        {
+          publicKey = "";
+          allowedIPs = [ "10.90.1.2/32" "fc00:90:90:90::1:2/128" ];
+        }
+      ];
+    };
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

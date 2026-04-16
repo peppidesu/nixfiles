@@ -22,6 +22,7 @@
         "grc"
         "sudo"
       ];
+      theme = "powerlevel10k/powerlevel10k";
     };
     shellAliases = {
       zed = lib.mkIf config.programs.zed-editor.enable "zeditor";
@@ -41,7 +42,6 @@
       '')
       ];
 
-    theme = "powerlevel10k/powerlevel10k";
     envExtra = ''
       HYPHEN_INSENSITIVE="true"
       HIST_STAMPS="yyyy-mm-dd"

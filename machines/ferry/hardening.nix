@@ -6,7 +6,7 @@
   boot.kernel.sysctl."net.core.bpf_jit_enable" = false;
 
   # Disable ftrace debugging
-  # boot.kernel.sysctl."kernel.ftrace_enabled" = false;
+  boot.kernel.sysctl."kernel.ftrace_enabled" = false;
 
   # Enable strict reverse path filtering (that is, do not attempt to route
   # packets that "obviously" do not belong to the iface's network; dropped
@@ -51,6 +51,7 @@
     "sysv"
     "ufs"
   ];
+  
   boot.kernelParams = [
    # Don't merge slabs
    # "slab_nomerge"
@@ -65,9 +66,9 @@
    # "debugfs=off"
   ];
 
-  #security.protectKernelImage = true;
+  security.protectKernelImage = true;
   #security.forcePageTableIsolation = true;
   security.apparmor.enable = true;
   security.apparmor.killUnconfinedConfinables = true;
-  # environment.memoryAllocator.provider = "graphene-hardened";
+  environment.memoryAllocator.provider = "graphene-hardened";
 }

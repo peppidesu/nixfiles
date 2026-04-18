@@ -28,12 +28,11 @@
      };
    };
 
-  systemd.services = lib.concatMapAttrs (name: _: {
+  systemd.services = lib.concatMapAttrs (name: value: {
     "wireguard-${name}".serviceConfig = {
       User = "wireguard";
       Group = "wireguard";
       AmbientCapabilities = "CAP_NET_ADMIN";
-      NoNewPrivileges = true;
     };
   }) config.networking.wireguard.interfaces;
 }

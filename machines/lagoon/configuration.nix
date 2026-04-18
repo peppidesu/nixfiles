@@ -1,6 +1,6 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{
+moduleArgs@{
   inputs,
   lib,
   config,
@@ -113,19 +113,7 @@
     };
   };
 
-  networking.wg-quick.interfaces.wg0 = {
-    address = [
-      "10.64.108.27/32"
-      "fc00:90:90:90::0:2/128"
-    ];
-    dns = [ "10.64.0.1" ];
-    privateKeyFile = config.age.secrets.wg-key-lagoon.path;
-    peers = [{
-      publicKey = "NNeWO/cXpvBci9n/K1W93jKN4wTeHUXZxsELI2XpWQM=";
-      allowedIPs = [ "fc00:90:90:90::0:1/64" ];
-      endpoint = "193.32.249.66:3002";
-    }];
-  };
+  networking.wg-quick.interfaces.wg0 = (import ../../common/wg.nix moduleArgs).peers.lagoon;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";

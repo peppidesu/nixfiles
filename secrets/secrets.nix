@@ -1,6 +1,6 @@
 let
   lagoon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDdOBUoHQDv4CrJjsfI8/iriz3+PnESu0scvVl+65iec root@lagoon";
-  ferry = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOgGkPR0z519KpHWGUdASL1vn1O+dazxuW7tjEL7hULh root@ferry";
+  ferry = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBJKQeBymU0nYPFrA2dJ4QMfhYQb7BqR6N34HxjJBDQS root@ferry";
   peppidesu-dreadnought = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO97Yve7hz7krbWA2FOgEihMAoGNmb2PhiwrUB3vXPzS peppidesu@dreadnought";
 in
 {

@@ -51,7 +51,7 @@
     "sysv"
     "ufs"
   ];
-  
+
   boot.kernelParams = [
    # Don't merge slabs
    "slab_nomerge"

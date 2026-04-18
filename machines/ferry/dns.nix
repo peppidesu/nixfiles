@@ -38,5 +38,7 @@
       '';
     };
   };
-  systemd.services.dnscrypt-proxy.serviceConfig.StateDirectory = "dnscrypt-proxy";
+  systemd.services.dnscrypt-proxy.serviceConfig = {
+    StateDirectory = "dnscrypt-proxy";
+  };  
 }

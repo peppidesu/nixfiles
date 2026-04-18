@@ -70,5 +70,9 @@
   security.forcePageTableIsolation = true;
   security.apparmor.enable = true;
   security.apparmor.killUnconfinedConfinables = true;
+
+  # DO NOT ENABLE!!!
+  # Enabling this option seems to make aarch64 platforms unrecoverable.
+  #
   # environment.memoryAllocator.provider = "graphene-hardened";
 }

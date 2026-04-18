@@ -4,6 +4,7 @@
      isSystemUser = true;
      group = "wireguard";
    };
+   users.groups."wireguard" = {};
 
    age.secrets.wg-key-ferry = {
      file = "${inputs.self.outPath}/secrets/wg-key-ferry.age";

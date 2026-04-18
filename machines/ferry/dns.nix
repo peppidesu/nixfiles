@@ -1,5 +1,6 @@
-{
+moduleArgs@{
   pkgs,
+  lib,
   ...
 }: {
   services.dnscrypt-proxy = {
@@ -29,16 +30,11 @@
 
       cloaking_rules = pkgs.writeText "cloaking-rules.txt" ''
         *.ferry.home.arpa 192.168.1.50
-        *.ferry.wg.arpa 10.90.0.1
-        *.ferry.wg.arpa fc00:90:90:90::0:1
-
         *.lagoon.home.arpa 192.168.1.100
-        *.lagoon.wg.arpa 10.90.0.2
-        *.lagoon.wg.arpa fc00:90:90:90::0:2
-      '';
+      '' ++ lib.debug.traceValSeq (import ../../common/wg.nix moduleArgs).cloakingRules;
     };
   };
   systemd.services.dnscrypt-proxy.serviceConfig = {
     StateDirectory = "dnscrypt-proxy";
-  };  
+  };
 }

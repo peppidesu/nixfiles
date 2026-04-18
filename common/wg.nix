@@ -1,10 +1,10 @@
 {lib, config, ...}: let
   # Wireguard Home VPN config
-  
+
   # Subnet sizes for ipv4 and ipv6
   subnet-ipv4 = "16";
   subnet-ipv6 = "64";
-  
+
   # Peer registry
   peers = {
     ferry = {
@@ -18,13 +18,13 @@
       ipv6 = "fc00:90:90:90::0:2";
     };
   };
-  
+
   # Endpoint peer
   endpoint = "ferry";
   # Endpoint address + port for other peers
   endpointAddress = "wg.peppidesu.dev";
   endpointPort = 51820;
-  
+
 in {
   endpoint = {
     ips = [
@@ -40,6 +40,7 @@ in {
       })
     (lib.attrsToList (builtins.removeAttrs peers [ endpoint ]));
   };
+
   peers = (builtins.mapAttrs (name: value: {
     address = [
       "${value.ipv4}/${subnet-ipv4}"
@@ -59,4 +60,13 @@ in {
       endpoint = "${endpointAddress}:${endpointPort}";
     }];
   }) (builtins.removeAttrs peers [ endpoint ]));
+
+  cloakingRules = builtins.concatStringsSep "\n" (
+    builtins.map ({name, value}: ''
+      *.${name}.wg.arpa ${value.ipv4}
+      *.${name}.wg.arpa ${value.ipv6}
+    '') (
+      lib.attrsToList peers
+    )
+  );
 }

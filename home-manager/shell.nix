@@ -74,10 +74,9 @@
 
   programs.git = {
     enable = true;
-    config = {
+    settings = {
       user.name = "peppidesu";
       user.email = "bakker.pepijn@gmail.com";
-
       init.defaultBranch = "main";
       url."https://github.com/".insteadOf = [ "github:" ];
     };

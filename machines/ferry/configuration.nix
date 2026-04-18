@@ -17,8 +17,9 @@
     # inputs.hardware.nixosModules.common-ssd
 
     ./dns.nix
-    ./hardware-configuration.nix
     ./hardening.nix
+    ./hardware-configuration.nix
+    ./wireguard.nix
   ];
 
   nixpkgs = {
@@ -128,31 +129,6 @@
       # Remove if you want to SSH using passwords
       PasswordAuthentication = false;
     };
-  };
-
-  age.secrets.wg-key-ferry = {
-    file = "${inputs.self.outPath}/secrets/wg-key-ferry.age";
-    mode = "640";
-  };
-
-  networking.wireguard.interfaces = {
-    wg0 = {
-      ips = [ "10.90.0.1/16" "fc00:90:90:90::0:1/64" ];
-      listenPort = 51820;
-      privateKeyFile = config.age.secrets.wg-key-ferry.path;
-
-      peers = [
-        {
-          publicKey = "tpajiBBjNW6RBahfZCttqCxEBu536ZqmuUMzCm93bxI=";
-          allowedIPs = [ "10.90.0.2/32" "fc00:90:90:90::0:2/128" ];
-        }
-      ];
-    };
-  };
-
-  systemd.services.wireguard-wg0.serviceConfig = {
-    DynamicUser = true;
-    AmbientCapabilities = "CAP_NET_ADMIN";
   };
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";

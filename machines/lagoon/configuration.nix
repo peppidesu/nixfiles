@@ -17,7 +17,7 @@ moduleArgs@{
     # inputs.hardware.nixosModules.common-ssd
 
     ./jellystack.nix
-
+    ./hardening.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
@@ -74,6 +74,7 @@ moduleArgs@{
     allowedTCPPorts = [ 80 443 ];
     allowedUDPPorts = [ ];
   };
+  networking.wg-quick.interfaces.wg0 = (import ../../common/wg.nix moduleArgs).peers.lagoon;
 
   programs.zsh.enable = true;
   users.users = {
@@ -111,9 +112,18 @@ moduleArgs@{
       ];
       hash = "replace-this";
     };
+    settings = {
+      admin.identity.issuers.acme = {
+       	module = "acme";
+       	challenges.dns.provider = {
+          name = "cloudflare";
+          api_token = "{env.CF_API_TOKEN}";
+       	};
+      };
+    };
   };
 
-  networking.wg-quick.interfaces.wg0 = (import ../../common/wg.nix moduleArgs).peers.lagoon;
+
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";

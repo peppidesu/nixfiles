@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, lib, ...}: {
   # Hide kptrs even for processes with CAP_SYSLOG
   boot.kernel.sysctl."kernel.kptr_restrict" = "2";
 
@@ -75,8 +75,8 @@
     killUnconfinedConfinables = true;
   };
 
-  # DO NOT ENABLE!!!
-  # RPi bricker
+  # USE WITH CAUTION!
+  # GrapheneOS hardened_malloc
   #
   # environment.memoryAllocator.provider = "graphene-hardened";
 }

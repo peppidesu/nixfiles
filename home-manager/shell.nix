@@ -74,6 +74,13 @@
 
   programs.git = {
     enable = true;
+    config = {
+      user.name = "peppidesu";
+      user.email = "bakker.pepijn@gmail.com";
+
+      init.defaultBranch = "main";
+      url."https://github.com/".insteadOf = [ "github:" ];
+    };
   };
 
   programs.nixvim = {

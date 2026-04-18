@@ -54,21 +54,21 @@
   
   boot.kernelParams = [
    # Don't merge slabs
-   # "slab_nomerge"
+   "slab_nomerge"
 
    # Overwrite free'd pages
-   # "page_poison=1"
+   "page_poison=1"
 
    # Enable page allocator randomization
-   # "page_alloc.shuffle=1"
+   "page_alloc.shuffle=1"
 
    # Disable debugfs
-   # "debugfs=off"
+   "debugfs=off"
   ];
 
   security.protectKernelImage = true;
-  #security.forcePageTableIsolation = true;
+  security.forcePageTableIsolation = true;
   security.apparmor.enable = true;
   security.apparmor.killUnconfinedConfinables = true;
-  environment.memoryAllocator.provider = "graphene-hardened";
+  # environment.memoryAllocator.provider = "graphene-hardened";
 }

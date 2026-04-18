@@ -152,6 +152,7 @@
 
   systemd.services.wireguard-wg0.serviceConfig = {
     DynamicUser = true;
+    AmbientCapabilities = "CAP_NET_ADMIN";
   };
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";

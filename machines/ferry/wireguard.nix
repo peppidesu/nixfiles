@@ -33,6 +33,7 @@
       User = "wireguard";
       Group = "wireguard";
       AmbientCapabilities = "CAP_NET_ADMIN";
+      NoNewPrivileges = true;
     };
   }) config.networking.wireguard.interfaces;
 }

@@ -29,6 +29,7 @@
     description = "Move WireGuard wgmv into namespace wgmv";
     wants = [ "wg-quick@wgmv.service" ];
     after = [ "wg-quick@wgmv.service" ];
+    wantedBy = [ "multi-user.target" ];
     serviceConfig.Type = "oneshot";
     serviceConfig.ExecStart = ''
       ip netns add wgmv || true
@@ -36,7 +37,6 @@
       mkdir -p /etc/netns/wgmv
       cp /etc/resolv.conf /etc/netns/wgmv/resolv.conf
     '';
-    install.WantedBy = [ "multi-user.target" ];
   };
 
   # servarr

@@ -99,7 +99,7 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [ ];
-      allowedUDPPorts = [ 53 ];
+      allowedUDPPorts = [ 53 51820 ];
     };
   };
   services.resolved.enable = false;
@@ -136,7 +136,7 @@
   services.homepage-dashboard = {
     enable = true;
   };
-  
+
   custom.neovim.enable = true;
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";

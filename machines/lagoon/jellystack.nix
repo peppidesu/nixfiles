@@ -2,62 +2,84 @@
   inputs,
   config,
   pkgs,
+  lib,
   ...
-}: {
-  # jellyfin
-  services.jellyfin.enable = true;
-  services.caddy.virtualHosts."jelly.peppidesu.dev" = {
-    extraConfig = ''
-      reverse_proxy http://localhost:8089
-    '';
-  };
+}: let
 
-  age.secrets.wg-key-mullvad.file = "${inputs.self.outPath}/secrets/wg-key-mullvad.age";
-  networking.wg-quick.interfaces.wgmv = {
-    address = [
-      "10.64.108.27/32"
-      "fc00:bbbb:bbbb:bb01::1:6c1a/128"
-    ];
-    dns = [ "10.64.0.1" ];
-    privateKeyFile = config.age.secrets.wg-key-mullvad.path;
-    peers = [{
-      publicKey = "Qn1QaXYTJJSmJSMw18CGdnFiVM0/Gj/15OdkxbXCSG0=";
-      allowedIPs = [ "0.0.0.0/0" "::0/0" ];
-      endpoint = "193.32.249.66:3002";
-    }];
-  };
-  systemd.services.wgmv-ns-setup = {
-    description = "Move WireGuard wgmv into namespace wgmv";
-    wants = [ "wg-quick@wgmv.service" ];
-    after = [ "wg-quick@wgmv.service" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig.Type = "oneshot";
-    serviceConfig.ExecStart = pkgs.writeShellApplication {
-      name = "move-wgmv-to-namespace";
-      runtimeInputs = [ pkgs.iproute2 ];
-
-      text = ''
-        if ! ip netns list | grep -q '^myns$'; then
-          ip netns add myns
-        fi
-        ip link set wgmv netns wgmv
-        mkdir -p /etc/netns/wgmv
-        cp /etc/resolv.conf /etc/netns/wgmv/resolv.conf
-      '';
+  confineServices = xs: lib.mkMerge ([{
+  }] ++ (builtins.map (name: {
+    systemd.services.${name}.vpnConfinement = {
+      enable = true;
+      vpnNamespace = "wgmv";
     };
-  };
+  }) xs));
 
-  # servarr
-  services.jellyseerr.enable = true;
-  systemd.services.jellyseerr.serviceConfig.NetworkNamespacePath = "/run/netns/wgmv";
-  services.sonarr.enable = true;
-  systemd.services.sonarr.serviceConfig.NetworkNamespacePath = "/run/netns/wgmv";
-  services.radarr.enable = true;
-  systemd.services.radarr.serviceConfig.NetworkNamespacePath = "/run/netns/wgmv";
-  services.prowlarr.enable = true;
-  systemd.services.prowlarr.serviceConfig.NetworkNamespacePath = "/run/netns/wgmv";
-  services.flaresolverr.enable = true;
-  systemd.services.flaresolverr.serviceConfig.NetworkNamespacePath = "/run/netns/wgmv";
-  services.qbittorrent.enable = true;
-  systemd.services.qbittorrent.serviceConfig.NetworkNamespacePath = "/run/netns/wgmv";
+  makeCaddyConfig = { publicServices, privateServices }: let
+    makeVirtualHostConfig = cfg: cfg.extraConfig or "reverse_proxy ${cfg.proxy}";
+  in lib.mkMerge [
+    (lib.concatMapAttrs (name: value: {
+      "${name}.peppidesu.dev".extraConfig = makeVirtualHostConfig value;
+    }) publicServices)
+    (lib.concatMapAttrs (name: value: {
+      "http://${name}.lagoon.home.arpa".extraConfig = makeVirtualHostConfig value;
+      "http://${name}.lagoon.wg.arpa".extraConfig = makeVirtualHostConfig value;
+    }) (publicServices // privateServices))
+  ];
+in {
+  config = lib.mkMerge [
+    {
+      services.caddy.virtualHosts = makeCaddyConfig {
+        publicServices = {
+          "jelly".proxy = "http://localhost:8096";
+        };
+        privateServices = {
+          "seerr".proxy = "http://10.200.1.1:5055";
+          "sonarr".proxy = "http://10.200.1.1:8989";
+          "radarr".proxy = "http://10.200.1.1:7878";
+          "prowlarr".proxy = "http://10.200.1.1:9696";
+          "qbt".proxy = "http://10.200.1.1:8080";
+        };
+      };
+      # jellyfin
+      services.jellyfin = {
+        enable = true;
+        configDir = "/opt/jellyfin/config";
+        dataDir = "/opt/jellyfin/data";
+        cacheDir = "/opt/jellyfin/cache";
+      };
+
+      # servarr
+      services.jellyseerr.enable = true;
+      services.sonarr.enable = true;
+      services.radarr.enable = true;
+      services.prowlarr.enable = true;
+      services.flaresolverr.enable = true;
+      services.qbittorrent.enable = true;
+
+      age.secrets.wg-key-mullvad.file = "${inputs.self.outPath}/secrets/wg-key-mullvad.age";
+      vpnNamespaces."wgmv" = {
+        enable = true;
+        wireguardConfigFile = config.age.secrets.wg-key-mullvad.path;
+        namespaceAddress = "10.200.1.1";
+        bridgeAddress = "10.200.1.5";
+        portMappings = [
+          { from = 5055; to = 5055; }
+          { from = 8989; to = 8989; }
+          { from = 7878; to = 7878; }
+          { from = 9696; to = 9696; }
+          { from = 8080; to = 8080; }
+        ];
+      };
+    }
+
+    # Confine servarr services to VPN namespace
+    (confineServices [
+      "jellyseerr"
+      "sonarr"
+      "radarr"
+      "prowlarr"
+      "flaresolverr"
+      "qbittorrent"
+    ])
+  ];
 }

@@ -24,7 +24,7 @@
   # Endpoint peer
   endpoint = "ferry";
   # Endpoint address + port for other peers
-  endpointAddress = "wg.peppidesu.dev";
+  endpointAddress = "192.168.1.50";
   endpointPort = 51820;
 
 in {

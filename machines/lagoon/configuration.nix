@@ -69,6 +69,7 @@ moduleArgs@{
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
+  networking.networkmanager.enable = true;
   networking.hostName = "lagoon";
   networking.firewall = {
     enable = true;

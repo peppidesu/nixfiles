@@ -13,6 +13,9 @@
     nixvim.url = "github:nix-community/nixvim/nixos-25.11";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
+    # VPN Confinement
+    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
+
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -27,6 +30,7 @@
     home-manager,
     nixvim,
     agenix,
+    vpn-confinement,
     ...
   } @ inputs: let
     # Supported systems for your flake packages, shell, etc.
@@ -66,6 +70,7 @@
           ./machines/lagoon/configuration.nix
           agenix.nixosModules.default
           home-manager.nixosModules.default
+          vpn-confinement.nixosModules.default
         ];
       };
       ferry = nixpkgs.lib.nixosSystem {

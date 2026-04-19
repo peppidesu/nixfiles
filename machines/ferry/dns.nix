@@ -31,7 +31,9 @@ moduleArgs@{
       cloaking_rules = pkgs.writeText "cloaking-rules.txt" ''
         *.ferry.home.arpa 192.168.1.50
         *.lagoon.home.arpa 192.168.1.100
-      '' ++ lib.debug.traceValSeq (import ../../common/wg.nix moduleArgs).cloakingRules;
+
+        ${(import ../../common/wg.nix moduleArgs).cloakingRules}
+      '';
     };
   };
   systemd.services.dnscrypt-proxy.serviceConfig = {

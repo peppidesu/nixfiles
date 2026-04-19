@@ -91,6 +91,7 @@ moduleArgs@{
       initialPassword = "correcthorsebatterystaple";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO97Yve7hz7krbWA2FOgEihMAoGNmb2PhiwrUB3vXPzS peppidesu@dreadnought"
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
@@ -112,20 +113,20 @@ moduleArgs@{
 
   services.caddy = {
     enable = true;
-    package = pkgs.caddy.withPlugins {
-      plugins = [
-        "github.com/caddy-dns/cloudflare@v0.2.4"
-      ];
-      hash = "replace-this";
-    };
+    # package = pkgs.caddy.withPlugins {
+    #   plugins = [
+    #     "github.com/caddy-dns/cloudflare@v0.2.4"
+    #   ];
+    #   hash = "replace-this";
+    # };
     settings = {
-      admin.identity.issuers.acme = {
-       	module = "acme";
-       	challenges.dns.provider = {
-          name = "cloudflare";
-          api_token = "{env.CF_API_TOKEN}";
-       	};
-      };
+      # admin.identity.issuers.acme = {
+      #  	module = "acme";
+      #  	challenges.dns.provider = {
+      #     name = "cloudflare";
+      #     api_token = "{env.CF_API_TOKEN}";
+      #  	};
+      # };
     };
   };
 

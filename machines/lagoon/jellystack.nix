@@ -1,6 +1,7 @@
 {
   inputs,
   config,
+  pkgs,
   ...
 }: {
   # jellyfin
@@ -31,12 +32,19 @@
     after = [ "wg-quick@wgmv.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig.Type = "oneshot";
-    serviceConfig.ExecStart = ''
-      ip netns add wgmv || true
-      ip link set mvvpn netns wgmv
-      mkdir -p /etc/netns/wgmv
-      cp /etc/resolv.conf /etc/netns/wgmv/resolv.conf
-    '';
+    serviceConfig.ExecStart = pkgs.writeShellApplication {
+      name = "move-wgmv-to-namespace";
+      runtimeInputs = [ pkgs.iproute2 ];
+
+      text = ''
+        if ! ip netns list | grep -q '^myns$'; then
+          ip netns add myns
+        fi
+        ip link set wgmv netns wgmv
+        mkdir -p /etc/netns/wgmv
+        cp /etc/resolv.conf /etc/netns/wgmv/resolv.conf
+      '';
+    };
   };
 
   # servarr

@@ -59,7 +59,7 @@ in {
         "${peers.${endpoint}.ipv4}/${subnet-ipv4}"
         "${peers.${endpoint}.ipv6}/${subnet-ipv6}"
       ];
-      endpoint = "${endpointAddress}:${endpointPort}";
+      endpoint = "${endpointAddress}:${builtins.toString endpointPort}";
     }];
   }) (builtins.removeAttrs peers [ endpoint ]));
 

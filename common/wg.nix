@@ -9,11 +9,13 @@
   peers = {
     ferry = {
       publicKey = "NNeWO/cXpvBci9n/K1W93jKN4wTeHUXZxsELI2XpWQM=";
+      privateKeyFile = config.age.secrets.wg-key-ferry.path;
       ipv4 = "10.90.0.1";
       ipv6 = "fc00:90:90:90::0:1";
     };
     lagoon = {
       publicKey = "tpajiBBjNW6RBahfZCttqCxEBu536ZqmuUMzCm93bxI=";
+      privateKeyFile = config.age.secrets.wg-key-lagoon.path;
       ipv4 = "10.90.0.2";
       ipv6 = "fc00:90:90:90::0:2";
     };
@@ -32,7 +34,7 @@ in {
       "${peers.${endpoint}.ipv6}/${subnet-ipv6}"
     ];
     listenPort = endpointPort;
-    privateKeyFile = config.age.secrets.wg-key-ferry.path;
+    privateKeyFile = peers.${endpoint}.privateKeyFile;
     peers = builtins.map
       ({value, ...}: {
         allowedIPs = [ "${value.ipv4}/32" "${value.ipv6}/128" ];
@@ -50,7 +52,7 @@ in {
       peers.${endpoint}.ipv4
       peers.${endpoint}.ipv6
     ];
-    privateKeyFile = config.age.secrets.wg-key-lagoon.path;
+    privateKeyFile = value.privateKeyFile;
     peers = [{
       publicKey = peers.${endpoint}.publicKey;
       allowedIPs = [

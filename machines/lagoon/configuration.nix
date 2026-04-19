@@ -75,6 +75,11 @@ moduleArgs@{
     allowedTCPPorts = [ 80 443 ];
     allowedUDPPorts = [ ];
   };
+
+  age.secrets.wg-key-lagoon = {
+    file = "${inputs.self.outPath}/secrets/wg-key-lagoon.age";
+    mode = "640";
+  };
   networking.wg-quick.interfaces.wg0 = (import ../../common/wg.nix moduleArgs).peers.lagoon;
 
   programs.zsh.enable = true;

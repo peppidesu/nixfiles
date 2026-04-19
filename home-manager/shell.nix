@@ -82,12 +82,6 @@
     };
   };
 
-  programs.nixvim = {
-    enable = true;
-    colorschemes.ayu.enable = true;
-    clipboard.register = "unnamedplus";
-  };
-
   home.packages = with pkgs; [
     chroma # required for colorize plugin
   ];

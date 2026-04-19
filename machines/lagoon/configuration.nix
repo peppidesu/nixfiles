@@ -11,6 +11,7 @@ moduleArgs@{
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
     # inputs.self.nixosModules.example
+    inputs.self.nixosModules.neovim
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -123,7 +124,7 @@ moduleArgs@{
     };
   };
 
-  services.homepage-dashboard.listenPort
+  custom.neovim.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";

@@ -99,7 +99,7 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [ ];
-      allowedUDPPorts = [ 53 51820 ];
+      allowedUDPPorts = [ 53 ];
     };
   };
   services.resolved.enable = false;
@@ -114,6 +114,7 @@
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO97Yve7hz7krbWA2FOgEihMAoGNmb2PhiwrUB3vXPzS peppidesu@dreadnought"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINwFC0NHKRy8ceAQWdxGHncauk7zf0UWQSaQsR1pF73k root@lagoon"
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)

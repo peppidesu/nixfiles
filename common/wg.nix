@@ -19,6 +19,12 @@
       ipv4 = "10.90.0.2";
       ipv6 = "fc00:90:90:90::0:2";
     };
+    muos = {
+      publicKey = "mh1tXC4L8y4ETrgU8Q4lFEALVJLjx76dUATXwarEdlw=";
+      privateKeyFile = null;
+      ipv4 = "10.90.14.2";
+      ipv6 = "fc00:90:90:90::14:2";
+    };
   };
 
   # Endpoint peer

@@ -25,6 +25,8 @@ moduleArgs@{
   home-manager.users."peppidesu" = ../../home-manager/peppidesu.nix;
   home-manager.extraSpecialArgs = { inherit inputs; };
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   nixpkgs = {
     # You can add overlays here
     overlays = [

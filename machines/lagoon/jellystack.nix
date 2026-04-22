@@ -55,6 +55,14 @@ in {
       services.prowlarr.enable = true;
       services.flaresolverr.enable = true;
       services.qbittorrent.enable = true;
+      services.qbittorrent.serverConfig = {
+        Preferences = {
+          WebUI = {
+            Username = "admin";
+            Password_PBKDF2 = "BZ8Whkgga8u8Z1udOhj4sQ==:gHYVcDTgqHSo6/U2IvPBjvlQhYH8Ecv49NNi9A4yZdzTPwgTUaAc8qQ1sR6+WsytoF08hC4YJaI5gtEL41nokA==";
+          };
+        };
+      };
 
       age.secrets.wg-key-mullvad.file = "${inputs.self.outPath}/secrets/wg-key-mullvad.age";
       vpnNamespaces."wgmv" = {
@@ -69,6 +77,36 @@ in {
           { from = 9696; to = 9696; }
           { from = 8080; to = 8080; }
         ];
+      };
+
+
+      hardware.graphics = {
+        enable = true;
+        extraPackages = with pkgs; [
+          # Required for modern Intel GPUs (Xe iGPU and ARC)
+          intel-media-driver     # VA-API (iHD) userspace
+          vpl-gpu-rt             # oneVPL (QSV) runtime
+
+          # Optional (compute / tooling):
+          # intel-compute-runtime  # OpenCL (NEO) + Level Zero for Arc/Xe
+        ];
+      };
+      environment.sessionVariables = {
+        LIBVA_DRIVER_NAME = "iHD";     # Prefer the modern iHD backend
+      };
+
+      hardware.enableRedistributableFirmware = true;
+      boot.kernelParams = [ "i915.enable_guc=3" ];
+      users.groups.silo = {};
+      users.groups.prowlarr = {};
+
+      users.users.jellyfin.extraGroups = [ "video" "render" "silo" ];
+      users.users.sonarr.extraGroups = ["silo"];
+      users.users.radarr.extraGroups = ["silo"];
+      users.users.prowlarr = {
+        group = "prowlarr";
+        isSystemUser = true;
+        extraGroups = ["silo"];
       };
     }
 

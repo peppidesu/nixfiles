@@ -8,7 +8,7 @@
     };
 
     arion = {
-      backend = "podman";
+      backend = "podman-socket";
       projects = {
         "ksp-luna".settings.services."luna".service = {
           image = "ghcr.io/lunamultiplayer/lunamultiplayer/server:master";
@@ -45,12 +45,21 @@
     };
   };
   systemd.tmpfiles.rules = [
-    "d /opt/ksp-luna/config 1770 kspluna kspluna -"
-    "d /opt/ksp-luna/universe 1770 kspluna kspluna -"
-    "d /opt/ksp-luna/plugins 1770 kspluna kspluna -"
-    "d /opt/ksp-luna/logs 1660 kspluna kspluna -"
+    "d /opt/ksp-luna/config 1777 kspluna kspluna -"
+    "d /opt/ksp-luna/universe 1777 kspluna kspluna -"
+    "d /opt/ksp-luna/plugins 1777 kspluna kspluna -"
+    "d /opt/ksp-luna/logs 1666 kspluna kspluna -"
   ];
+
+  users.users.kspluna = {
+    isSystemUser = true;
+    group = "kspluna";
+  };
+  users.groups.kspluna = {};
+
   users.users.peppidesu.extraGroups = ["podman"];
-
-
+  networking.firewall = {
+    allowedTCPPorts = [ 8900 ];
+    allowedUDPPorts = [ 8800 ];
+  };
 }

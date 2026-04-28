@@ -12,14 +12,17 @@ moduleArgs@{
     # If you want to use modules your own flake exports (from modules/nixos):
     # inputs.self.nixosModules.example
     inputs.self.nixosModules.neovim
+    inputs.self.nixosModules.caddy
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
-    ./jellystack.nix
     ./hardening.nix
+
+    ./jellystack.nix
     ./ksp.nix
+    ./immich.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
@@ -76,8 +79,8 @@ moduleArgs@{
   networking.hostName = "lagoon";
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 443 ];
-    allowedUDPPorts = [ ];
+    allowedTCPPorts = [ 80 443 8900 ];
+    allowedUDPPorts = [ 8800 ];
   };
 
   age.secrets.wg-key-lagoon = {

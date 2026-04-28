@@ -5,7 +5,6 @@
   lib,
   ...
 }: let
-
   confineServices = xs: lib.mkMerge ([{
   }] ++ (builtins.map (name: {
     systemd.services.${name}.vpnConfinement = {
@@ -13,22 +12,10 @@
       vpnNamespace = "wgmv";
     };
   }) xs));
-
-  makeCaddyConfig = { publicServices, privateServices }: let
-    makeVirtualHostConfig = cfg: cfg.extraConfig or "reverse_proxy ${cfg.proxy}";
-  in lib.mkMerge [
-    (lib.concatMapAttrs (name: value: {
-      "${name}.peppidesu.dev".extraConfig = makeVirtualHostConfig value;
-    }) publicServices)
-    (lib.concatMapAttrs (name: value: {
-      "http://${name}.lagoon.home.arpa".extraConfig = makeVirtualHostConfig value;
-      "http://${name}.lagoon.wg.arpa".extraConfig = makeVirtualHostConfig value;
-    }) (publicServices // privateServices))
-  ];
 in {
   config = lib.mkMerge [
     {
-      services.caddy.virtualHosts = makeCaddyConfig {
+      custom.caddy = {
         publicServices = {
           "jelly".proxy = "http://localhost:8096";
         };
@@ -40,6 +27,7 @@ in {
           "qbt".proxy = "http://10.200.1.1:8080";
         };
       };
+
       # jellyfin
       services.jellyfin = {
         enable = true;

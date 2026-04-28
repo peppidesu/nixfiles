@@ -45,21 +45,17 @@
     };
   };
   systemd.tmpfiles.rules = [
-    "d /opt/ksp-luna/config 1777 kspluna kspluna -"
-    "d /opt/ksp-luna/universe 1777 kspluna kspluna -"
-    "d /opt/ksp-luna/plugins 1777 kspluna kspluna -"
-    "d /opt/ksp-luna/logs 1666 kspluna kspluna -"
+    "d /opt/ksp-luna/config 1775 12001 12001 -"
+    "d /opt/ksp-luna/universe 1775 12001 12001 -"
+    "d /opt/ksp-luna/plugins 1775 12001 12001 -"
+    "d /opt/ksp-luna/logs 1775 12001 12001 -"
   ];
-
-  users.users.kspluna = {
-    isSystemUser = true;
-    group = "kspluna";
-  };
-  users.groups.kspluna = {};
 
   users.users.peppidesu.extraGroups = ["podman"];
   networking.firewall = {
     allowedTCPPorts = [ 8900 ];
     allowedUDPPorts = [ 8800 ];
   };
+
+
 }

@@ -75,12 +75,14 @@ moduleArgs@{
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
-  networking.networkmanager.enable = true;
-  networking.hostName = "lagoon";
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 80 443 8900 ];
-    allowedUDPPorts = [ 8800 ];
+  networking = {
+    hostName = "lagoon";
+    tempAddresses = "disabled";
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 80 443 ];
+    };
+    networkmanager.enable = true;
   };
 
   age.secrets.wg-key-lagoon = {

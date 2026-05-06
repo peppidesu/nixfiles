@@ -96,11 +96,9 @@
     networkmanager.enable = true;
     networkmanager.dns = "none";
 
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [ ];
-      allowedUDPPorts = [ 53 ];
-    };
+    firewall.enable = true;
+
+    tempAddresses = "disabled";
   };
   services.resolved.enable = false;
 

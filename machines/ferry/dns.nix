@@ -36,6 +36,9 @@ moduleArgs@{
       '';
     };
   };
+  networking.firewall = {
+    allowedUDPPorts = [ 53 ];
+  };
   systemd.services.dnscrypt-proxy.serviceConfig = {
     StateDirectory = "dnscrypt-proxy";
   };

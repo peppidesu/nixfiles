@@ -19,6 +19,7 @@
     services.caddy.virtualHosts = lib.mkMerge [
       (lib.concatMapAttrs (name: val: {
         "${name}.peppidesu.dev".extraConfig = mkConfigForAddress val;
+        "${name}.pbbl.dev".extraConfig = mkConfigForAddress val;
       }) cfg.publicServices)
       (lib.concatMapAttrs (name: val: {
         "http://${name}.${host}.home.arpa".extraConfig = mkConfigForAddress val;

@@ -23,6 +23,7 @@ moduleArgs@{
     ./jellystack.nix
     ./ksp.nix
     ./immich.nix
+    ./radicale.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];

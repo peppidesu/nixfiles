@@ -49,7 +49,28 @@ in {
             Username = "admin";
             Password_PBKDF2 = "BZ8Whkgga8u8Z1udOhj4sQ==:gHYVcDTgqHSo6/U2IvPBjvlQhYH8Ecv49NNi9A4yZdzTPwgTUaAc8qQ1sR6+WsytoF08hC4YJaI5gtEL41nokA==";
           };
+          Downloads = {
+            SavePath = "/silo/media/download";
+            TempPathEnabled = true;
+            TempPath = "/silo/media/download/incomplete";
+          };
+          Advanced = {
+            AnonymousMode = true;
+          };
         };
+        BitTorrent = {
+          Session = {
+            AddTorrentStopped = false;
+            AnonymousModeEnabled = true;
+            GlobalMaxRatio = 2;
+            GlobalMaxInactiveSeedingMinutes = 10080;
+            ShareLimitAction = "RemoveWithContent";
+          };
+        };
+        Application = {
+          MemoryWorkingSetLimit = 1024;
+        };
+
       };
 
       age.secrets.wg-key-mullvad.file = "${inputs.self.outPath}/secrets/wg-key-mullvad.age";

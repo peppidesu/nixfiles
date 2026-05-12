@@ -30,7 +30,9 @@ moduleArgs@{
 
       cloaking_rules = pkgs.writeText "cloaking-rules.txt" ''
         *.ferry.home.arpa 192.168.1.50
+        *.ferry.home.arpa 10.90.0.1
         *.lagoon.home.arpa 192.168.1.100
+        *.lagoon.home.arpa 10.90.0.2
 
         ${(import ../../common/wg.nix moduleArgs).cloakingRules}
       '';

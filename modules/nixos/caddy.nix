@@ -23,7 +23,6 @@
       }) cfg.publicServices)
       (lib.concatMapAttrs (name: val: {
         "http://${name}.${host}.home.arpa".extraConfig = mkConfigForAddress val;
-        "http://${name}.${host}.wg.arpa".extraConfig = mkConfigForAddress val;
       }) (cfg.publicServices // cfg.privateServices))
     ];
   };

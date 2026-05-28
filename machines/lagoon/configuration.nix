@@ -102,6 +102,7 @@ moduleArgs@{
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO97Yve7hz7krbWA2FOgEihMAoGNmb2PhiwrUB3vXPzS peppidesu@dreadnought"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA+DDOyMQZKiFMo2fPOAjmtPGZ2dnUAuonSGwqfxgG0Y peppidesu@catamaran"
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)

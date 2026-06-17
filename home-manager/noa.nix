@@ -20,20 +20,6 @@
     ./shell.nix
   ];
 
-  options = let
-    inherit (lib.options) mkEnableOption;
-  in {
-    profiles.peppidesu = {
-      graphical = {
-        enable = mkEnableOption "Enable basic applications for graphical shell";
-
-        games.enable = mkEnableOption "Enable gaming-related applications";
-        coding.enable = mkEnableOption "Enable coding-related applications";
-        work.enable = mkEnableOption "Enable work-related applications";
-      };
-    };
-  };
-
   config = {
     nixpkgs = {
       # You can add overlays here
@@ -62,17 +48,27 @@
 
     # TODO: Set your username
     home = {
-      username = "peppidesu";
-      homeDirectory = "/home/peppidesu";
+      username = "noa";
+      homeDirectory = "/home/noa";
     };
 
     # Enable home-manager and git
     programs.home-manager.enable = true;
     programs.git.settings = {
-      user.name = "peppidesu";
-      user.email = "bakker.pepijn@gmail.com";
+      user.name = "Noa Aarts";
+      user.email = "noa@voorwaarts.nl";
     };
 
+    programs.direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+      config.global = {
+        load_dotenv = true;
+        log_format = "-";
+        hide_env_diff = true;
+      };
+    };
 
     # Nicely reload system units when changing configs
     systemd.user.startServices = "sd-switch";

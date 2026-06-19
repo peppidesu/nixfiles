@@ -13,24 +13,36 @@
 
     mods =
       let
-        modDir = /opt/factorio-mods;
-        modList = lib.pipe modDir [
-          builtins.readDir
-          (lib.filterAttrs (k: v: v == "regular"))
-          (lib.mapAttrsToList (k: v: k))
-          (builtins.filter (lib.hasSuffix ".zip"))
-        ];
-        validPath = modFileName:
-          builtins.path {
-            path = modDir + "/${modFileName}";
-            name = lib.strings.sanitizeDerivationName modFileName;
-          };
-        modToDrv = modFileName:
-          pkgs.runCommand "copy-factorio-mods" {} ''
+        modList = {
+          "aai-loaders_0.2.11" = "";
+          "aai-signal-transmission_0.5.3" = "";
+          "better-victory-screen_1.0.0" = "";
+          "blueprint-sandboxes_3.2.2" = "";
+          "DiscoScience_2.0.1" = "";
+          "even-distribution_2.0.2"= "";
+          "factoryplanner_2.0.50"= "";
+          "flib_0.16.5"= "";
+          "Flow Control_3.2.3"= "";
+          "Honk_5.1.1"= "";
+          "krastorio2-assets-ultracube_2.0.0"= "";
+          "Milestones_1.4.7"= "";
+          "nixie-tubes_2.0.9"= "";
+          "pushbutton_2.0.5"= "";
+          "squeak-through-2_0.1.5"= "";
+          "textplates_0.7.2"= "";
+          "Ultracube_0.7.0"= "";
+        };
+        modToDrv = modFileName: hash:
+        pkgs.runCommand "copy-factorio-mods" {} ''
             mkdir $out
-            ln -s '${validPath modFileName}' $out/'${modFileName}'
-          ''
-          // { deps = []; };
+            ln -s '${
+            fetchTree {
+              type="file";
+              url = "file:///opt/factorio-mods/${modFileName}.zip";
+              narHash = hash;
+            }}' $out/'${modFileName}.zip'
+
+        '';
       in
         builtins.map modToDrv modList;
 

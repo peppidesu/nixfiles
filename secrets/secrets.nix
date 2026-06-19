@@ -14,4 +14,6 @@ in
   # Wireguard private keys for home VPN - ferry.
   # Public key: NNeWO/cXpvBci9n/K1W93jKN4wTeHUXZxsELI2XpWQM=
   "wg-key-ferry.age".publicKeys = [ ferry peppidesu-dreadnought ];
+
+  "factorio-token.age".publicKeys = [ lagoon peppidesu-dreadnought ];
 }

@@ -33,12 +33,12 @@
           "Ultracube_0.7.0"= "";
         };
         modToDrv = modFileName: hash:
-        pkgs.runCommand "copy-factorio-mods" {} ''
+        pkgs.runCommand "copy-factorio-mod-${modFileName}" {} ''
             mkdir $out
             ln -s '${
             fetchTree {
               type="file";
-              url = "file:///opt/factorio-mods/${modFileName}.zip";
+              url = "https://git.geenit.nl/noa/factorio-modlists/raw/branch/main/${modFileName}.zip";
               narHash = hash;
             }}' $out/'${modFileName}.zip'
 

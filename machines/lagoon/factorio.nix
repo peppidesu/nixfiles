@@ -44,7 +44,7 @@
 
         '';
       in
-        builtins.map modToDrv modList;
+        builtins.mapAttrs modToDrv modList;
 
     game-name = "kuub";
     allowedPlayers = [

@@ -2,9 +2,6 @@
   # Hide kptrs even for processes with CAP_SYSLOG
   boot.kernel.sysctl."kernel.kptr_restrict" = "2";
 
-  # Disable bpf() JIT (to eliminate spray attacks)
-  boot.kernel.sysctl."net.core.bpf_jit_enable" = false;
-
   # Disable ftrace debugging
   boot.kernel.sysctl."kernel.ftrace_enabled" = false;
 
@@ -52,22 +49,7 @@
     "ufs"
   ];
 
-  boot.kernelParams = [
-   # Don't merge slabs
-   "slab_nomerge"
-
-   # Overwrite free'd pages
-   "page_poison=1"
-
-   # Enable page allocator randomization
-   "page_alloc.shuffle=1"
-
-   # Disable debugfs
-   "debugfs=off"
-  ];
-
   security.protectKernelImage = true;
-  security.forcePageTableIsolation = true;
 
   # AppArmor
   security.apparmor = {

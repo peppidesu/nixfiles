@@ -22,17 +22,11 @@ moduleArgs@{
       require_nofilter = true;
       require_dnssec = false;
 
-      cache_size = 65536;
-      cache_min_ttl = 2400;
-      cache_max_ttl = 604800;
-      cache_neg_min_ttl = 30;
-      cache_neg_max_ttl = 600;
+      cache_size = 4096;
 
       cloaking_rules = pkgs.writeText "cloaking-rules.txt" ''
         *.ferry.home.arpa 192.168.1.50
-        *.ferry.home.arpa 10.90.0.1
         *.lagoon.home.arpa 192.168.1.100
-        *.lagoon.home.arpa 10.90.0.2
 
         ${(import ../../common/wg.nix moduleArgs).cloakingRules}
       '';

@@ -10,6 +10,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
+  boot.kernel.sysctl."vm.mmap_rnd_bits" = 24;
 
   fileSystems."/" = lib.mkDefault {
     device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";

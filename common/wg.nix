@@ -25,6 +25,12 @@
       ipv4 = "10.90.14.2";
       ipv6 = "fc00:90:90:90::14:2";
     };
+    catamaran = {
+      publicKey = "dY6s4xANbg6sbwRDXt9nyE7S/gwJN5W4Z59qM5hFXxw=";
+      privateKeyFile = null;
+      ipv4 = "10.90.1.1";
+      ipv6 = "fc00:90:90:90::1:1";
+    };
   };
 
   # Endpoint peer

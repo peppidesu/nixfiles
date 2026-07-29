@@ -51,6 +51,7 @@ in {
       ({value, ...}: {
         allowedIPs = [ "${value.ipv4}/32" "${value.ipv6}/128" ];
         publicKey = value.publicKey;
+        persistentKeepalive = 25;
       })
     (lib.attrsToList (builtins.removeAttrs peers [ endpoint ]));
   };
@@ -72,6 +73,7 @@ in {
         "${peers.${endpoint}.ipv6}/${subnet-ipv6}"
       ];
       endpoint = "${endpointAddress}:${builtins.toString endpointPort}";
+      persistentKeepalive = 25;
     }];
   }) (builtins.removeAttrs peers [ endpoint ]));
 

@@ -24,6 +24,9 @@
     agenix.url = "github:ryantm/agenix";
 
     arion.url = "github:hercules-ci/arion";
+
+    # Pixelflut Server
+    flurry.url = "git+https://git.geenit.nl/noa/flurry.git";
   };
 
   outputs = {

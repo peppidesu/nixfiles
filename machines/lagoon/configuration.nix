@@ -27,6 +27,7 @@ moduleArgs@{
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ./factorio.nix
+    ./flurry.nix
   ];
   home-manager.users."peppidesu" = ../../home-manager/peppidesu.nix;
   home-manager.users."noa" = ../../home-manager/noa.nix;

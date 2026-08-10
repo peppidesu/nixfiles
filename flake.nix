@@ -23,7 +23,8 @@
     # Agenix
     agenix.url = "github:ryantm/agenix";
 
-    arion.url = "github:hercules-ci/arion";
+    # flurry
+    flurry.url = "git+https://git.geenit.nl/noa/flurry.git";
   };
 
   outputs = {
@@ -33,7 +34,7 @@
     nixvim,
     agenix,
     vpn-confinement,
-    arion,
+    flurry,
     ...
   } @ inputs: let
     # Supported systems for your flake packages, shell, etc.
@@ -74,7 +75,7 @@
           agenix.nixosModules.default
           home-manager.nixosModules.default
           vpn-confinement.nixosModules.default
-          arion.nixosModules.arion
+          flurry.nixosModules.default
         ];
       };
       ferry = nixpkgs.lib.nixosSystem {

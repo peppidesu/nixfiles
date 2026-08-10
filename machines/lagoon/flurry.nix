@@ -2,7 +2,7 @@
   services.flurry = {
     enable = true;
     package = inputs.flurry.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    host = "0.0.0.0:44901";
+    host = "0.0.0.0";
     web_host = "0.0.0.0:44902";
     openFirewall = true;
     grid_width = 1920;

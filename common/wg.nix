@@ -31,6 +31,12 @@
       ipv4 = "10.90.1.1";
       ipv6 = "fc00:90:90:90::1:1";
     };
+    dreadnought = {
+      publicKey = "W5DRlL14xVd4A6cTuYSX7UDV/14JhXkvYeXCMMwI8A8=";
+      privateKeyFile = null;
+      ipv4 = "10.90.0.100";
+      ipv6 = "fc00:90:90:90::0:100";
+    };
   };
 
   # Endpoint peer

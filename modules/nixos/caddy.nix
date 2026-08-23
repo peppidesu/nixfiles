@@ -22,7 +22,8 @@
         "${name}.pbbl.dev".extraConfig = mkConfigForAddress val;
       }) cfg.publicServices)
       (lib.concatMapAttrs (name: val: {
-        "http://${name}.${host}.home.arpa".extraConfig = mkConfigForAddress val;
+        "http://${name}.${host}.reef.arpa".extraConfig = mkConfigForAddress val;
+        "http://${name}.${host}.reef".extraConfig = mkConfigForAddress val;
       }) (cfg.publicServices // cfg.privateServices))
     ];
   };

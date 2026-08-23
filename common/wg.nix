@@ -37,6 +37,12 @@
       ipv4 = "10.90.0.100";
       ipv6 = "fc00:90:90:90::0:100";
     };
+    ejbphone = {
+      publicKey = "2JiuzysYyvwfLjJaQ8oK8kP+3J7tInEgynTlNjX4ugg=";
+      privateKeyFile = null;
+      ipv4 = "10.90.42.1";
+      ipv6 = "fc00:90:90:90::42:1";
+    };
   };
 
   # Endpoint peer
@@ -85,8 +91,10 @@ in {
 
   cloakingRules = builtins.concatStringsSep "\n" (
     builtins.map ({name, value}: ''
-      *.${name}.wg.arpa ${value.ipv4}
-      *.${name}.wg.arpa ${value.ipv6}
+      *.${name}.reef.arpa ${value.ipv4}
+      *.${name}.reef.arpa ${value.ipv6}
+      *.${name}.reef ${value.ipv4}
+      *.${name}.reef ${value.ipv6}
     '') (
       lib.attrsToList peers
     )

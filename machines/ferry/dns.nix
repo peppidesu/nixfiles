@@ -25,9 +25,6 @@ moduleArgs@{
       cache_size = 4096;
 
       cloaking_rules = pkgs.writeText "cloaking-rules.txt" ''
-        *.ferry.home.arpa 192.168.1.50
-        *.lagoon.home.arpa 192.168.1.100
-
         ${(import ../../common/wg.nix moduleArgs).cloakingRules}
       '';
     };

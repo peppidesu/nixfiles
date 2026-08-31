@@ -17,7 +17,12 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ./shell.nix
+    ./common/shell
+    ./common/bat
+  ] ++ lib.mkIf config.profiles.peppidesu.graphical.enable [
+    ./common/hyprland
+    ./common/hyprpaper
+    ./common/darkman
   ];
 
   options = let

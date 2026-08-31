@@ -1,0 +1,249 @@
+* {
+  /* `otf-font-awesome` is required to be installed for icons */
+  font-family: "Maple Mono NF";
+  font-size: 12px;
+}
+
+window#waybar {
+  background-color: #fffbef; /* bg0 */
+  color: #5c6a72; /* fg */
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  border-bottom: 1px solid #bec5b2;
+}
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+window#waybar.termite {
+  background-color: transparent;
+}
+
+window#waybar.chromium {
+  background-color: transparent;
+}
+
+button {
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -1px transparent;
+  /* Avoid rounded borders under each button name */
+  border: none;
+  border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+  background: inherit;
+  border-radius: 999px;
+}
+
+#workspaces button {
+  transition: all 0.2s;
+  padding: 4px 4px 4px 5px;
+  margin: 3px;
+  min-width: 15px;
+  min-height: 15px;
+  background-color: transparent;
+  color: #5c6a72; /* fg */
+  border-radius: 999px;
+}
+
+#workspaces button:hover {
+  background-color: #ecf5ed;
+  color: #3a94c5; /* bg0 */
+}
+
+#workspaces button.active {
+  font-weight: bold;
+  background-color: #3a94c5; /* green */
+  color: #fffbef; /* bg0 */
+}
+
+#workspaces button.urgent {
+  background-color: #f85552; /* red */
+  color: #fffbef; /* bg0 */
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#tray,
+#custom-updates,
+#custom-bluetooth,
+#mpd {
+  color: #5c6a72; /* fg */
+  margin: 5px 0px;
+  padding: 0 8px;
+  background-color: #f2efdf; /* bg_dim / bg2 */
+}
+/* Group end */
+#clock {
+  margin-right: 2px;
+  padding-right: 12px;
+  border-radius: 0 999px 999px 0;
+}
+/* Group start */
+#custom-bluetooth {
+  margin-left: 2px;
+  padding-left: 12px;
+  border-radius: 999px 0 0 999px;
+}
+/* Single item groups (buttons) */
+#custom-updates,
+#tray,
+#battery {
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 999px;
+}
+
+.modules-right > widget:last-child > #clock,
+.modules-right > widget:last-child > #battery {
+  margin-right: 4px;
+}
+
+#tray {
+  padding: 4px 10px;
+}
+
+#window {
+  margin-left: 6px;
+  color: #5c6a72; /* fg */
+}
+
+#workspaces {
+  padding: 4px 4px;
+  border-radius: 999px;
+}
+
+#clock {
+  box-shadow: none;
+}
+
+#battery {
+  min-width: 40px;
+  border-radius: 999px;
+  transition: all 0.3s;
+}
+
+#battery.charging,
+#battery.plugged,
+#battery.full {
+  color: #fffbef; /* bg0 */
+  background-color: #8da101; /* green */
+  box-shadow: none;
+}
+
+#battery.critical:not(.charging) {
+  background-color: transparent;
+  animation: batteryCritical 1.2s linear 0s infinite normal forwards;
+}
+
+#network.disconnected,
+#pulseaudio.muted {
+  transition: all 0.2s;
+  color: #a6b0a0; /* grey0 */
+}
+
+/* For the title/artist */
+#custom-waymedia {
+}
+
+/* For the buttons */
+#custom-waymedia-buttons {
+}
+
+#temperature.critical {
+  color: #f57d26; /* orange */
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+#tray > * {
+  padding: 0 20px;
+}
+
+#tray > .needs-attention {
+  background-color: #f85552; /* red */
+  border-radius: 999px;
+}
+
+/* #idle_inhibitor {
+    background-color: #E8E5D5;
+}
+
+#idle_inhibitor.activated {
+    background-color: #F8F5E4;
+    color: #E8E5D5;
+} */
+
+#keyboard-state > label {
+  padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+  background: rgba(92, 106, 114, 0.05); /* fg @ 5% */
+}
+
+#scratchpad {
+  background: rgba(92, 106, 114, 0.1); /* fg @ 10% */
+}
+#scratchpad.empty {
+  background-color: transparent;
+}
+
+#custom-updates:not(.has-updates) {
+  color: #5c6a72; /* fg */
+  font-weight: bold;
+  transition: all 0.5s;
+  padding: 0 12px 0 10px;
+}
+
+#custom-updates.has-updates {
+  box-shadow: inset 0 0 0 2px #3a94c5; /* blue */
+  color: #3a94c5; /* blue */
+  background-color: #ecf5ed;
+  font-weight: 900;
+  transition: all 0.5s;
+}
+
+tooltip {
+  background-color: #fffbef; /* bg0 */
+  border: 2px solid;
+  border-color: #a6b0a0; /* grey0 */
+  color: #5c6a72; /* fg */
+}
+tooltip label {
+  padding: 5px;
+}
+
+/* Keyframes ---------------------------------------------------------------- */
+
+@keyframes batteryCritical {
+  0% {
+    background-color: #f85552; /* red */
+    color: #fffbef; /* bg0 */
+  }
+  50% {
+    background-color: #fffbef; /* bg0 */
+    color: #f85552; /* red */
+  }
+  100% {
+    background-color: #f85552; /* red */
+    color: #fffbef; /* bg0 */
+  }
+}

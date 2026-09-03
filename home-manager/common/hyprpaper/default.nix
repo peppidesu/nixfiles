@@ -1,9 +1,9 @@
 {...}:let
-path-light = ./mononoke.png;
+  path-light = ./mononoke.png;
   path-dark = ./mononoke-dark.png;
 in
 {
-  services.darkman.scripts.hyprpaper =        ''
+  services.darkman.scripts.hyprpaper = ''
     case "$1" in
     dark)
       hyprctl hyprpaper wallpaper ",${path-dark}" || exit 0
@@ -18,7 +18,7 @@ in
     enable=true;
     settings={
       splash=false;
-      preload = [path-light path-dark];
+      preload = ["${path-light}" "${path-dark}"];
       wallpaper = {
         monitor="";
         path = "${path-dark}";

@@ -19,15 +19,27 @@
       ipv4 = "10.90.0.2";
       ipv6 = "fc00:90:90:90::0:2";
     };
+    lambdaos = {
+      publicKey = "noalAv3R9xsUPga9VFvyDfP8F8IH6Hi8vbrGk7YoOAU=";
+      privateKeyFile = null;
+      ipv4 = "10.90.14.1";
+      ipv6 = "fc00:90:90:90::14:1";
+    };
     muos = {
-      publicKey = "mh1tXC4L8y4ETrgU8Q4lFEALVJLjx76dUATXwarEdlw=";
+      publicKey = "nOaMUdcYJ2KCRDcT8GIg0EckoygPCjpt+1MhJD1Vqis=";
       privateKeyFile = null;
       ipv4 = "10.90.14.2";
       ipv6 = "fc00:90:90:90::14:2";
     };
-    catamaran = {
-      publicKey = "dY6s4xANbg6sbwRDXt9nyE7S/gwJN5W4Z59qM5hFXxw=";
+    nuos = {
+      publicKey = "NOAnUBCzgO1dhioeKp4M7xN2kz+41jKBylhzwxCnwms=";
       privateKeyFile = null;
+      ipv4 = "10.90.14.3";
+      ipv6 = "fc00:90:90:90::14:3";
+    };
+    archelon = {
+      publicKey = "YoBsqGw7+NXDqW66Vc6N+otiSoCFRtr3c58Ih+wbPg8=";
+      privateKeyFile = config.age.secrets.wg-key-archelon.path;
       ipv4 = "10.90.1.1";
       ipv6 = "fc00:90:90:90::1:1";
     };

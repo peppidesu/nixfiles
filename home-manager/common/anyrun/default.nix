@@ -1,9 +1,12 @@
 {config, ...}:{
   programs.anyrun = {
     enable = true;
+    extraCss = builtins.readFile ./style.css;
     config = {
       closeOnClick = true;
       height.absolute = 500;
+      x.fraction = 0.5;
+      y.fraction = 0.5;
       hideIcons = false;
       hidePluginInfo = true;
       ignoreExclusiveZones = false;
@@ -19,4 +22,7 @@
       ];
     };
   };
+  services.darkman.scripts.anyrun = ''
+    pkill -9 anyrun || exit 0
+  '';
 }

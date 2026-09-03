@@ -7,6 +7,7 @@
   pkgs,
   ...
 }: {
+  imports = [ ./bat ];
 
   programs.zsh = {
     enable = true;

@@ -1,0 +1,173 @@
+* {
+  font-family: "Source Serif 4" !important;
+}
+pre, code, .hljs-attr, .hljs- {
+  font-family: "Maple Mono NF" !important;
+}
+@media (prefers-color-scheme: dark) {
+  * {
+    --accent-1: var(--blue-1) !important; /* links and other accent text */
+    --accent-2: var(--purple-2) !important; /* small accent elements */
+    --accent-3: var(--purple-3) !important; /* accent buttons */
+    --accent-4: var(--purple-4) !important; /* accent buttons when hovered */
+    --accent-5: var(--purple-5) !important; /* accent buttons when clicked */
+    --accent-new: var(
+      --red-1
+    ); /* stuff that's normally red like mute/deafen buttons */
+
+    --red-1: #e57e80 !important;
+    --red-2: #e57e80 !important;
+    --red-3: #e57e80 !important;
+    --red-4: #e57e80 !important;
+    --red-5: #e57e80 !important;
+
+    --green-1: #a7c080 !important;
+    --green-2: #a7c080 !important;
+    --green-3: #a7c080 !important;
+    --green-4: #a7c080 !important;
+    --green-5: #a7c080 !important;
+
+    --blue-1: #7fbbb3 !important;
+    --blue-2: #7fbbb3 !important;
+    --blue-3: #7fbbb3 !important;
+    --blue-4: #7fbbb3 !important;
+    --blue-5: #7fbbb3 !important;
+
+    --yellow-1: #e59875 !important;
+    --yellow-2: #e59875 !important;
+    --yellow-3: #e59875 !important;
+    --yellow-4: #e59875 !important;
+    --yellow-5: #e59875 !important;
+
+    --purple-1: #d699b6 !important;
+    --purple-2: #d699b6 !important;
+    --purple-3: #d699b6 !important;
+    --purple-4: #d699b6 !important;
+    --purple-5: #d699b6 !important;
+
+    --mention: #ee618320;
+    --mention-hover: #ee618330;
+
+    --bg-1: #414b50 !important;
+    --bg-2: #374145 !important;
+    --bg-3: #2e383c !important;
+    --bg-4: #272e33 !important;
+    --hover: #2e383c !important;
+    --active: #2e383c !important;
+    --active-2: hsla(0, 0, 0, 0.3); /* extra state for transparent buttons */
+    --message-hover: hsla(0, 0%, 0%, 0.1); /* messages when hovered */
+
+    --text-0: var(--bg-4); /* text on colored elements */
+    --text-1: #d3c6aa; /* bright text on colored elements */
+    --text-2: #d3c6aa; /* headings and important text */
+    --text-3: #d3c6aa; /* normal text */
+    --text-4: #9da9a0; /* icon buttons and channels */
+    --text-5: #859289; /* muted channels/chats and timestamps */
+
+    --mention-background: color-mix(in hsl, var(--accent-1), transparent 90%);
+  }
+
+  .selectorButton_c6d3dc.selectorButtonSelected_c6d3dc .selectorText_c6d3dc,
+  .selectorButton_c6d3dc:hover .selectorText_c6d3dc {
+    color: var(--bg-2);
+  }
+
+  .winButtons_c38106 {
+    display: none;
+  }
+  .toolbar__9293f {
+    padding-right: 36px;
+  }
+  /*.interactive:hover {
+        background-color: #d699b6 !important;
+    }*/
+}
+
+@media (prefers-color-scheme: light) {
+  * {
+
+    --accent-1: var(--blue-1) !important; /* links and other accent text */
+    --accent-2: var(--red-2) !important; /* small accent elements */
+    --accent-3: var(--blue-3) !important; /* accent buttons */
+    --accent-4: var(--blue-4) !important; /* accent buttons when hovered */
+    --accent-5: var(--blue-5) !important; /* accent buttons when clicked */
+    --accent-new: var(--red-1);
+
+    --red-1: #f75552 !important;
+    --red-2: #f75552 !important;
+    --red-3: #f75552 !important;
+    --red-4: #f75552 !important;
+    --red-5: #f75552 !important;
+
+    --green-1: #8ca101 !important;
+    --green-2: #8ca101 !important;
+    --green-3: #8ca101 !important;
+    --green-4: #8ca101 !important;
+    --green-5: #8ca101 !important;
+
+    --blue-1: #3a94c5 !important;
+    --blue-2: #3a94c5 !important;
+    --blue-3: #3a94c5 !important;
+    --blue-4: #3a94c5 !important;
+    --blue-5: #3a94c5 !important;
+
+    --yellow-1: #dea000 !important;
+    --yellow-2: #dea000 !important;
+    --yellow-3: #dea000 !important;
+    --yellow-4: #dea000 !important;
+    --yellow-5: #dea000 !important;
+
+    --purple-1: #df69ba !important;
+    --purple-2: #df69ba !important;
+    --purple-3: #df69ba !important;
+    --purple-4: #df69ba !important;
+    --purple-5: #df69ba !important;
+
+    --mention: #ee618320;
+    --mention-hover: #ee618330;
+
+    --bg-1: #edeada !important;
+    --bg-2: #f2efdf !important;
+    --bg-3: #f8f5e4 !important;
+    --bg-4: #fffbef !important;
+    --hover: #f2efdf !important;
+    --active: #e8e5d5 !important;
+    --active-2: hsla(0, 0, 0, 0.3);
+    --message-hover: hsla(0, 0%, 0%, 0.05); /* messages when hovered */
+
+    --text-0: var(--bg-4); /* text on colored elements */
+    --text-1: #5c6a72; /* bright text on colored elements */
+    --text-2: #5c6a72; /* headings and important text */
+    --text-3: #5c6a72; /* normal text */
+    --text-4: #829181; /* icon buttons and channels */
+    --text-5: #a6b0a0; /* muted channels/chats and timestamps */
+
+    --mention-background: color-mix(in hsl, var(--accent-1), transparent 90%);
+    --border: var(--active);
+  }
+
+  .selectorButton_c6d3dc.selectorButtonSelected_c6d3dc .selectorText_c6d3dc,
+  .selectorButton_c6d3dc:hover .selectorText_c6d3dc {
+    color: var(--bg-2);
+  }
+
+  .winButtons_c38106 {
+    display: none;
+  }
+  .toolbar__9293f {
+    padding-right: 36px;
+  }
+  /*.interactive:hover {
+        background-color: #d699b6 !important;
+    }*/
+  .name__703b9,
+  .username_c19a55 {
+    filter: contrast(0.4) saturate(1.6);
+  }
+}
+
+@container root style(--colors: on) {
+    .container__3f21e, .vc-switch-container {
+        background: transparent;
+    }
+}

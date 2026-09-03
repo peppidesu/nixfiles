@@ -19,14 +19,10 @@
     # ./nvim.nix
     ./common/console
   ] ++ lib.optionals osConfig.profiles.graphical.enable [
-    ./common/theme
     ./common/hyprland
     ./common/hyprpaper
     ./common/darkman
     ./common/anyrun
-    ./common/dunst
-    ./common/kitty
-    ./common/discord
     ./common/waybar
   ];
 
@@ -56,16 +52,17 @@
       };
     };
 
+    # TODO: Set your username
     home = {
-      username = "peppidesu";
-      homeDirectory = "/home/peppidesu";
+      username = "daklab";
+      homeDirectory = "/home/daklab";
     };
 
     # Enable home-manager and git
     programs.home-manager.enable = true;
     programs.git.settings = {
-      user.name = "peppidesu";
-      user.email = "bakker.pepijn@gmail.com";
+      user.name = "Pepijn Bakker";
+      user.email = "p.bakker@daklab.nl";
     };
 
     programs.kitty.enable = osConfig.profiles.graphical.enable;
@@ -74,20 +71,11 @@
       defaultEditor = true;
     };
 
+
     home.packages = lib.optionals osConfig.profiles.graphical.enable [
       pkgs.nautilus
       pkgs.ungoogled-chromium
     ];
-
-    # xdg desktop portal
-    xdg.portal = {
-      enable = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-hyprland
-      ];
-      config.common."org.freedesktop.impl.portal.Settings" = ["darkman"];
-    };
 
     # Nicely reload system units when changing configs
     systemd.user.startServices = "sd-switch";

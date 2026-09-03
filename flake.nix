@@ -9,18 +9,18 @@
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
-    # VPN Confinement
-    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
-
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Agenix
+    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
     agenix.url = "github:ryantm/agenix";
-
-    # flurry
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
     flurry.url = "git+https://git.geenit.nl/noa/flurry.git";
+    matshell.url = "github:Neurarian/matshell";
+    disko.url = "github:nix-community/disko";
+    nixcord.url = "github:4evy/nixcord";
+    hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = {
@@ -80,6 +80,15 @@
           ./machines/ferry/configuration.nix
           agenix.nixosModules.default
           home-manager.nixosModules.default
+        ];
+      };
+      archelon = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./machines/archelon/configuration.nix
+          agenix.nixosModules.default
+          home-manager.nixosModules.default
+          inputs.hardware.nixosModules.framework-amd-ai-300-series
         ];
       };
     };

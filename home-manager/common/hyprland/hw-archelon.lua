@@ -1,29 +1,21 @@
--- This is a Hyprland Lua config file.
--- Converted from hyprlang to Lua (Hyprland 0.55+)
--- https://wiki.hypr.land/Configuring/Start/
-
 ------------------
 ---- MONITORS ----
 ------------------
-
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 
--- Primary monitor (DP-1): 4K@240, scaled 1.5, with luminance/HDR metadata
 hl.monitor({
-    output               = "DP-1",
-    mode                 = "3840x2160@240",
+    output               = "eDP-1",
+    mode                 = "2560x1600@165",
     position             = "0x0",
-    scale                = 1.5,
-    -- supports_wide_color = 1,
-    -- supports_hdr        = 1,
+    scale                = 1.33,
     sdr_max_luminance    = 120,
     sdr_min_luminance    = 0.005,
     min_luminance        = 0.005,
     max_luminance        = 1000,
+    vrr                  = true,
     -- bitdepth             = 10,
 })
 
--- Secondary monitor (HDMI-A-1): 1080p@60, positioned left of DP-1, rotated (transform 1)
 hl.monitor({
     output   = "HDMI-A-1",
     mode     = "1920x1080@60",
@@ -35,7 +27,6 @@ hl.monitor({
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
-
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
 hl.env("OZONE_PLATFORM", "wayland")
@@ -60,13 +51,13 @@ hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 -- hl.env("XCURSOR_SIZE", "32")
 
 --------------------------
----- CONFIG SECTIONS -----
+---- HARDWARE CONFIG -----
 --------------------------
-
 -- See https://wiki.hypr.land/Configuring/Basics/Variables/
+
 hl.config({
     general = {
-        allow_tearing = 0,
+        allow_tearing = false,
     },
 
     cursor = {
@@ -80,11 +71,11 @@ hl.config({
 
     render = {
         direct_scanout        = 1,
-        new_render_scheduling = 2,
+        new_render_scheduling = true,
     },
 
     misc = {
-        vrr = 0,
+        vrr = 2,
     },
 
     xwayland = {

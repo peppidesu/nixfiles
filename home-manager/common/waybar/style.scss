@@ -5,22 +5,13 @@
 }
 
 window#waybar {
-  background-color: #fffbef; /* bg0 */
-  color: #5c6a72; /* fg */
+  background-color: $color-bg0;
+  color: $color-fg;
   transition-property: background-color;
   transition-duration: 0.5s;
-  border-bottom: 1px solid #bec5b2;
 }
-window#waybar.hidden {
-  opacity: 0.2;
-}
-
-window#waybar.termite {
-  background-color: transparent;
-}
-
-window#waybar.chromium {
-  background-color: transparent;
+window#waybar.fullscreen {
+  font-weight: bold;
 }
 
 button {
@@ -31,7 +22,8 @@ button {
   border-radius: 0;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-
+strange-hover-effect */
 button:hover {
   background: inherit;
   border-radius: 999px;
@@ -44,24 +36,25 @@ button:hover {
   min-width: 15px;
   min-height: 15px;
   background-color: transparent;
-  color: #5c6a72; /* fg */
+  color: $color-fg;
   border-radius: 999px;
 }
 
 #workspaces button:hover {
-  background-color: #ecf5ed;
-  color: #3a94c5; /* bg0 */
+  background-color: $color-bg-blue;
+  color: $color-blue;
 }
 
 #workspaces button.active {
   font-weight: bold;
-  background-color: #3a94c5; /* green */
-  color: #fffbef; /* bg0 */
+  box-shadow: inset 0 0 0 2px $color-blue;
+  color: $color-blue;
+  background-color: $color-bg-blue;
 }
 
 #workspaces button.urgent {
-  background-color: #f85552; /* red */
-  color: #fffbef; /* bg0 */
+  background-color: $color-red;
+  color: $color-bg-red;
 }
 
 #clock,
@@ -82,10 +75,10 @@ button:hover {
 #custom-updates,
 #custom-bluetooth,
 #mpd {
-  color: #5c6a72; /* fg */
+  color: $color-fg;
   margin: 5px 0px;
   padding: 0 8px;
-  background-color: #f2efdf; /* bg_dim / bg2 */
+  background-color: $color-bg2;
 }
 /* Group end */
 #clock {
@@ -121,7 +114,7 @@ button:hover {
 
 #window {
   margin-left: 6px;
-  color: #5c6a72; /* fg */
+  color: $color-fg;
 }
 
 #workspaces {
@@ -140,10 +133,14 @@ button:hover {
 }
 
 #battery.charging,
-#battery.plugged,
+#battery.plugged {
+  box-shadow: inset 0 0 0 2px $color-green;
+  background-color: $color-bg-green;
+}
+
 #battery.full {
-  color: #fffbef; /* bg0 */
-  background-color: #8da101; /* green */
+  background-color: $color-bg-blue;
+  color: $color-blue;
   box-shadow: none;
 }
 
@@ -153,21 +150,14 @@ button:hover {
 }
 
 #network.disconnected,
-#pulseaudio.muted {
+#pulseaudio.muted, #wireplumber.muted {
   transition: all 0.2s;
-  color: #a6b0a0; /* grey0 */
+  color: $color-grey0;
 }
 
-/* For the title/artist */
-#custom-waymedia {
-}
-
-/* For the buttons */
-#custom-waymedia-buttons {
-}
 
 #temperature.critical {
-  color: #f57d26; /* orange */
+  color: $color-orange;
 }
 
 #tray > .passive {
@@ -178,72 +168,37 @@ button:hover {
 }
 
 #tray > .needs-attention {
-  background-color: #f85552; /* red */
+  background-color: $color-red;
   border-radius: 999px;
 }
 
-/* #idle_inhibitor {
-    background-color: #E8E5D5;
-}
-
-#idle_inhibitor.activated {
-    background-color: #F8F5E4;
-    color: #E8E5D5;
-} */
-
-#keyboard-state > label {
-  padding: 0 5px;
-}
-
-#keyboard-state > label.locked {
-  background: rgba(92, 106, 114, 0.05); /* fg @ 5% */
-}
-
-#scratchpad {
-  background: rgba(92, 106, 114, 0.1); /* fg @ 10% */
-}
-#scratchpad.empty {
-  background-color: transparent;
-}
-
 #custom-updates:not(.has-updates) {
-  color: #5c6a72; /* fg */
+  color: $color-fg;
   font-weight: bold;
   transition: all 0.5s;
   padding: 0 12px 0 10px;
 }
 
 #custom-updates.has-updates {
-  box-shadow: inset 0 0 0 2px #3a94c5; /* blue */
-  color: #3a94c5; /* blue */
-  background-color: #ecf5ed;
+  box-shadow: inset 0 0 0 2px $color-blue;
+  color: $color-blue;
+  background-color: $color-bg-blue;
   font-weight: 900;
   transition: all 0.5s;
 }
 
 tooltip {
-  background-color: #fffbef; /* bg0 */
+  background-color: $color-bg0;
   border: 2px solid;
-  border-color: #a6b0a0; /* grey0 */
-  color: #5c6a72; /* fg */
+  border-color: $color-grey0;
+  color: $color-fg;
 }
 tooltip label {
   padding: 5px;
 }
 
-/* Keyframes ---------------------------------------------------------------- */
-
-@keyframes batteryCritical {
-  0% {
-    background-color: #f85552; /* red */
-    color: #fffbef; /* bg0 */
-  }
-  50% {
-    background-color: #fffbef; /* bg0 */
-    color: #f85552; /* red */
-  }
-  100% {
-    background-color: #f85552; /* red */
-    color: #fffbef; /* bg0 */
-  }
+#submap {
+    padding-right: 10px;
+    font-style: italic;
+    color: $color-blue;
 }

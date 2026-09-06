@@ -28,6 +28,7 @@ moduleArgs@{
     ./hardware-configuration.nix
     ./factorio.nix
     ./flurry.nix
+    ./netbird.nix
   ];
   home-manager.users."peppidesu" = ../../home-manager/peppidesu.nix;
   home-manager.users."noa" = ../../home-manager/noa.nix;

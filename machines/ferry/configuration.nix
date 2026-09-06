@@ -21,6 +21,7 @@
     ./hardening.nix
     ./hardware-configuration.nix
     ./wireguard.nix
+    ./netbird.nix
   ];
 
   nixpkgs = {

@@ -8,7 +8,7 @@
     grid_width = 1920;
     grid_height = 1080;
   };
-  custom.caddy.publicServices = {
+  peppidesu.caddy.publicServices = {
     "flurry".proxy = "http://${config.services.flurry.web_host}";
   };
 }

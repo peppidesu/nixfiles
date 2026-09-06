@@ -15,7 +15,7 @@
 in {
   config = lib.mkMerge [
     {
-      custom.caddy = {
+      peppidesu.caddy = {
         publicServices = {
           "jelly".proxy = "http://localhost:8096";
         };
@@ -90,7 +90,7 @@ in {
 
 
       hardware.graphics = {
-        enable = true;
+        enable = lib.mkForce true;
         extraPackages = with pkgs; [
           # Required for modern Intel GPUs (Xe iGPU and ARC)
           intel-media-driver     # VA-API (iHD) userspace

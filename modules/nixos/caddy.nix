@@ -1,5 +1,5 @@
 {lib, config, ...}: {
-  options.custom.caddy = {
+  options.peppidesu.caddy = {
     publicServices = lib.mkOption {
       type = lib.types.attrs;
       default = {};
@@ -10,7 +10,7 @@
     };
   };
   config = let
-    cfg = config.custom.caddy;
+    cfg = config.peppidesu.caddy;
     host = config.networking.hostName;
     mkConfigForAddress = c: c.extraConfig or ''
       reverse_proxy ${c.proxy}

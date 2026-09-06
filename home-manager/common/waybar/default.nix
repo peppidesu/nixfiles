@@ -8,71 +8,72 @@ let
   mkScss = {
     src,
     vars ? {},
-    varsDark ? {},
   }:
     let
       combinedScss = pkgs.writeText "combined.scss" ''
         ${mkVars vars}
-        @media (prefers-color-scheme: dark) {
-          ${mkVars varsDark}
-        }
         ${builtins.readFile src}
       '';
       pkg = pkgs.runCommand "compiled-css" {
         nativeBuildInputs = [ pkgs.dart-sass ];
       } ''
         mkdir $out
-        sass --style=compressed --no-source-map ${combinedScss} $out/style.css
+        sass --no-source-map ${combinedScss} $out/style.css
       '';
     in
       builtins.readFile (pkg + "/style.css");
 in {
+  xdg.configFile."waybar/style-light.css" = mkScss {
+    src = ./style.scss;
+    vars = {
+      color-fg = "#5c6a72";
+      color-grey0 = "#a6b0a0";
+      color-bg0 = "#fffbef";
+      color-bg2 = "#f8f5e4";
+
+      color-red = "#f85552";
+      color-yellow = "#dfa000";
+      color-green = "#8da101";
+      color-blue = "#3a94c5";
+      color-purple = "#df69ba";
+
+      color-orange = "#f57d26";
+
+      color-bg-red = "#ffe7de";
+      color-bg-yellow = "#fef2d5";
+      color-bg-green = "#f3f5d9";
+      color-bg-blue = "#ecf5ed";
+      color-bg-purple = "#fceced";
+    };
+  };
+  xdg.configFile."waybar/style-dark.css" = mkScss {
+    src = ./style.scss;
+    vars = {
+      color-fg = "#d3c6aa";
+      color-grey0 = "#7a8478";
+      color-bg0 = "#272e33";
+      color-bg2 = "#374145";
+
+      color-red = "#e67e80";
+      color-yellow = "#dbbc7f";
+      color-green = "#a7c080";
+      color-blue = "#7fbbb3";
+      color-purple = "#d699b6";
+
+      color-orange = "#e69875";
+
+      color-bg-red = "#493b40";
+      color-bg-yellow = "#45443c";
+      color-bg-green = "#3c4841";
+      color-bg-blue = "#384b55";
+      color-bg-purple = "#463f48";
+    };
+  };
+
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-    style = mkScss {
-      src = ./style.scss;
-      vars = {
-        color-fg = "#5c6a72";
-        color-grey0 = "#a6b0a0";
-        color-bg0 = "#fffbef";
-        color-bg2 = "#f8f5e4";
-
-        color-red = "#f85552";
-        color-yellow = "#dfa000";
-        color-green = "#8da101";
-        color-blue = "#3a94c5";
-        color-purple = "#df69ba";
-
-        color-orange = "#f57d26";
-
-        color-bg-red = "#ffe7de";
-        color-bg-yellow = "#fef2d5";
-        color-bg-green = "#f3f5d9";
-        color-bg-blue = "#ecf5ed";
-        color-bg-purple = "#fceced";
-      };
-      varsDark = {
-        color-fg = "#d3c6aa";
-        color-grey0 = "#7a8478";
-        color-bg0 = "#272e33";
-        color-bg2 = "#374145";
-
-        color-red = "#e67e80";
-        color-yellow = "#dbbc7f";
-        color-green = "#a7c080";
-        color-blue = "#7fbbb3";
-        color-purple = "#d699b6";
-
-        color-orange = "#e69875";
-
-        color-bg-red = "#493b40";
-        color-bg-yellow = "#45443c";
-        color-bg-green = "#3c4841";
-        color-bg-blue = "#384b55";
-        color-bg-purple = "#463f48";
-      };
-    };
+    style = null;
     settings = {
       mainBar = {
         layer = "top";

@@ -12,6 +12,7 @@
     # If you want to use modules your own flake exports (from modules/nixos):
     # inputs.self.nixosModules.example
     inputs.self.nixosModules.neovim
+    inputs.self.nixosModules.netbird
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -21,6 +22,7 @@
     ./hardening.nix
     ./hardware-configuration.nix
     ./wireguard.nix
+    ../../common/profiles.nix
   ];
 
   nixpkgs = {
@@ -56,7 +58,7 @@
   in {
     settings = {
       # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
+      experimental-features = ["nix-command" "flakes"];
       # Opinionated: disable global registry
       # flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
@@ -137,7 +139,7 @@
     enable = true;
   };
 
-  custom.neovim.enable = true;
+  peppidesu.neovim.enable = true;
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";
 }

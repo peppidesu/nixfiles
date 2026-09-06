@@ -7,8 +7,8 @@
     };
   };
 
-  config = {
-    hardware.graphics.enable = config.profiles.graphical.enable;
-    hardware.graphics.enable32Bit = config.profiles.graphical.enable;
+  config = lib.mkIf config.profiles.graphical.enable {
+    hardware.graphics.enable = true;
+    hardware.graphics.enable32Bit = true;
   };
 }

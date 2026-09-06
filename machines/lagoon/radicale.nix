@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  custom.caddy.publicServices.radicale.proxy = "http://localhost:5232";
+  peppidesu.caddy.publicServices.radicale.proxy = "http://localhost:5232";
 
   services.radicale = {
     enable = true;

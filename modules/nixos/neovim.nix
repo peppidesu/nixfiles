@@ -3,21 +3,20 @@
     inputs.nixvim.nixosModules.nixvim
   ];
 
-  options = let
+  options.peppidesu.neovim = let
     inherit (lib.options) mkEnableOption;
   in {
-    custom.neovim.enable = mkEnableOption "Enable neovim config";
-    custom.neovim.lsps = mkEnableOption "Enable LSPs";
+    enable = mkEnableOption "Enable neovim config";
+    lsps = mkEnableOption "Enable LSPs";
   };
 
   config = let
-    cfg = config.custom.neovim;
+    cfg = config.peppidesu.neovim;
   in lib.mkIf (cfg.enable) {
     programs.nixvim = {
       enable = true;
       colorschemes.ayu.enable = true;
       clipboard.register = "unnamedplus";
-
     };
   };
 }

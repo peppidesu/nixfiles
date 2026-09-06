@@ -142,7 +142,7 @@ moduleArgs@{
 
   services.fprintd.enable = true;
 
-  custom.neovim.enable = true;
+  peppidesu.neovim.enable = true;
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "26.05";
 }

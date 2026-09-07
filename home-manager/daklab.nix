@@ -76,10 +76,8 @@
       defaultEditor = true;
     };
 
-
     home.packages = lib.optionals osConfig.profiles.graphical.enable [
       pkgs.nautilus
-      pkgs.ungoogled-chromium
     ];
 
     # Nicely reload system units when changing configs

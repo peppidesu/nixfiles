@@ -27,6 +27,17 @@ in {
     pkgs.maple-mono.NF-CN
   ];
 
+  gtk.enable = true;
+  gtk.font = {
+    name = "Source Serif 4";
+    package = pkgs.source-serif;
+  };
+  gtk.cursorTheme = {
+    name = "Bibata-Modern-Classic";
+    package = pkgs.bibata-cursors;
+    size = 24;
+  };
+
   services.darkman.scripts.gtk = let
     dconf = lib.getExe pkgs.dconf;
   in ''

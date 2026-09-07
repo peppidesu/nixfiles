@@ -72,6 +72,7 @@
 
     home.packages = lib.optionals osConfig.profiles.graphical.enable [
       pkgs.nautilus
+      pkgs.signal-desktop
     ];
 
     # xdg desktop portal

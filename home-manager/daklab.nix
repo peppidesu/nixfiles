@@ -28,6 +28,7 @@
     ./common/kitty
     ./common/waybar
     ./common/zed
+    ./common/chromium
   ];
 
   config = {

@@ -29,6 +29,7 @@
     ./common/discord
     ./common/waybar
     ./common/zed
+    ./common/chromium
   ];
 
   config = {

@@ -23,6 +23,8 @@ in {
     lightTheme.icon.package
     darkTheme.gtk.package
     darkTheme.icon.package
+    pkgs.maple-mono.NF
+    pkgs.maple-mono.NF-CN
   ];
 
   services.darkman.scripts.gtk = let

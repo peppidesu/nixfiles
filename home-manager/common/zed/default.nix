@@ -16,12 +16,13 @@
       "typst"
       "python-requirements"
       "cargo-tom"
+      "bicep"
       "tera"
       "chrome-devtools-mcp"
     ];
     userSettings = {
       diff_view_style = "unified";
-      icon_theme = "Zed (default)";
+      icon_theme = "Zed (Default)";
       context_servers = {
         atlassian = {
           enabled = true;

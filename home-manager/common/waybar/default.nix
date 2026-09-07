@@ -21,9 +21,9 @@ let
         sass --no-source-map ${combinedScss} $out/style.css
       '';
     in
-      builtins.readFile (pkg + "/style.css");
+      pkg + "/style.css";
 in {
-  xdg.configFile."waybar/style-light.css" = mkScss {
+  xdg.configFile."waybar/style-light.css".source = mkScss {
     src = ./style.scss;
     vars = {
       color-fg = "#5c6a72";
@@ -46,7 +46,7 @@ in {
       color-bg-purple = "#fceced";
     };
   };
-  xdg.configFile."waybar/style-dark.css" = mkScss {
+  xdg.configFile."waybar/style-dark.css".source = mkScss {
     src = ./style.scss;
     vars = {
       color-fg = "#d3c6aa";

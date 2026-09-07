@@ -52,6 +52,7 @@ moduleArgs@{
   };
 
   profiles.graphical.enable = true;
+  programs.dconf.enable = true;
 
   home-manager.users."peppidesu" = ../../home-manager/peppidesu.nix;
   home-manager.users."daklab" = ../../home-manager/daklab.nix;

@@ -23,14 +23,20 @@
     };
   };
   systemd.user.services.anyrund = {
-    enable = true;
-    partOf = [ "graphical-session.target" ];
-    bindsTo = [ "graphical-session.target" ];
-    description = "anyrun daemon";
-    serviceConfig = {
-        Type = "simple";
-        ExecStart = "${lib.getExe pkgs.anyrun} daemon";
+    Unit = {
+      PartOf = [ "graphical-session.target" ];
+      BindsTo = [ "graphical-session.target" ];
+      Description = "anyrun daemon";
     };
+
+    Service = {
+      Type = "simple";
+      ExecStart = "${lib.getExe pkgs.anyrun} daemon";
+      Restart = "on-failure";
+      TimeoutStopSec = 15;
+    };
+
+    Install.WantedBy = [ "graphical-session.target" ];
   };
   services.darkman.scripts.anyrun = ''
     systemctl --user restart anyrund.service

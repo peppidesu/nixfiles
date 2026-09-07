@@ -13,6 +13,7 @@ moduleArgs@{
     # inputs.self.nixosModules.example
     inputs.self.nixosModules.neovim
     inputs.self.nixosModules.chromium
+    inputs.self.nixosModules.greeter
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -21,9 +22,10 @@ moduleArgs@{
     ./hardening.nix
     ./hardware-configuration.nix
     ./disk-config.nix
-    ./greeter.nix
     ../../common/profiles.nix
   ];
+
+  peppidesu.greeter.enable = true;
 
   nixpkgs = {
     # You can add overlays here

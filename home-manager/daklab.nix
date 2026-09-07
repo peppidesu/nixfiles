@@ -19,11 +19,15 @@
     # ./nvim.nix
     ./common/console
   ] ++ lib.optionals osConfig.profiles.graphical.enable [
+    ./common/theme
     ./common/hyprland
     ./common/hyprpaper
     ./common/darkman
     ./common/anyrun
+    ./common/dunst
+    ./common/kitty
     ./common/waybar
+    ./common/zed
   ];
 
   config = {

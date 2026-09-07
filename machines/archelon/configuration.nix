@@ -12,7 +12,6 @@ moduleArgs@{
     # If you want to use modules your own flake exports (from modules/nixos):
     # inputs.self.nixosModules.example
     inputs.self.nixosModules.neovim
-    inputs.self.nixosModules.chromium
     inputs.self.nixosModules.greeter
 
     # Or modules from other flakes (such as nixos-hardware):
@@ -88,7 +87,7 @@ moduleArgs@{
 
   networking = {
     hostName = "archelon";
-    nameservers = [ "10.90.0.1" "1.1.1.1" ];
+    nameservers = [ "1.1.1.1" ];
     networkmanager.enable = true;
     firewall.enable = true;
     tempAddresses = "disabled";

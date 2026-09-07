@@ -28,6 +28,7 @@
     ./common/kitty
     ./common/discord
     ./common/waybar
+    ./common/zed
   ];
 
   config = {
@@ -68,15 +69,8 @@
       user.email = "bakker.pepijn@gmail.com";
     };
 
-    programs.kitty.enable = osConfig.profiles.graphical.enable;
-    programs.zed-editor = {
-      enable = osConfig.profiles.graphical.enable;
-      defaultEditor = true;
-    };
-
     home.packages = lib.optionals osConfig.profiles.graphical.enable [
       pkgs.nautilus
-      pkgs.ungoogled-chromium
     ];
 
     # xdg desktop portal

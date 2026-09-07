@@ -29,6 +29,7 @@
     ./common/waybar
     ./common/zed
     ./common/chromium
+    ./common/nwg-drawer
   ];
 
   config = {

@@ -7,9 +7,16 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    # example = prev.example.overrideAttrs (oldAttrs: rec {
-    # ...
-    # });
+    nwg-drawer = (prev.nwg-drawer.override {
+      # use clang instead of gcc (build performance)
+      buildGoModule = prev.buildGoModule.override {
+        stdenv = prev.clangStdenv;
+      };
+    }).overrideAttrs (oldAttrs: {
+      patches = (oldAttrs.patches or []) ++ [
+        ./patches/nwg-drawer-valign.patch
+      ];
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

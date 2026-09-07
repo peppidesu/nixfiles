@@ -37,12 +37,12 @@
       ipv4 = "10.90.14.3";
       ipv6 = "fc00:90:90:90::14:3";
     };
-    archelon = {
-      publicKey = "YoBsqGw7+NXDqW66Vc6N+otiSoCFRtr3c58Ih+wbPg8=";
-      privateKeyFile = config.age.secrets.wg-key-archelon.path;
-      ipv4 = "10.90.1.1";
-      ipv6 = "fc00:90:90:90::1:1";
-    };
+    # archelon = {
+    #   publicKey = "YoBsqGw7+NXDqW66Vc6N+otiSoCFRtr3c58Ih+wbPg8=";
+    #   privateKeyFile = config.age.secrets.wg-key-archelon.path;
+    #   ipv4 = "10.90.1.1";
+    #   ipv6 = "fc00:90:90:90::1:1";
+    # };
     dreadnought = {
       publicKey = "W5DRlL14xVd4A6cTuYSX7UDV/14JhXkvYeXCMMwI8A8=";
       privateKeyFile = null;

@@ -30,6 +30,7 @@
     ./common/waybar
     ./common/zed
     ./common/chromium
+    ./common/nwg-drawer
   ];
 
   config = {
@@ -80,7 +81,6 @@
       enable = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-hyprland
       ];
       config.common."org.freedesktop.impl.portal.Settings" = ["darkman"];
     };

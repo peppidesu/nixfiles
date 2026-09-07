@@ -21,6 +21,9 @@
     disko.url = "github:nix-community/disko";
     nixcord.url = "github:4evy/nixcord";
     hardware.url = "github:NixOS/nixos-hardware/master";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {

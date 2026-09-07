@@ -1,6 +1,6 @@
 local terminal = "kitty"
 local fileManager = "nautilus -w"
-local menu = "anyrun"
+local menu = "nwg-drawer"
 local browser = "chromium"
 local mainMod = "SUPER"
 

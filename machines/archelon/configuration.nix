@@ -79,11 +79,11 @@ moduleArgs@{
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
-  age.secrets.wg-key-archelon = {
-    file = "${inputs.self.outPath}/secrets/wg-key-archelon.age";
-    mode = "640";
-  };
-  networking.wg-quick.interfaces.wg0 = (import ../../common/wg.nix moduleArgs).peers.archelon;
+  # age.secrets.wg-key-archelon = {
+  #   file = "${inputs.self.outPath}/secrets/wg-key-archelon.age";
+  #   mode = "640";
+  # };
+  # networking.wg-quick.interfaces.wg0 = (import ../../common/wg.nix moduleArgs).peers.archelon;
 
   networking = {
     hostName = "archelon";
@@ -145,6 +145,8 @@ moduleArgs@{
   services.fprintd.enable = true;
 
   peppidesu.neovim.enable = true;
+
+  powerManagement.enable = true;
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "26.05";
 }

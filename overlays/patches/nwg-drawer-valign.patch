@@ -1,0 +1,41 @@
+diff --git a/uicomponents.go b/uicomponents.go
+index e2b4a90..45fdf6b 100644
+--- a/uicomponents.go
++++ b/uicomponents.go
+@@ -119,15 +119,17 @@ func setUpCategoriesButtonBox() *gtk.EventBox {
+ 	button.Connect("clicked", func(item *gtk.Button) {
+ 		searchEntry.SetText("")
+ 		appFlowBox = setUpAppsFlowBox(nil, "")
++
+ 		for _, btn := range catButtons {
+-			btn.SetImagePosition(gtk.PosLeft)
+-			btn.SetSizeRequest(0, 0)
+-			if fileSearchResultWrapper != nil {
+-				fileSearchResultWrapper.Hide()
+-			}
++			btn.StyleContext().RemoveClass("selected")
++		}
++
++		if fileSearchResultWrapper != nil {
++			fileSearchResultWrapper.Hide()
+ 		}
+ 	})
+ 	hBox.PackStart(button, false, false, 0)
++	hBox.SetVAlign(gtk.AlignCenter)
+ 
+ 	for _, cat := range categories {
+ 		if isSupposedToShowUp(cat.Name) {
+@@ -144,11 +146,9 @@ func setUpCategoriesButtonBox() *gtk.EventBox {
+ 				// One day or another we'll add SetFilterFunction here; it was impossible on the gotk3 library
+ 				appFlowBox = setUpAppsFlowBox(lists[name], "")
+ 				for _, btn := range catButtons {
+-					btn.SetImagePosition(gtk.PosLeft)
++					btn.StyleContext().RemoveClass("selected")
+ 				}
+-				w := b.AllocatedWidth()
+-				b.SetImagePosition(gtk.PosTop)
+-				b.SetSizeRequest(w, 0)
++				b.StyleContext().AddClass("selected")
+ 				if fileSearchResultWrapper != nil {
+ 					fileSearchResultWrapper.Hide()
+ 				}

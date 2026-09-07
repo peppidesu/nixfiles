@@ -1,4 +1,4 @@
-{config, ...}:{
+{config, lib, pkgs, ...}:{
   programs.anyrun = {
     enable = true;
     extraCss = builtins.readFile ./style.css;
@@ -22,7 +22,17 @@
       ];
     };
   };
+  systemd.user.services.anyrund = {
+    enable = true;
+    partOf = [ "graphical-session.target" ];
+    bindsTo = [ "graphical-session.target" ];
+    description = "anyrun daemon";
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${lib.getExe pkgs.anyrun} daemon";
+    };
+  };
   services.darkman.scripts.anyrun = ''
-    pkill -9 anyrun || exit 0
+    systemctl --user restart anyrund.service
   '';
 }

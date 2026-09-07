@@ -14,7 +14,7 @@
     };
     style = ''
         window {
-          background-color: rgba(39, 46, 51, 0.9);
+          background-color: rgba(39, 46, 51, 0.3);
         }
         #category-button {
           margin-left: 4px;

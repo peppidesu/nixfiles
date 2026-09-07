@@ -20,7 +20,6 @@
       "--enable-vulkan"
       "--enable-system-notifications"
       "--pdf-use-skia-renderer"
-      "--enable-unsafe-webgpu"
       "--enable-drdc"
       "--skia-graphite"
     ];

@@ -30,6 +30,8 @@
     ./common/zed
     ./common/chromium
     ./common/nwg-drawer
+    ./common/bluetooth-manager-sidebar
+    # ./common/swaync
   ];
 
   config = {
@@ -79,6 +81,7 @@
 
     home.packages = lib.optionals osConfig.profiles.graphical.enable [
       pkgs.nautilus
+      pkgs.teams-for-linux
     ];
 
     # Nicely reload system units when changing configs

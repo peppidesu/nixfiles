@@ -144,6 +144,14 @@ moduleArgs@{
 
   services.fprintd.enable = true;
 
+  environment.systemPackages = [
+    pkgs.fprintd
+  ];
+  services.fprintd.tod.enable = true;
+  # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
+  security.pam.services.greetd.fprintAuth = true;
+
   peppidesu.neovim.enable = true;
 
   powerManagement.enable = true;

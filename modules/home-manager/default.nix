@@ -3,4 +3,5 @@
 {
   # List your module files here
   nwg-drawer = import ./nwg-drawer;
+  bluetooth-manager-sidebar = import ./bluetooth-manager-sidebar;
 }

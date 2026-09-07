@@ -70,7 +70,7 @@ hl.config({
 			enabled = true,
 			size = 6,
 			passes = 3,
-			noise = 0.15,
+			noise = 0,
 			xray = false,
 			special = false,
 			brightness = 1.02,
@@ -285,9 +285,14 @@ end)
 -- LAYER RULES
 -- ---------------------------------------------------------------------------
 hl.layer_rule({
-	name = "anyrun",
-	match = { namespace = "^(anyrun)$" },
-	dim_around = true,
+	name = "nwg-drawer",
+	match = { namespace = "^(nwg-drawer)$" },
+	blur = true,
+})
+hl.layer_rule({
+	name = "bm-sidebar",
+	match = { namespace = "^(bm-sidebar)$" },
+	blur = true,
 })
 
 -- General binds ----------------------------------------------------------------

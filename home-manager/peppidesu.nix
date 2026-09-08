@@ -15,24 +15,9 @@
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
-    ./common/console
+    ./common
   ] ++ lib.optionals osConfig.profiles.graphical.enable [
-    ./common/theme
-    ./common/hyprland
-    ./common/hyprpaper
-    ./common/darkman
-    ./common/anyrun
-    ./common/dunst
-    ./common/kitty
     ./common/discord
-    ./common/waybar
-    ./common/zed
-    ./common/chromium
-    ./common/nwg-drawer
-    ./common/bluetooth-manager-sidebar
-    # ./common/swaync
   ];
 
   config = {
@@ -74,9 +59,7 @@
     };
 
     home.packages = lib.optionals osConfig.profiles.graphical.enable [
-      pkgs.nautilus
       pkgs.signal-desktop
-      pkgs.teams-for-linux
     ];
 
     # xdg desktop portal

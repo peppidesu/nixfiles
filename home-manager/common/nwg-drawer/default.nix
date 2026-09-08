@@ -25,6 +25,10 @@
           background-color: #493b40;
           color: #e67e80;
         }
+        /* search entry */
+        entry {
+          border-radius: 5px;
+        }
     '';
   };
 }

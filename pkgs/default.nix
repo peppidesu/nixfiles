@@ -2,4 +2,5 @@
 # You can build them using 'nix build .#example'
 pkgs: {
   bluetooth-manager-sidebar = pkgs.callPackage ./bluetooth-manager-sidebar { };
+  hyprlandPlugins = pkgs.callPackage ./hyprland-plugins { };
 }

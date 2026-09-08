@@ -6,7 +6,9 @@
       enableXdgAutostart = true;
       variables = ["--all"];
     };
-    plugins = [];
+    plugins = [
+      pkgs.hyprlandPlugins.hyprcapture
+    ];
     configType = "lua";
     extraConfig = lib.mkMerge [
       (builtins.readFile ./hyprland.lua)

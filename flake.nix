@@ -6,8 +6,14 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Nixvim
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        systems.follows = "systems";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
@@ -21,6 +27,7 @@
     disko.url = "github:nix-community/disko";
     nixcord.url = "github:4evy/nixcord";
     hardware.url = "github:NixOS/nixos-hardware/master";
+    itepastra.url = "github:itepastra/nixconf";
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";

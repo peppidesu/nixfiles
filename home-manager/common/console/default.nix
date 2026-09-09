@@ -82,6 +82,8 @@
   };
 
   home.packages = with pkgs; [
+    coreutils
+    inputs.itepastra.packages.${pkgs.stdenv.hostPlatform.system}.btop-good-nix
     chroma # required for colorize plugin
   ];
 }

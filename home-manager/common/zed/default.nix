@@ -1,4 +1,11 @@
-{...}: {
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    codex
+    codex-acp
+    claude-code
+    claude-agent-acp
+  ];
+
   programs.zed-editor = {
     enable = true;
     extensions = [
@@ -40,24 +47,20 @@
         };
       };
       agent_servers = {
-        claude_acp = {
-          default_config_options = {
-            fast = true;
-            model = "opus[1m]";
-            mode = "auto";
-            effort = "medium";
+        "Codex" = {
+          type = "custom";
+          command = "codex-acp";
+          args = [ ];
+          env = {
+            # optional: preload API key via a secret manager
+            # OPENAI_API_KEY = "...";
           };
-          type = "registry";
         };
-        codex_acp = {
-          default_config_options = {
-            fast-mode = false;
-            collaboration_mode = "default";
-            mode = "agent";
-            reasoning_effort = "medium";
-            model = "gpt-5.6-terra";
-          };
-          type = "registry";
+        "Claude Code" = {
+          type = "custom";
+          command = "claude-agent-acp";
+          args = [];
+          env = {};
         };
       };
       project_panel = {
@@ -84,7 +87,7 @@
         inline.enabled = true;
       };
       show_edit_predictions = false;
-      vim_mode = false;
+      vim_mode = true;
       theme = {
         mode = "system";
         light = "Everforest Light Hard (material)";

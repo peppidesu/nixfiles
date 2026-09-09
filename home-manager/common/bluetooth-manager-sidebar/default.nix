@@ -7,10 +7,11 @@
     extraCss = ''
       .bm-sidebar-window,
       .bm-sidebar-surface {
-        background-color: rgba(39, 46, 51, 0.3);
+        background-color: alpha(@window_bg_color, 0.25);
       }
       .bm-sidebar-panel {
         margin: 16px;
+        border-color: @accent_fg_color;
       }
     '';
   };

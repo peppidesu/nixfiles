@@ -15,6 +15,7 @@
   in lib.mkIf (cfg.enable) {
     programs.nixvim = {
       enable = true;
+      nixpkgs.source = inputs.nixpkgs;
       colorschemes.ayu.enable = true;
       clipboard.register = "unnamedplus";
     };

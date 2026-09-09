@@ -14,8 +14,9 @@
     };
     style = ''
         window {
-          background-color: rgba(39, 46, 51, 0.3);
+          background-color: rgba(0, 0, 0, 0.15);
         }
+
         #category-button {
           margin-left: 4px;
           margin-right: 4px;
@@ -25,8 +26,7 @@
           background-color: #493b40;
           color: #e67e80;
         }
-        /* search entry */
-        entry {
+        button {
           border-radius: 5px;
         }
     '';

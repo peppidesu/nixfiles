@@ -85,7 +85,6 @@ moduleArgs@{
 
   networking = {
     hostName = "archelon";
-    nameservers = [ "1.1.1.1" ];
     networkmanager.enable = true;
     firewall.enable = true;
     tempAddresses = "disabled";

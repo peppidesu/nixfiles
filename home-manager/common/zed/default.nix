@@ -26,6 +26,7 @@
       "bicep"
       "tera"
       "chrome-devtools-mcp"
+      "haskell"
     ];
     userSettings = {
       diff_view_style = "unified";
@@ -87,7 +88,7 @@
         inline.enabled = true;
       };
       show_edit_predictions = false;
-      vim_mode = true;
+      vim_mode = false;
       theme = {
         mode = "system";
         light = "Everforest Light Hard (material)";

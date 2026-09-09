@@ -1,7 +1,10 @@
 {lib, pkgs, config, ...}: let
   lightTheme = {
-    gtk.name = "Everforest-Red-Light";
-    gtk.package = pkgs.everforest-gtk-theme;
+    gtk.name = "Everforest-Red-Light-Compact";
+    gtk.package = pkgs.everforest-gtk-theme.override {
+      themes = ["red"];
+      size = "compact";
+    };
 
     icon.name = "Papirus-Light";
     icon.package = pkgs.papirus-icon-theme.override {
@@ -10,7 +13,7 @@
   };
 
   darkTheme = {
-    gtk.name = "Everforest-Red-Dark";
+    gtk.name = "Everforest-Red-Dark-Compact";
     gtk.package = lightTheme.gtk.package;
 
     icon.name = "Papirus-Dark";

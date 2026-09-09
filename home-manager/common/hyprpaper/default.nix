@@ -1,4 +1,4 @@
-{...}:let
+{...}: let
   path-light = ./mononoke.png;
   path-dark = ./mononoke-dark.png;
 in
@@ -15,12 +15,12 @@ in
   '';
 
   services.hyprpaper = {
-    enable=true;
-    settings={
-      splash=false;
-      preload = ["${path-light}" "${path-dark}"];
+    enable = true;
+    settings = {
+      splash = false;
+      preload = [ "${path-light}" "${path-dark}" ];
       wallpaper = {
-        monitor="";
+        monitor = "";
         path = "${path-dark}";
       };
     };

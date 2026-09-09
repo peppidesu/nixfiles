@@ -17,6 +17,37 @@
         ./patches/nwg-drawer-valign.patch
       ];
     });
+
+    everforest-gtk-theme = final.lib.makeOverridable (
+        { themes ? []
+        , colors ? []
+        , size ? "standard"
+        }:
+
+        prev.everforest-gtk-theme.overrideAttrs (_oldAttrs: {
+          installPhase = ''
+            runHook preInstall
+
+            mkdir -p "$out/share/"{themes,icons}
+
+            cp -a icons/* "$out/share/icons/"
+
+            for iconTheme in "$out/share/icons/"*; do
+              gtk-update-icon-cache "$iconTheme"
+            done
+
+            cd themes
+            ./install.sh --name Everforest \
+              ${if themes != [] then "--theme ${final.lib.escapeShellArgs themes}" else ""} \
+              ${if colors != [] then "--color ${final.lib.escapeShellArgs colors}" else ""} \
+              --size ${final.lib.escapeShellArg size} \
+              --dest "$out/share/themes"
+            cd ..
+
+            runHook postInstall
+          '';
+        })
+      ) { };
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

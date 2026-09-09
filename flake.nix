@@ -8,11 +8,7 @@
     # Nixvim
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        systems.follows = "systems";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Home manager
@@ -20,14 +16,23 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
+
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
+
     flurry.url = "git+https://git.geenit.nl/noa/flurry.git";
-    matshell.url = "github:Neurarian/matshell";
+    flurry.inputs.nixpkgs.follows = "nixpkgs";
+
     disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
     nixcord.url = "github:4evy/nixcord";
+    nixcord.inputs.nixpkgs.follows = "nixpkgs";
+
     hardware.url = "github:NixOS/nixos-hardware/master";
-    itepastra.url = "github:itepastra/nixconf";
+
+    pepoapkgs.url = "github:itepastra/pepoapkgs";
+    pepoapkgs.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";

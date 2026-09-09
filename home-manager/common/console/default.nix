@@ -17,7 +17,6 @@
       plugins = [
         "git"
         "alias-finder"
-        "colorize"
         "colored-man-pages"
         "docker"
         "grc"
@@ -40,6 +39,7 @@
 
     shellAliases = {
       zed = lib.mkIf config.programs.zed-editor.enable "zeditor";
+      cat = lib.getExe pkgs.bat;
     };
 
     initContent = ''
@@ -82,8 +82,9 @@
   };
 
   home.packages = with pkgs; [
-    coreutils
-    inputs.itepastra.packages.${pkgs.stdenv.hostPlatform.system}.btop-good-nix
-    chroma # required for colorize plugin
+    killall
+    net-tools
+    dust
+    inputs.pepoapkgs.packages.${pkgs.stdenv.hostPlatform.system}.btop
   ];
 }

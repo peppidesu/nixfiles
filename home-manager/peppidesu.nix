@@ -59,6 +59,7 @@
 
     home.packages = lib.optionals osConfig.profiles.graphical.enable [
       pkgs.signal-desktop
+      pkgs.teams-for-linux
     ];
 
     # xdg desktop portal

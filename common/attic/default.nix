@@ -15,6 +15,53 @@ in
 
   environment.systemPackages = [
     attic
+    (pkgs.writeShellScriptBin "nix-build-push" ''
+      name="$1"
+      if [ -z "$name" ]; then
+        echo "Usage: nix-build-push <nixosConfiguration name>"
+        exit 1
+      fi
+
+      store_path=$(nix build -L --no-link --print-out-paths ".#nixosConfigurations.''${name}.config.system.build.toplevel")
+      if [ $? -ne 0 ]; then
+        echo "Build failed"
+        exit 1
+      fi
+
+      echo "Built: $store_path"
+      sudo attic push anemone "$store_path"
+
+      drv=$(nix path-info --derivation "$store_path")
+      requisites=$(nix-store --query --requisites --include-outputs "$drv")
+
+      echo "$requisites" | sudo xargs attic push anemone
+    '')
+    (pkgs.writeShellScriptBin "nix-shell-push" ''
+      if [ -z "$IN_NIX_SHELL" ] && [ -z "$name" ]; then
+        echo "Not in a nix shell"
+        exit 1
+      fi
+
+      paths=""
+      for var in $buildInputs $nativeBuildInputs $propagatedBuildInputs $propagatedNativeBuildInputs; do
+        paths="$paths $var"
+      done
+
+      if [ -z "$paths" ]; then
+        echo "No build inputs found in environment"
+        exit 1
+      fi
+
+      requisites=$(echo "$paths" | tr ' ' '\n' | grep -v '^$' | while read -r p; do
+        drv=$(nix path-info --derivation "$p" 2>/dev/null)
+        if [ -n "$drv" ]; then
+          nix-store --query --requisites --include-outputs "$drv"
+        fi
+      done)
+
+      echo "$requisites" | sort -u | sudo xargs attic push anemone
+    '')
+
   ];
 
   systemd.tmpfiles.rules = [

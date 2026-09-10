@@ -2,6 +2,7 @@ let
   lagoon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINwFC0NHKRy8ceAQWdxGHncauk7zf0UWQSaQsR1pF73k root@lagoon";
   ferry = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBJKQeBymU0nYPFrA2dJ4QMfhYQb7BqR6N34HxjJBDQS root@ferry";
   peppidesu-dreadnought = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO97Yve7hz7krbWA2FOgEihMAoGNmb2PhiwrUB3vXPzS peppidesu@dreadnought";
+  archelon = "";
 in
 {
   # Wireguard private key for Mullvad VPN
@@ -21,4 +22,5 @@ in
 
   "factorio-token.age".publicKeys = [ lagoon peppidesu-dreadnought ];
 
+  "attic-anemone.age".publicKeys = [ archelon peppidesu-dreadnought ];
 }

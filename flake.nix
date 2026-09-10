@@ -36,6 +36,9 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
+
+    attic.url = "github:zhaofengli/attic";
+    attic.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {

@@ -61,6 +61,7 @@
     home.packages = lib.optionals osConfig.profiles.graphical.enable [
       pkgs.signal-desktop
       pkgs.teams-for-linux
+      pkgs.bitwarden-desktop
     ];
 
     # Nicely reload system units when changing configs

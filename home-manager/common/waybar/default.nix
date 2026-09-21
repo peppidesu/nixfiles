@@ -80,27 +80,24 @@ in {
         position = "top";
         height = 32;
         spacing = 0;
-        margin-top = 0;
-        margin-left = 0;
-        margin-right = 0;
+        margin-top = 8;
+        margin-left = 8;
+        margin-right = 8;
 
         modules-left = [
           "custom/spacer"
-          "hyprland/workspaces"
           "tray"
-          "hyprland/window"
+          "hyprland/workspaces"
         ];
         modules-center = [ "custom/spotify" ];
         modules-right = [
-          "hyprland/submap"
+          "hyprland/window"
           "custom/spacer"
           "custom/updates"
           "custom/bluetooth"
           "network"
           "wireplumber"
           "cpu"
-          "memory"
-          "temperature"
           "clock"
           "battery"
           "custom/spacer"
@@ -129,13 +126,13 @@ in {
         clock = {
           tooltip-format = "<span>{calendar}</span>";
           interval = 1;
-          format = "{:%H:%M:%S}";
+          format = "{:%m-%d %H:%M}";
           format-alt = "{:%Y-%m-%d %H:%M:%S}";
           calendar = {
             weeks-pos = "left";
             format = {
-              today = "<span color='#FABD2F'><u>{}</u></span>";
-              weeks = "<span color='#FABD2F'>{}</span>";
+              today = "<span color='#e67e80'><u>{}</u></span>";
+              weeks = "<span color='#e67e80'>{}</span>";
             };
           };
         };
@@ -146,7 +143,7 @@ in {
         };
 
         memory = {
-          format = "  {}%";
+          format = "{}%";
           tooltip = false;
         };
 
@@ -182,7 +179,7 @@ in {
         "hyprland/window" = {
           max-length = 50;
           seperate-outputs = true;
-          icon = true;
+          icon = false;
         };
 
         "hyprland/submap" = {
@@ -196,7 +193,6 @@ in {
           tooltip-format = "ssid : {essid}\naddr : {ipaddr}/{cidr}\ngate : {gwaddr}\ndev  : {ifname}";
           format-linked = "󰲝";
           format-disconnected = "";
-          format-alt = "{ipaddr}/{cidr}";
         };
 
         wireplumber = {

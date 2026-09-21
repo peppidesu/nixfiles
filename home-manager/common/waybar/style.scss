@@ -6,6 +6,10 @@
 
 window#waybar {
   background-color: $color-bg0;
+  opacity: 0.7;
+  border: 1px solid $color-grey0;
+
+  border-radius: 5px;
   color: $color-fg;
   transition-property: background-color;
   transition-duration: 0.5s;
@@ -28,13 +32,12 @@ button:hover {
   background: inherit;
   border-radius: 999px;
 }
-
 #workspaces button {
   transition: all 0.2s;
-  padding: 4px 4px 4px 5px;
-  margin: 3px;
-  min-width: 15px;
-  min-height: 15px;
+  padding: 0px 5px;
+  margin: 2px;
+  min-width: 25px;
+  min-height: 20px;
   background-color: transparent;
   color: $color-fg;
   border-radius: 999px;
@@ -47,7 +50,9 @@ button:hover {
 
 #workspaces button.active {
   font-weight: bold;
-  box-shadow: inset 0 0 0 2px $color-blue;
+  box-shadow: inset 0 0 0 2px $color-blue,
+              inset 0 0 4px 0px rgba($color-blue, 0.5),
+              0 0 2px 0px rgba($color-blue, 0.75);
   color: $color-blue;
   background-color: $color-bg-blue;
 }
@@ -79,28 +84,25 @@ button:hover {
   margin: 5px 0px;
   padding: 0 8px;
   background-color: $color-bg2;
+  transition: all 200ms;
 }
 /* Group end */
 #clock {
-  margin-right: 2px;
-  padding-right: 12px;
-  border-radius: 0 999px 999px 0;
+  margin-right: 4px;
+  border-radius: 0 5px 5px 0;
 }
 /* Group start */
 #custom-bluetooth {
-  margin-left: 2px;
-  padding-left: 12px;
-  border-radius: 999px 0 0 999px;
+  margin-left: 4px;
+  border-radius: 5px 0 0 5px;
 }
 /* Single item groups (buttons) */
 #custom-updates,
 #tray,
 #battery {
-  margin-left: 2px;
-  margin-right: 2px;
-  padding-left: 12px;
-  padding-right: 12px;
-  border-radius: 999px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-radius: 5px;
 }
 
 .modules-right > widget:last-child > #clock,
@@ -113,40 +115,101 @@ button:hover {
 }
 
 #window {
-  margin-left: 6px;
+  margin-right: 6px;
   color: $color-fg;
 }
 
 #workspaces {
   padding: 4px 4px;
-  border-radius: 999px;
+  border-radius: 5px;
 }
 
 #clock {
   box-shadow: none;
 }
 
+#network {
+    min-width: 10px;
+}
+
 #battery {
   min-width: 40px;
-  border-radius: 999px;
   transition: all 0.3s;
 }
 
+#custom-bluetooth:hover,
+#network:hover,
+#pulseaudio:hover,
+#wireplumber:hover {
+    background-color: rgba($color-grey0, 0.75);
+    color: #fff;
+}
+
+@keyframes battery-glow-pulse {
+  0% {
+    box-shadow: inset 0 0 0 2px $color-green,
+                inset 0 0 0 2px rgba(255,255,255,0.5),
+                inset 0 0 4px -1px $color-green,
+                0 0 2px 0px rgba($color-green, 0.65);
+    color: $color-green;
+  }
+  50% {
+    box-shadow: inset 0 0 0 2px $color-blue,
+                inset 0 0 0 2px rgba(255,255,255,0.5),
+                inset 0 0 4px -1px $color-blue,
+                0 0 2px 0px rgba($color-blue, 0.75);
+    color: $color-blue;
+  }
+  100% {
+    box-shadow: inset 0 0 0 2px $color-green,
+                inset 0 0 0 2px rgba(255,255,255,0.5),
+                inset 0 0 4px -1px $color-green,
+                0 0 2px 0px rgba($color-green, 0.65);
+    color: $color-green;
+  }
+}
+
+@keyframes battery-warning {
+  0%   {
+      background-color: $color-red;
+      color: $color-bg-red;
+  }
+  9.99%   {
+      background-color: transparent;
+      color: $color-red;
+  }
+  10%   {
+      background-color: $color-red;
+      color: $color-bg-red;
+  }
+  19%  {
+      background-color: transparent;
+      color: $color-red;
+  }
+  100% {
+      background-color: transparent;
+      color: $color-red;
+  }
+}
+
+
 #battery.charging,
 #battery.plugged {
-  box-shadow: inset 0 0 0 2px $color-green;
+  color: $color-green;
   background-color: $color-bg-green;
+
+  animation:
+    battery-glow-pulse 2.4s ease-in-out infinite;
 }
 
 #battery.full {
   background-color: $color-bg-blue;
   color: $color-blue;
-  box-shadow: none;
 }
 
 #battery.critical:not(.charging) {
   background-color: transparent;
-  animation: batteryCritical 1.2s linear 0s infinite normal forwards;
+  animation: battery-warning 2s linear 0s infinite normal forwards;
 }
 
 #network.disconnected,
@@ -189,12 +252,14 @@ button:hover {
 
 tooltip {
   background-color: $color-bg0;
-  border: 2px solid;
+  opacity: 0.9;
+  border: 1px solid;
+  border-radius: 5px;
   border-color: $color-grey0;
   color: $color-fg;
 }
 tooltip label {
-  padding: 5px;
+  padding: 3px;
 }
 
 #submap {

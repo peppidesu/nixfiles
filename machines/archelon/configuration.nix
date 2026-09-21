@@ -158,10 +158,44 @@ moduleArgs@{
   };
   security.pam.services.greetd.fprintAuth = true;
   security.pam.services.gtklock = { };
+  security.polkit.enable = true;
+
+  services.udev.packages = [ pkgs.yubikey-personalization ];
 
   peppidesu.neovim.enable = true;
 
   powerManagement.enable = true;
+
+  services.pipewire.wireplumber.extraConfig."10-dmic-node-props" = {
+    "monitor.alsa.rules" = [
+      {
+        matches = [
+          {
+            # Target only the AMD ACP DMIC capture device
+            "node.name" = "~alsa_input.pci-0000_c1_00.5.*"; # or matching your acp-pdm-mach node name
+          }
+        ];
+        actions = {
+          update-props = {
+            "audio.channels" = 2;
+            "audio.position" = "[ FL FR ]";
+          };
+        };
+      }
+    ];
+  };
+
+  systemd.services.load-fw16-mic = {
+    description = "Load AMD ACP DMIC modules after boot";
+    after = [ "multi-user.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      /run/current-system/sw/bin/modprobe snd_acp_pci
+      /run/current-system/sw/bin/modprobe snd_acp70
+    '';
+  };
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "26.05";
 }

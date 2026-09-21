@@ -67,7 +67,22 @@
     home.packages = lib.optionals osConfig.profiles.graphical.enable [
       pkgs.teams-for-linux
       pkgs.git-credential-oauth
+      pkgs.bitwarden-desktop
     ];
+
+    systemd.user.services.bitwarden-desktop = {
+      Unit = {
+        Description = "Bitwarden Desktop Password Manager";
+        After = [ "graphical-session.target" ];
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.bitwarden-desktop}/bin/bitwarden";
+        Restart = "on-failure";
+      };
+    };
 
     # Nicely reload system units when changing configs
     systemd.user.startServices = "sd-switch";

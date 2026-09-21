@@ -2,12 +2,12 @@
   path-light = if config.home.username == "daklab" then
     ./dakota-light.jpg
   else
-    ./mononoke.png
+    ./flowers.png
   ;
   path-dark = if config.home.username == "daklab" then
     ./dakota-dark.jpg
   else
-    ./mononoke-dark.png
+    ./berries.png
   ;
 in
 {

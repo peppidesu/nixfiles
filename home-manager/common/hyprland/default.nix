@@ -16,4 +16,7 @@
     ];
     # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
   };
+  home.packages = [
+    pkgs.hyprpicker
+  ];
 }

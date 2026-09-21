@@ -14,12 +14,5 @@
       # Unhook
       { id = "khncfooichmfjbepaaaebmommgaepoid"; }
     ];
-    commandLineArgs = [
-      "--ignore-gpu-blocklist"
-      "--enable-gpu-rasterization"
-      "--enable-system-notifications"
-      "--pdf-use-skia-renderer"
-      "--enable-drdc"
-    ];
   };
 }

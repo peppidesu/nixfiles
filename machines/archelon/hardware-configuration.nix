@@ -8,7 +8,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-amd"  "snd_acp_pci" "snd_acp70"  ];
   boot.extraModulePackages = [ ];
   boot.loader.systemd-boot.enable = true;
 

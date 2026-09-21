@@ -45,6 +45,7 @@
     shellAliases = {
       zed = lib.mkIf config.programs.zed-editor.enable "zeditor";
       cat = lib.getExe pkgs.bat;
+      parrot = "${lib.getExe pkgs.curl} parrot.live";
     };
 
     initContent = ''

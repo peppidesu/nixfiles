@@ -39,8 +39,8 @@ hl.config({
 -- ---------------------------------------------------------------------------
 hl.config({
 	general = {
-		gaps_in = 5,
-		gaps_out = 10,
+		gaps_in = 4,
+		gaps_out = 8,
 		border_size = 1,
 		["col.active_border"] = "rgb(e57e80)",
 		["col.inactive_border"] = "rgb(829181)",
@@ -63,18 +63,20 @@ hl.config({
 	decoration = {
 		rounding = 5,
 		dim_special = 0.3,
-		active_opacity = 0.95,
+		active_opacity = 0.9,
 		inactive_opacity = 0.8,
 
 		blur = {
 			enabled = true,
 			size = 8,
-			passes = 3,
+			passes = 2,
 			noise = 0,
 			xray = false,
 			special = false,
-			brightness = 1.02,
-			popups = false,
+			brightness = 0.98,
+			contrast = 1.5,
+			vibrancy = 0.5,
+			popups = true,
 			ignore_opacity = true,
 		},
 
@@ -259,7 +261,7 @@ hl.window_rule({
 -- Pavucontrol ---------------------------------------------------------------
 hl.window_rule({
 	name = "pavucontrol",
-	match = { class = "^(org.pulseaudio.pavucontrol)$" },
+	match = { class = "^(org.pulseaudio.pavucontrol)$|^(com.saivert.pwvucontrol)$" },
 	float = true,
 	center = true,
 })
@@ -288,12 +290,19 @@ hl.layer_rule({
 	name = "nwg-drawer",
 	match = { namespace = "^(nwg-drawer)$" },
 	blur = true,
-	dim_around = true,
 })
 
 hl.layer_rule({
 	name = "bm-sidebar",
 	match = { namespace = "^(bm-sidebar)$" },
+	blur = true,
+})
+
+
+hl.layer_rule({
+	name = "waybar",
+	match = { namespace = "^(waybar)$" },
+	ignore_alpha = 0.01,
 	blur = true,
 })
 

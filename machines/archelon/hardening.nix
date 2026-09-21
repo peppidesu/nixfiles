@@ -57,7 +57,7 @@
     killUnconfinedConfinables = true;
   };
 
-  environment.memoryAllocator.provider = "graphene-hardened-light";
+  # environment.memoryAllocator.provider = "scudo";
 
   programs.firejail = {
     enable = true;
@@ -68,5 +68,13 @@
         "--blacklist=/etc/ld-nix.so.preload"
       ];
     };
+
+    # wrappedBinaries.chromium = {
+    #   executable = "${pkgs.chromium}/bin/chromium-browser";
+    #   profile = "${pkgs.firejail}/etc/firejail/chromium-browser.profile";
+    #   extraArgs = [
+    #     "--blacklist=/etc/ld-nix.so.preload"
+    #   ];
+    # };
   };
 }

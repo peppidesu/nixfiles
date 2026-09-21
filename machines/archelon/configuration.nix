@@ -13,6 +13,7 @@ moduleArgs@{
     # inputs.self.nixosModules.example
     inputs.self.nixosModules.neovim
     inputs.self.nixosModules.greeter
+    inputs.self.nixosModules.netbird
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd

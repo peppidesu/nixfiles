@@ -126,8 +126,7 @@ in {
         clock = {
           tooltip-format = "<span>{calendar}</span>";
           interval = 1;
-          format = "{:%m-%d %H:%M}";
-          format-alt = "{:%Y-%m-%d %H:%M:%S}";
+          format = "{:%Y-%m-%d %H:%M:%S}";
           calendar = {
             weeks-pos = "left";
             format = {

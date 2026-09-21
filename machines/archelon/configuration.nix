@@ -22,6 +22,7 @@ moduleArgs@{
     ./hardware-configuration.nix
     ./disk-config.nix
     ../../common/profiles.nix
+    ../../common/attic
   ];
 
   peppidesu.greeter.enable = true;

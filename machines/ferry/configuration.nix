@@ -6,7 +6,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
@@ -52,47 +53,55 @@
   home-manager.users."peppidesu" = ../../home-manager/peppidesu.nix;
   home-manager.extraSpecialArgs = { inherit inputs; };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = ["nix-command" "flakes"];
-      # Opinionated: disable global registry
-      # flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
-    };
-    # Opinionated: disable channels
-    channel.enable = false;
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        # Enable flakes and new 'nix' command
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+        # Opinionated: disable global registry
+        # flake-registry = "";
+        # Workaround for https://github.com/NixOS/nix/issues/9574
+        nix-path = config.nix.nixPath;
+      };
+      # Opinionated: disable channels
+      channel.enable = false;
 
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    };
 
   boot = {
-     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
-     initrd.availableKernelModules = {
-       dw-hdmi = lib.mkForce false;
-       dw-mipi-dsi = lib.mkForce false;
-       rockchipdrm = lib.mkForce false;
-       rockchip-rga = lib.mkForce false;
-       phy-rockchip-pcie = lib.mkForce false;
-       pcie-rockchip-host = lib.mkForce false;
-       pwm-sun4i = lib.mkForce false;
-       sun4i-drm = lib.mkForce false;
-       sun8i-mixer = lib.mkForce false;
-     };
-     loader = {
-       grub.enable = false;
-       generic-extlinux-compatible.enable = true;
-     };
-   };
+    kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+    initrd.availableKernelModules = {
+      dw-hdmi = lib.mkForce false;
+      dw-mipi-dsi = lib.mkForce false;
+      rockchipdrm = lib.mkForce false;
+      rockchip-rga = lib.mkForce false;
+      phy-rockchip-pcie = lib.mkForce false;
+      pcie-rockchip-host = lib.mkForce false;
+      pwm-sun4i = lib.mkForce false;
+      sun4i-drm = lib.mkForce false;
+      sun8i-mixer = lib.mkForce false;
+    };
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
+    };
+  };
 
   networking = {
     hostName = "ferry";
-    nameservers = [ "127.0.0.1" "::1" ];
+    nameservers = [
+      "127.0.0.1"
+      "::1"
+    ];
 
     networkmanager.enable = true;
     networkmanager.dns = "none";
@@ -118,7 +127,10 @@
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["wheel" "networkmanager"];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+      ];
       shell = pkgs.zsh;
     };
   };

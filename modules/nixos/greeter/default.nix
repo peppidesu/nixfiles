@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 let
   nwgHelloHypr = pkgs.writeText "nwg-hello-hyprland.lua" ''
@@ -20,19 +25,25 @@ let
         hl.exec_cmd("nwg-hello; hyprctl dispatch 'hl.dsp.exit()'")
     end)
   '';
-in {
-  options.peppidesu.greeter = let
-    inherit (lib.options) mkEnableOption;
-  in {
-    enable = mkEnableOption "Enable greeter";
-  };
+in
+{
+  options.peppidesu.greeter =
+    let
+      inherit (lib.options) mkEnableOption;
+    in
+    {
+      enable = mkEnableOption "Enable greeter";
+    };
   config = lib.mkIf config.peppidesu.greeter.enable {
     environment.systemPackages = with pkgs; [
       nwg-hello
       hyprland
     ];
 
-    environment.pathsToLink = [ "/share/wayland-sessions" "/share/xsessions" ];
+    environment.pathsToLink = [
+      "/share/wayland-sessions"
+      "/share/xsessions"
+    ];
 
     services.greetd = {
       enable = true;

@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   imports = [
     inputs.self.homeManagerModules.bluetooth-manager-sidebar
   ];

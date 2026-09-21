@@ -1,7 +1,15 @@
-{inputs, lib, osConfig, pkgs, ...}: {
+{
+  inputs,
+  lib,
+  osConfig,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ./console
-  ] ++ lib.optionals osConfig.profiles.graphical.enable [
+  ]
+  ++ lib.optionals osConfig.profiles.graphical.enable [
     ./theme
     ./hyprland
     ./hyprpaper

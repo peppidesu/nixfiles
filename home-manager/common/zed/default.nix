@@ -1,4 +1,4 @@
-{inputs, pkgs, ...}: {
+{ inputs, pkgs, ... }: {
   home.packages = [
     pkgs.codex
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex-acp
@@ -60,8 +60,8 @@
         "Claude Code" = {
           type = "custom";
           command = "claude-agent-acp";
-          args = [];
-          env = {};
+          args = [ ];
+          env = { };
         };
       };
       project_panel = {
@@ -115,22 +115,29 @@
         CSharp = {
           hard_tabs = false;
           tab_size = 4;
-          langauge_servers = ["roslyn"];
+          langauge_servers = [ "roslyn" ];
 
           ensure_final_newline_on_save = false;
         };
         JavaScript = {
           formatter = "prettier";
         };
+        Nix = {
+          language_servers = [ "nixd" ];
+        };
       };
 
       lsp = {
-        roslyn.binary.arguments = ["--stdio" "autoLoadProjects"];
+        roslyn.binary.arguments = [
+          "--stdio"
+          "autoLoadProjects"
+        ];
       };
       load_direnv = "shell_hook";
     };
     extraPackages = [
-
+      pkgs.nixd
+      pkgs.nixfmt
     ];
   };
 

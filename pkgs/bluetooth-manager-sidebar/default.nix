@@ -11,8 +11,9 @@
   json-glib,
   bluez,
   pulseaudio,
-  libuuid
-}: stdenv.mkDerivation rec {
+  libuuid,
+}:
+stdenv.mkDerivation rec {
   pname = "bluetooth-manager-sidebar";
   version = "0.2.0";
 

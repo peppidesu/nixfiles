@@ -4,15 +4,24 @@
   pkgs,
   lib,
   ...
-}: let
-  confineServices = xs: lib.mkMerge ([{
-  }] ++ (builtins.map (name: {
-    systemd.services.${name}.vpnConfinement = {
-      enable = true;
-      vpnNamespace = "wgmv";
-    };
-  }) xs));
-in {
+}:
+let
+  confineServices =
+    xs:
+    lib.mkMerge (
+      [
+        {
+        }
+      ]
+      ++ (builtins.map (name: {
+        systemd.services.${name}.vpnConfinement = {
+          enable = true;
+          vpnNamespace = "wgmv";
+        };
+      }) xs)
+    );
+in
+{
   config = lib.mkMerge [
     {
       peppidesu.caddy = {
@@ -80,42 +89,60 @@ in {
         namespaceAddress = "10.200.1.1";
         bridgeAddress = "10.200.1.5";
         portMappings = [
-          { from = 5055; to = 5055; }
-          { from = 8989; to = 8989; }
-          { from = 7878; to = 7878; }
-          { from = 9696; to = 9696; }
-          { from = 8080; to = 8080; }
+          {
+            from = 5055;
+            to = 5055;
+          }
+          {
+            from = 8989;
+            to = 8989;
+          }
+          {
+            from = 7878;
+            to = 7878;
+          }
+          {
+            from = 9696;
+            to = 9696;
+          }
+          {
+            from = 8080;
+            to = 8080;
+          }
         ];
       };
-
 
       hardware.graphics = {
         enable = lib.mkForce true;
         extraPackages = with pkgs; [
           # Required for modern Intel GPUs (Xe iGPU and ARC)
-          intel-media-driver     # VA-API (iHD) userspace
-          vpl-gpu-rt             # oneVPL (QSV) runtime
+          intel-media-driver # VA-API (iHD) userspace
+          vpl-gpu-rt # oneVPL (QSV) runtime
 
           # Optional (compute / tooling):
           # intel-compute-runtime  # OpenCL (NEO) + Level Zero for Arc/Xe
         ];
       };
       environment.sessionVariables = {
-        LIBVA_DRIVER_NAME = "iHD";     # Prefer the modern iHD backend
+        LIBVA_DRIVER_NAME = "iHD"; # Prefer the modern iHD backend
       };
 
       hardware.enableRedistributableFirmware = true;
       boot.kernelParams = [ "i915.enable_guc=3" ];
-      users.groups.silo = {};
-      users.groups.prowlarr = {};
+      users.groups.silo = { };
+      users.groups.prowlarr = { };
 
-      users.users.jellyfin.extraGroups = [ "video" "render" "silo" ];
-      users.users.sonarr.extraGroups = ["silo"];
-      users.users.radarr.extraGroups = ["silo"];
+      users.users.jellyfin.extraGroups = [
+        "video"
+        "render"
+        "silo"
+      ];
+      users.users.sonarr.extraGroups = [ "silo" ];
+      users.users.radarr.extraGroups = [ "silo" ];
       users.users.prowlarr = {
         group = "prowlarr";
         isSystemUser = true;
-        extraGroups = ["silo"];
+        extraGroups = [ "silo" ];
       };
     }
 

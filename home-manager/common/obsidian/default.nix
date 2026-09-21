@@ -1,4 +1,4 @@
-{inputs, pkgs, ...}: {
+{ inputs, pkgs, ... }: {
   nixpkgs.overlays = [
     inputs.obsidian-extensions.overlays.default
   ];

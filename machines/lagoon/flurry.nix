@@ -1,4 +1,10 @@
-{config, inputs, pkgs, ...}: {
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+{
   services.flurry = {
     enable = true;
     package = inputs.flurry.packages.${pkgs.stdenv.hostPlatform.system}.default;

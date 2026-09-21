@@ -1,4 +1,5 @@
-{lib, config, ...}: let
+{ lib, config, ... }:
+let
   # Wireguard Home VPN config
 
   # Subnet sizes for ipv4 and ipv6
@@ -63,7 +64,8 @@
   endpointAddress = "192.168.1.50";
   endpointPort = 51820;
 
-in {
+in
+{
   endpoint = {
     ips = [
       "${peers.${endpoint}.ipv4}/${subnet-ipv4}"
@@ -71,44 +73,47 @@ in {
     ];
     listenPort = endpointPort;
     privateKeyFile = peers.${endpoint}.privateKeyFile;
-    peers = builtins.map
-      ({value, ...}: {
-        allowedIPs = [ "${value.ipv4}/32" "${value.ipv6}/128" ];
-        publicKey = value.publicKey;
-        persistentKeepalive = 25;
-      })
-    (lib.attrsToList (builtins.removeAttrs peers [ endpoint ]));
+    peers = builtins.map ({ value, ... }: {
+      allowedIPs = [
+        "${value.ipv4}/32"
+        "${value.ipv6}/128"
+      ];
+      publicKey = value.publicKey;
+      persistentKeepalive = 25;
+    }) (lib.attrsToList (builtins.removeAttrs peers [ endpoint ]));
   };
 
-  peers = (builtins.mapAttrs (name: value: {
-    address = [
-      "${value.ipv4}/${subnet-ipv4}"
-      "${value.ipv6}/${subnet-ipv6}"
-    ];
-    dns = [
-      peers.${endpoint}.ipv4
-      peers.${endpoint}.ipv6
-    ];
-    privateKeyFile = value.privateKeyFile;
-    peers = [{
-      publicKey = peers.${endpoint}.publicKey;
-      allowedIPs = [
-        "${peers.${endpoint}.ipv4}/${subnet-ipv4}"
-        "${peers.${endpoint}.ipv6}/${subnet-ipv6}"
+  peers = (
+    builtins.mapAttrs (name: value: {
+      address = [
+        "${value.ipv4}/${subnet-ipv4}"
+        "${value.ipv6}/${subnet-ipv6}"
       ];
-      endpoint = "${endpointAddress}:${builtins.toString endpointPort}";
-      persistentKeepalive = 25;
-    }];
-  }) (builtins.removeAttrs peers [ endpoint ]));
+      dns = [
+        peers.${endpoint}.ipv4
+        peers.${endpoint}.ipv6
+      ];
+      privateKeyFile = value.privateKeyFile;
+      peers = [
+        {
+          publicKey = peers.${endpoint}.publicKey;
+          allowedIPs = [
+            "${peers.${endpoint}.ipv4}/${subnet-ipv4}"
+            "${peers.${endpoint}.ipv6}/${subnet-ipv6}"
+          ];
+          endpoint = "${endpointAddress}:${builtins.toString endpointPort}";
+          persistentKeepalive = 25;
+        }
+      ];
+    }) (builtins.removeAttrs peers [ endpoint ])
+  );
 
   cloakingRules = builtins.concatStringsSep "\n" (
-    builtins.map ({name, value}: ''
+    builtins.map ({ name, value }: ''
       *.${name}.reef.arpa ${value.ipv4}
       *.${name}.reef.arpa ${value.ipv6}
       *.${name}.reef ${value.ipv4}
       *.${name}.reef ${value.ipv6}
-    '') (
-      lib.attrsToList peers
-    )
+    '') (lib.attrsToList peers)
   );
 }

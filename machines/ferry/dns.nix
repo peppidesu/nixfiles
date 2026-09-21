@@ -2,7 +2,8 @@ moduleArgs@{
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   services.dnscrypt-proxy = {
     enable = true;
     settings = {
@@ -16,7 +17,10 @@ moduleArgs@{
         minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
         refresh_delay = 72;
       };
-      server_names = [ "quad9-dnscrypt-ip4-filter-pri" "quad9-dnscrypt-ip4-nofilter-pri" ];
+      server_names = [
+        "quad9-dnscrypt-ip4-filter-pri"
+        "quad9-dnscrypt-ip4-nofilter-pri"
+      ];
       ipv6_servers = false;
 
       require_nolog = true;

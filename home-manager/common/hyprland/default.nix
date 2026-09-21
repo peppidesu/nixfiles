@@ -1,10 +1,17 @@
-{lib, pkgs, inputs, osConfig,... }:{
+{
+  lib,
+  pkgs,
+  inputs,
+  osConfig,
+  ...
+}:
+{
   wayland.windowManager.hyprland = {
     enable = true;
     systemd = {
       enable = true;
       enableXdgAutostart = true;
-      variables = ["--all"];
+      variables = [ "--all" ];
     };
     plugins = [
       pkgs.hyprlandPlugins.hyprcapture

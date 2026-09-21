@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.programs.gtklock;
@@ -75,13 +80,14 @@ in
       (cfg.package.overrideAttrs (old: {
         buildInputs = (old.buildInputs or [ ]) ++ cfg.modules;
         postInstall = (old.postInstall or "") + ''
-          ${lib.optionalString (cfg.modules != []) ''
+          ${lib.optionalString (cfg.modules != [ ]) ''
             wrapProgram $out/bin/gtklock \
               --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath cfg.modules}"
           ''}
         '';
       }))
-    ] ++ cfg.modules;
+    ]
+    ++ cfg.modules;
 
     xdg.configFile."gtklock/config.ini" = lib.mkIf (cfg.config != { }) {
       source = settingsFormat.generate "gtklock-config.ini" cfg.config;

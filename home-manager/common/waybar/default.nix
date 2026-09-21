@@ -2,27 +2,31 @@
 let
   inherit (pkgs.lib) concatStringsSep mapAttrsToList;
 
-  mkVars = vars: concatStringsSep "\n"
-    (mapAttrsToList (name: value: "\$${name}: ${value};") vars);
+  mkVars = vars: concatStringsSep "\n" (mapAttrsToList (name: value: "\$${name}: ${value};") vars);
 
-  mkScss = {
-    src,
-    vars ? {},
-  }:
+  mkScss =
+    {
+      src,
+      vars ? { },
+    }:
     let
       combinedScss = pkgs.writeText "combined.scss" ''
         ${mkVars vars}
         ${builtins.readFile src}
       '';
-      pkg = pkgs.runCommand "compiled-css" {
-        nativeBuildInputs = [ pkgs.dart-sass ];
-      } ''
-        mkdir $out
-        sass --no-source-map ${combinedScss} $out/style.css
-      '';
+      pkg =
+        pkgs.runCommand "compiled-css"
+          {
+            nativeBuildInputs = [ pkgs.dart-sass ];
+          }
+          ''
+            mkdir $out
+            sass --no-source-map ${combinedScss} $out/style.css
+          '';
     in
-      pkg + "/style.css";
-in {
+    pkg + "/style.css";
+in
+{
   xdg.configFile."waybar/style-light.css".source = mkScss {
     src = ./style.scss;
     vars = {
@@ -121,7 +125,9 @@ in {
           };
         };
 
-        tray = { spacing = 10; };
+        tray = {
+          spacing = 10;
+        };
 
         clock = {
           tooltip-format = "<span>{calendar}</span>";
@@ -151,12 +157,26 @@ in {
           hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
           critical-threshold = 80;
           format = "{icon} {temperatureC}°C";
-          format-icons = [ "" "" "" ];
+          format-icons = [
+            ""
+            ""
+            ""
+          ];
         };
 
         backlight = {
           format = "{percent}% {icon}";
-          format-icons = [ "" "" "" "" "" "" "" "" "" ];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
           reverse-scrolling = true;
         };
 
@@ -172,7 +192,13 @@ in {
           format-plugged = "{capacity}% {icon}";
           format-alt = "{time} {icon}";
           interval = 1;
-          format-icons = [ "󰂎" "󰁻" "󰁾" "󰂀" "󰁹" ];
+          format-icons = [
+            "󰂎"
+            "󰁻"
+            "󰁾"
+            "󰂀"
+            "󰁹"
+          ];
         };
 
         "hyprland/window" = {
@@ -208,7 +234,11 @@ in {
             phone = "";
             portable = "";
             car = "󰄋";
-            default = [ "󰕾" "󰕾" "󰕾" ];
+            default = [
+              "󰕾"
+              "󰕾"
+              "󰕾"
+            ];
           };
           on-click = lib.getExe pkgs.pwvucontrol;
           reverse-scrolling = true;

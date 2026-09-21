@@ -1,5 +1,5 @@
-{inputs, ...}: {
-  imports = [inputs.disko.nixosModules.disko];
+{ inputs, ... }: {
+  imports = [ inputs.disko.nixosModules.disko ];
 
   boot.kernel.sysctl = {
     "vm.swappiness" = 10; # swap as little as possible to protect ssd health
@@ -20,7 +20,12 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "umask=0077" "nosuid" "nodev" "noexec" ];
+                mountOptions = [
+                  "umask=0077"
+                  "nosuid"
+                  "nodev"
+                  "noexec"
+                ];
               };
             };
             luks = {

@@ -1,72 +1,58 @@
 {
   "lsp": {
-    "nil": {
+    "nixd": {
       "settings": {
-        "formatting": {
-          // External formatter command (with arguments).
-          // It should accepts file content in stdin and print the formatted code into stdout.
-          // Type: [string] | null
-          // Example: ["nixfmt"]
-          "command": ["nixfmt"],
-        },
-        "diagnostics": {
-          // Ignored diagnostic kinds.
-          // The kind identifier is a snake_cased_string usually shown together
-          // with the diagnostic message.
-          // Type: [string]
-          // Example: ["unused_binding", "unused_with"]
-          "ignored": [],
-          // Files to exclude from showing diagnostics. Useful for generated files.
-          // It accepts an array of paths. Relative paths are joint to the workspace root.
-          // Glob patterns are currently not supported.
-          // Type: [string]
-          // Example: ["Cargo.nix"]
-          "excludedFiles": [],
-        },
-        "nix": {
-          // The path to the `nix` binary.
-          // Type: string
-          // Example: "/run/current-system/sw/bin/nix"
-          "binary": "nix",
-          // The heap memory limit in MiB for `nix` evaluation.
-          // Currently it only applies to flake evaluation when `autoEvalInputs` is
-          // enabled, and only works for Linux. Other `nix` invocations may be also
-          // applied in the future. `null` means no limit.
-          // As a reference, `nix flake show --legacy nixpkgs` usually requires
-          // about 2GiB memory.
-          //
-          // Type: number | null
-          // Example: 1024
-          "maxMemoryMB": 4096,
-          "flake": {
-            // Auto-archiving behavior which may use network.
-            //
-            // - null: Ask every time.
-            // - true: Automatically run `nix flake archive` when necessary.
-            // - false: Do not archive. Only load inputs that are already on disk.
-            // Type: null | boolean
-            // Example: true
-            "autoArchive": true,
-            // Whether to auto-eval flake inputs.
-            // The evaluation result is used to improve completion, but may cost
-            // lots of time and/or memory.
-            //
-            // Type: boolean
-            // Example: true
-            "autoEvalInputs": true,
-            // The input name of nixpkgs for NixOS options evaluation.
-            //
-            // The options hierarchy is used to improve completion, but may cost
-            // lots of time and/or memory.
-            // If this value is `null` or is not found in the workspace flake's
-            // inputs, NixOS options are not evaluated.
-            //
-            // Type: null | string
-            // Example: "nixos"
-            "nixpkgsInputName": "nixpkgs",
+        "nixpkgs": {
+            // For flake.
+            // "expr": "import (builtins.getFlake \"/home/lyc/workspace/CS/OS/NixOS/flakes\").inputs.nixpkgs { }   "
+
+            // This expression will be interpreted as "nixpkgs" toplevel
+            // Nixd provides package, lib completion/information from it.
+            ///
+            // Resource Usage: Entries are lazily evaluated, entire nixpkgs takes 200~300MB for just "names".
+            ///                Package documentation, versions, are evaluated by-need.
+            "expr": "import (builtins.getFlake \"/home/peppidesu/nixfiles\").inputs.nixpkgs { }"
           },
-        },
-      },
-    },
-  },
+          "formatting": {
+            // Which command you would like to do formatting
+            "command": [ "nixfmt" ]
+          },
+          // Tell the language server your desired option set, for completion
+          // This is lazily evaluated.
+          "options": { // Map of eval information
+              // By default, this entriy will be read from `import <nixpkgs> { }`
+              // You can write arbitary nix expression here, to produce valid "options" declaration result.
+              //
+              // *NOTE*: Replace "<name>" below with your actual configuration name.
+              // If you're unsure what to use, you can verify with `nix repl` by evaluating
+              // the expression directly.
+              //
+              "nixos": {
+                  "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.<name>.options"
+              },
+
+            // Before configuring Home Manager options, consider your setup:
+            // Which command do you use for home-manager switching?
+            //
+            //  A. home-manager switch --flake .#... (standalone Home Manager)
+            //  B. nixos-rebuild switch --flake .#... (NixOS with integrated Home Manager)
+            //
+            // Configuration examples for both approaches are shown below.
+            "home-manager": {
+              // A:
+              // "expr": "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.<name>.options"
+
+              // B:
+              "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.<name>.options.home-manager.users.type.getSubOptions []"
+            }
+          },
+          // Control the diagnostic system
+          "diagnostic": {
+            "suppress": [
+              "sema-extra-with"
+            ]
+          }
+      }
+    }
+  }
 }

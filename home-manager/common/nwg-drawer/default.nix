@@ -1,4 +1,4 @@
-{pkgs, inputs, ...}: {
+{ pkgs, inputs, ... }: {
   imports = [
     inputs.self.homeManagerModules.nwg-drawer
   ];
@@ -13,22 +13,22 @@
       spacing = 24;
     };
     style = ''
-        window {
-          background-color: rgba(0, 0, 0, 0.15);
-        }
+      window {
+        background-color: rgba(0, 0, 0, 0.15);
+      }
 
-        #category-button {
-          margin-left: 4px;
-          margin-right: 4px;
-          padding: 5px 10px;
-        }
-        #category-button.selected {
-          background-color: #493b40;
-          color: #e67e80;
-        }
-        button {
-          border-radius: 5px;
-        }
+      #category-button {
+        margin-left: 4px;
+        margin-right: 4px;
+        padding: 5px 10px;
+      }
+      #category-button.selected {
+        background-color: #493b40;
+        color: #e67e80;
+      }
+      button {
+        border-radius: 5px;
+      }
     '';
   };
 }

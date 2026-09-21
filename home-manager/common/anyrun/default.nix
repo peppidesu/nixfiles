@@ -1,4 +1,10 @@
-{config, lib, pkgs, ...}:{
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   programs.anyrun = {
     enable = true;
     extraCss = builtins.readFile ./style.css;

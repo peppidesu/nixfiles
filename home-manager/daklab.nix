@@ -6,7 +6,8 @@
   osConfig,
   pkgs,
   ...
-}: {
+}:
+{
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -18,7 +19,8 @@
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
     ./common
-  ] ++ lib.optionals osConfig.profiles.graphical.enable [
+  ]
+  ++ lib.optionals osConfig.profiles.graphical.enable [
 
   ];
 
@@ -60,7 +62,10 @@
       user.email = "p.bakker@daklab.nl";
       user.signingkey = "23212ECB3DD3A645";
       credential = {
-        helper = [ "cache --timeout=21600" "oauth" ];
+        helper = [
+          "cache --timeout=21600"
+          "oauth"
+        ];
       };
     };
 

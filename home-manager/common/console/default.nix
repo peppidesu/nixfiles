@@ -6,7 +6,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [ ./bat ];
 
   programs.direnv.enable = true;
@@ -61,7 +62,6 @@
       HIST_STAMPS="yyyy-mm-dd"
     '';
   };
-
 
   # lsd
   programs.lsd = {

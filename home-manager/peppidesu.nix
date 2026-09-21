@@ -6,7 +6,8 @@
   osConfig,
   pkgs,
   ...
-}: {
+}:
+{
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -16,7 +17,8 @@
     # inputs.nix-colors.homeManagerModules.default
 
     ./common
-  ] ++ lib.optionals osConfig.profiles.graphical.enable [
+  ]
+  ++ lib.optionals osConfig.profiles.graphical.enable [
     ./common/discord
     ./common/obsidian
   ];

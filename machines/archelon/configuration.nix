@@ -63,11 +63,13 @@ moduleArgs@{
   home-manager.extraSpecialArgs = { inherit inputs; };
   hardware.bluetooth.enable = true;
 
+
   nix =
     let
       flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
     in
     {
+      package = pkgs.nixVersions.latest;
       settings = {
         # Enable flakes and new 'nix' command
         experimental-features = [
@@ -93,9 +95,11 @@ moduleArgs@{
   # };
   # networking.wg-quick.interfaces.wg0 = (import ../../common/wg.nix moduleArgs).peers.archelon;
 
+  services.resolved.enable = true;
   networking = {
     hostName = "archelon";
     networkmanager.enable = true;
+    networkmanager.dns = "systemd-resolved";
     firewall.enable = true;
     tempAddresses = "disabled";
   };
@@ -124,6 +128,7 @@ moduleArgs@{
         "networkmanager"
       ];
       shell = pkgs.zsh;
+
     };
     daklab = {
       # TODO: You can set an initial password for your user.

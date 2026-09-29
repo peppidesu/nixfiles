@@ -14,5 +14,8 @@
       # Unhook
       { id = "khncfooichmfjbepaaaebmommgaepoid"; }
     ];
+    commandLineArgs = [
+      "--password-store=gnome-libsecret"  # or "gnome-libsecret" / "kwallet5"
+    ];
   };
 }

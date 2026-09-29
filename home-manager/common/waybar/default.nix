@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
   inherit (pkgs.lib) concatStringsSep mapAttrsToList;
 
@@ -73,6 +73,11 @@ in
       color-bg-purple = "#463f48";
     };
   };
+
+  systemd.user.services.waybar.Unit.X-Reload-Triggers = [
+    "${config.xdg.configFile."waybar/style-light.css".source}"
+    "${config.xdg.configFile."waybar/style-dark.css".source}"
+  ];
 
   programs.waybar = {
     enable = true;

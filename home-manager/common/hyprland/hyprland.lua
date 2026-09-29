@@ -68,14 +68,14 @@ hl.config({
 
 		blur = {
 			enabled = true,
-			size = 8,
-			passes = 2,
+			size = 4,
+			passes = 3,
 			noise = 0,
 			xray = false,
 			special = false,
-			brightness = 0.98,
-			contrast = 1.5,
-			vibrancy = 0.5,
+			brightness = 0.9,
+			contrast = 1.2,
+			vibrancy = 0.25,
 			popups = true,
 			ignore_opacity = true,
 		},
@@ -243,13 +243,6 @@ hl.window_rule({
 	opacity = "0.9 0.8",
 })
 
--- Browser -------------------------------------------------------------------
-hl.window_rule({
-	name = "browser",
-	match = { class = "chromium-browser" },
-	opaque = true,
-})
-
 -- Browser popup -------------------------------------------------------------
 hl.window_rule({
 	name = "browser-popup",
@@ -306,6 +299,19 @@ hl.layer_rule({
 	blur = true,
 })
 
+
+local forceOpaque = hl.window_rule({
+    name  = "hyprpicker-force-opaque",
+    match = { class = ".*" },
+    opacity = "1.0 override",
+})
+
+forceOpaque:set_enabled(false)
+_G.hyprpickerOpaque = function(on)
+    hl.animation({ leaf = "fadeSwitch", enabled = on == false, speed = 9, bezier = "default" })
+    forceOpaque:set_enabled(on == true)
+end
+
 -- General binds ----------------------------------------------------------------
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
@@ -320,7 +326,7 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(menu))
 
 -- Widgets
-hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -nra"))
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprctl eval '_G.hyprpickerOpaque(true)'; hyprpicker -nra; hyprctl eval '_G.hyprpickerOpaque(false)'"))
 hl.bind(mainMod .. " + backspace", hl.dsp.exec_cmd("nwg-bar -f"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("killall -SIGUSR1 waybar"))
 

@@ -38,7 +38,7 @@ button:hover {
   margin: 2px;
   min-width: 25px;
   min-height: 20px;
-  background-color: transparent;
+  background-color: $color-bg2;
   color: $color-fg;
   border-radius: 999px;
 }
@@ -88,20 +88,24 @@ button:hover {
 }
 /* Group end */
 #clock {
-  margin-right: 4px;
+  margin-right: 2px;
   border-radius: 0 5px 5px 0;
 }
 /* Group start */
-#custom-bluetooth {
-  margin-left: 4px;
+#cpu {
+  margin-left: 2px;
   border-radius: 5px 0 0 5px;
 }
 /* Single item groups (buttons) */
 #custom-updates,
+#custom-bluetooth,
+#network,
+#pulseaudio,
+#wireplumber,
 #tray,
 #battery {
-  margin-left: 4px;
-  margin-right: 4px;
+  margin-left: 2px;
+  margin-right: 2px;
   border-radius: 5px;
 }
 
@@ -112,6 +116,7 @@ button:hover {
 
 #tray {
   padding: 4px 10px;
+  margin-left: 4px;
 }
 
 #window {
@@ -129,7 +134,8 @@ button:hover {
 }
 
 #network {
-    min-width: 10px;
+    padding-right: 11px;
+    padding-left: 8px;
 }
 
 #battery {
@@ -141,8 +147,11 @@ button:hover {
 #network:hover,
 #pulseaudio:hover,
 #wireplumber:hover {
-    background-color: rgba($color-grey0, 0.75);
-    color: #fff;
+    color: $color-red;
+    background-color: $color-bg-red;
+    box-shadow: inset 0 0 0 1px $color-red,
+        inset 0 0 4px 0px rgba($color-red, 0.5),
+        0 0 2px 0px rgba($color-red, 0.75);
 }
 
 @keyframes battery-glow-pulse {

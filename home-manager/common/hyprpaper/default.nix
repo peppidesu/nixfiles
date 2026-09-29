@@ -1,7 +1,7 @@
 { config, ... }:
 let
-  path-light = if config.home.username == "daklab" then ./dakota-light.jpg else ./flowers.png;
-  path-dark = if config.home.username == "daklab" then ./dakota-dark.jpg else ./berries.png;
+  path-light = if config.home.username == "daklab" then ./dakota-dark.png else ./flowers.png;
+  path-dark = if config.home.username == "daklab" then ./dakota-dark.png else ./berries.png;
 in
 {
   config = {

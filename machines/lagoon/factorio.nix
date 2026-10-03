@@ -60,4 +60,12 @@
     lan = true;
     nonBlockingSaving = true;
   };
+
+  # netbird fix
+  networking.interfaces.enp4s0.ipv4.routes = [
+    {
+      address = "10.67.255.255";
+      prefixLength = 32;
+    }
+  ];
 }

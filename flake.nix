@@ -127,6 +127,18 @@
             inputs.hardware.nixosModules.framework-amd-ai-300-series
           ];
         };
+        megalodon = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./machines/megalodon/configuration.nix
+            agenix.nixosModules.default
+            home-manager.nixosModules.default
+            inputs.hardware.nixosModules.common-cpu-amd
+            inputs.hardware.nixosModules.common-cpu-amd-pstate
+            inputs.hardware.nixosModules.common-cpu-amd-zenpower
+            inputs.hardware.nixosModules.common-gpu-amd
+          ];
+        };
       };
     };
 }

@@ -12,5 +12,6 @@
   config = lib.mkIf config.profiles.graphical.enable {
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
+    services.gvfs.enable = true;
   };
 }

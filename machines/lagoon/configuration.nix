@@ -119,7 +119,7 @@ moduleArgs@{
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO97Yve7hz7krbWA2FOgEihMAoGNmb2PhiwrUB3vXPzS peppidesu@dreadnought"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA+DDOyMQZKiFMo2fPOAjmtPGZ2dnUAuonSGwqfxgG0Y peppidesu@catamaran"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqaiJUEzKbdGcIPzQwPFvTn1Gh5E00a/6MDs5JtBwOC peppidesu@megalodon"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBJKQeBymU0nYPFrA2dJ4QMfhYQb7BqR6N34HxjJBDQS root@ferry"
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];

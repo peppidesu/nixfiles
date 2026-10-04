@@ -27,9 +27,15 @@
   ];
   home.packages = lib.optionals osConfig.profiles.graphical.enable [
     pkgs.nautilus
+    pkgs.nautilus-open-any-terminal
+    pkgs.sushi
+    pkgs.gnome-disk-utility
+    pkgs.seahorse
+    pkgs.gnome-calendar
     pkgs.wl-clipboard
     pkgs.swappy
   ];
+
 
   services.gnome-keyring.enable = true;
 

@@ -4,8 +4,8 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 
 hl.monitor({
-    output               = "eDP-1",
-    mode                 = "2560x1600@165",
+    output               = "DP-2",
+    mode                 = "3840x2160@240",
     position             = "0x0",
     scale                = 1.33,
     vrr                  = true,
@@ -19,7 +19,7 @@ hl.monitor({
 hl.env("OZONE_PLATFORM", "wayland")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 -- hl.env("SDL_VIDEODRIVER", "wayland, x11")
-hl.env("EGL_PLATFORM", "wayland")
+-- hl.env("EGL_PLATFORM", "wayland")
 
 -- XDG Desktop Portal
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
@@ -27,11 +27,11 @@ hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 
 -- QT
-hl.env("QT_QPA_PLATFORM", "wayland")
-hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+-- hl.env("QT_QPA_PLATFORM", "wayland")
+-- hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 -- hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
-hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
-hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
+-- hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
+-- hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 
 -- Toolkit-specific scale
 -- hl.env("GDK_SCALE", "1.5")

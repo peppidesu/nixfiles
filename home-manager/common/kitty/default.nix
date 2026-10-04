@@ -9,6 +9,7 @@
     settings = {
       window_padding_width = 5;
       font_family = "family=\"Maple Mono NF\" features=\"calt cv01 ss01\"";
+      remember_window_size = false;
     };
   };
 }

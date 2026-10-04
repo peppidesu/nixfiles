@@ -47,6 +47,12 @@
       zed = lib.mkIf config.programs.zed-editor.enable "zeditor";
       cat = lib.getExe pkgs.bat;
       parrot = "${lib.getExe pkgs.curl} parrot.live";
+
+      ping = "grcx ping";
+      netstat = "grcx netstat";
+      dig = "grcx dig";
+      docker = "grcx docker";
+
     };
 
     initContent = ''
@@ -55,6 +61,15 @@
         alias ssh-slow="infocmp -a xterm-kitty | ssh myserver tic -x -o \~/.terminfo /dev/stdin"
         alias ssh-bare="/bin/ssh"
       fi
+
+      grcx() {
+        local c=$1; shift
+        if (( $+commands[$c] )); then
+          command ${lib.getExe pkgs.grc} "$c" "$@"
+        else
+          command "$c" "$@"
+        fi
+      }
     '';
 
     envExtra = ''
@@ -91,6 +106,7 @@
     pkgs.killall
     pkgs.net-tools
     pkgs.dust
+    pkgs.dig
     inputs.pepoapkgs.packages.${pkgs.stdenv.hostPlatform.system}.btop
   ];
 }

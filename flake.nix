@@ -139,6 +139,10 @@
             inputs.hardware.nixosModules.common-gpu-amd
           ];
         };
+        clam = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./machines/clam/configuration.nix ];
+        };
       };
     };
 }

@@ -2,6 +2,7 @@ let
   lagoon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINwFC0NHKRy8ceAQWdxGHncauk7zf0UWQSaQsR1pF73k root@lagoon";
   ferry = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBJKQeBymU0nYPFrA2dJ4QMfhYQb7BqR6N34HxjJBDQS root@ferry";
   peppidesu-dreadnought = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO97Yve7hz7krbWA2FOgEihMAoGNmb2PhiwrUB3vXPzS peppidesu@dreadnought";
+  peppidesu-archelon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHDmqN9vOXKI8lgVdmUQF2Bg7yZ6lz5tNZmSJN+syr1w peppidesu@archelon";
   archelon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAE6R5oK0crQGOOvGkhhjWMTU5WBpc0JQee8bzVwVOOZ";
 in
 {
@@ -9,6 +10,7 @@ in
   "wg-key-mullvad.age".publicKeys = [
     lagoon
     peppidesu-dreadnought
+    peppidesu-archelon
   ];
 
   # Wireguard private key for archelon.reef
@@ -20,6 +22,7 @@ in
   "wg-key-lagoon.age".publicKeys = [
     lagoon
     peppidesu-dreadnought
+    peppidesu-archelon
   ];
 
   # Wireguard private keys for ferry.reef
@@ -27,15 +30,18 @@ in
   "wg-key-ferry.age".publicKeys = [
     ferry
     peppidesu-dreadnought
+    peppidesu-archelon
   ];
 
   "factorio-token.age".publicKeys = [
     lagoon
     peppidesu-dreadnought
+    peppidesu-archelon
   ];
 
   "attic-anemone.age".publicKeys = [
     archelon
     peppidesu-dreadnought
+    peppidesu-archelon
   ];
 }

@@ -15,12 +15,14 @@
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
-
     ./common
   ]
   ++ lib.optionals osConfig.profiles.graphical.enable [
     ./common/discord
     ./common/obsidian
+  ]
+  ++ lib.optionals osConfig.profiles.graphical.games [
+    inputs.pepoapkgs.homeModules.osu
   ];
 
   config = {
@@ -30,6 +32,8 @@
         # Add overlays your own flake exports (from overlays and pkgs dir):
         inputs.self.overlays.additions
         inputs.self.overlays.modifications
+        inputs.pepoapkgs.overlays.additions
+        inputs.pepoapkgs.overlays.modifications
 
         # You can also add overlays exported from other flakes:
         # neovim-nightly-overlay.overlays.default
@@ -65,6 +69,12 @@
       pkgs.teams-for-linux
       pkgs.bitwarden-desktop
     ];
+
+    programs.osu = {
+      enable = true;
+      nativeWayland = true;
+      pipewireLatency = "32/44100";
+    };
 
     # Nicely reload system units when changing configs
     systemd.user.startServices = "sd-switch";

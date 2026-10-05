@@ -11,6 +11,10 @@
   imports = [ ./bat ];
 
   programs.direnv.enable = true;
+  xdg.configFile."direnv/direnv.toml".text = ''
+    [global]
+    hide_env_diff = true
+  '';
   programs.direnv.enableZshIntegration = true;
 
   programs.gpg.enable = true;
@@ -107,6 +111,6 @@
     pkgs.net-tools
     pkgs.dust
     pkgs.dig
-    inputs.pepoapkgs.packages.${pkgs.stdenv.hostPlatform.system}.btop
+    pkgs.btop
   ];
 }

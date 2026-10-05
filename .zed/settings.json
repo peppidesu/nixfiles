@@ -20,16 +20,16 @@
           // Tell the language server your desired option set, for completion
           // This is lazily evaluated.
           "options": { // Map of eval information
-              // By default, this entriy will be read from `import <nixpkgs> { }`
-              // You can write arbitary nix expression here, to produce valid "options" declaration result.
-              //
-              // *NOTE*: Replace "<name>" below with your actual configuration name.
-              // If you're unsure what to use, you can verify with `nix repl` by evaluating
-              // the expression directly.
-              //
-              "nixos": {
-                  "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.<name>.options"
-              },
+            // By default, this entriy will be read from `import <nixpkgs> { }`
+            // You can write arbitary nix expression here, to produce valid "options" declaration result.
+            //
+            // *NOTE*: Replace "<name>" below with your actual configuration name.
+            // If you're unsure what to use, you can verify with `nix repl` by evaluating
+            // the expression directly.
+            //
+            "nixos": {
+                "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.debug.options"
+            },
 
             // Before configuring Home Manager options, consider your setup:
             // Which command do you use for home-manager switching?
@@ -43,7 +43,7 @@
               // "expr": "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.<name>.options"
 
               // B:
-              "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.<name>.options.home-manager.users.type.getSubOptions []"
+              "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.debug.options.home-manager.users.type.getSubOptions []"
             }
           },
           // Control the diagnostic system

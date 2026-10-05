@@ -31,8 +31,11 @@
 
     hardware.url = "github:NixOS/nixos-hardware/master";
 
-    pepoapkgs.url = "github:itepastra/pepoapkgs";
-    pepoapkgs.inputs.nixpkgs.follows = "nixpkgs";
+    pepoapkgs = {
+      url = "github:itepastra/pepoapkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
@@ -49,6 +52,11 @@
       url = "github:karaolidis/nix-obsidian-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    septabee = {
+      url = "github:Ap6661/septabee-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -58,13 +66,7 @@
 
   outputs =
     {
-      self,
       nixpkgs,
-      home-manager,
-      nixvim,
-      agenix,
-      vpn-confinement,
-      flurry,
       ...
     }@inputs:
     let
@@ -104,44 +106,43 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./machines/lagoon/configuration.nix
-            agenix.nixosModules.default
-            home-manager.nixosModules.default
-            vpn-confinement.nixosModules.default
-            flurry.nixosModules.default
+            inputs.home-manager.nixosModules.default
           ];
         };
         ferry = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
             ./machines/ferry/configuration.nix
-            agenix.nixosModules.default
-            home-manager.nixosModules.default
+            inputs.home-manager.nixosModules.default
           ];
         };
         archelon = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
             ./machines/archelon/configuration.nix
-            agenix.nixosModules.default
-            home-manager.nixosModules.default
-            inputs.hardware.nixosModules.framework-amd-ai-300-series
+            inputs.home-manager.nixosModules.default
           ];
         };
         megalodon = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
             ./machines/megalodon/configuration.nix
-            agenix.nixosModules.default
-            home-manager.nixosModules.default
-            inputs.hardware.nixosModules.common-cpu-amd
-            inputs.hardware.nixosModules.common-cpu-amd-pstate
-            inputs.hardware.nixosModules.common-cpu-amd-zenpower
-            inputs.hardware.nixosModules.common-gpu-amd
+            inputs.home-manager.nixosModules.default
           ];
         };
         clam = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [ ./machines/clam/configuration.nix ];
+        };
+        debug = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            inputs.agenix.nixosModules.default
+            inputs.home-manager.nixosModules.default
+            inputs.vpn-confinement.nixosModules.default
+            inputs.flurry.nixosModules.default
+            inputs.pepoapkgs.nixosModules.default
+          ];
         };
       };
     };

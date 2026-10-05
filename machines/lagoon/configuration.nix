@@ -17,8 +17,9 @@ moduleArgs@{
     inputs.self.nixosModules.netbird
 
     # Or modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
+    inputs.agenix.nixosModules.default
+    inputs.vpn-confinement.nixosModules.default
+    inputs.flurry.nixosModules.default
 
     ./hardening.nix
 

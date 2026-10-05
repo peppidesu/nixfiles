@@ -15,16 +15,20 @@ moduleArgs@{
     inputs.self.nixosModules.neovim
     inputs.self.nixosModules.greeter
     inputs.self.nixosModules.netbird
+    inputs.septabee.nixosModules.default
 
     # Or modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
+    inputs.agenix.nixosModules.default
+    inputs.hardware.nixosModules.common-cpu-amd
+    inputs.hardware.nixosModules.common-cpu-amd-pstate
+    inputs.hardware.nixosModules.common-cpu-amd-zenpower
+    inputs.hardware.nixosModules.common-gpu-amd
+    inputs.pepoapkgs.nixosModules.attic-toggler
 
     ./hardening.nix
     ./hardware-configuration.nix
     ./disk-config.nix
     ../../common/profiles.nix
-    ../../common/attic
   ];
 
   peppidesu.greeter.enable = true;
@@ -56,6 +60,8 @@ moduleArgs@{
   };
 
   profiles.graphical.enable = true;
+  profiles.graphical.games = true;
+
   programs.dconf.enable = true;
 
   home-manager.users."peppidesu" = ../../home-manager/peppidesu.nix;
@@ -108,10 +114,7 @@ moduleArgs@{
 
   users.users = {
     peppidesu = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "correcthorsebatterystaple";
+      hashedPassword = "$6$rounds=65536$.nevQkbHOU4EN1my$orZCLTiCeAz8Tmd1OTPJrnF1MIpQFj/sOYP1q3oa/pBBKZ2ft5aWJd5SP7k2UdfbXSZH4S2iVQEQs62BJv3Sp.";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
@@ -126,10 +129,7 @@ moduleArgs@{
 
     };
     daklab = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "correcthorsebatterystaple";
+      hashedPassword = "$6$rounds=65536$rRJtWk3Ir53IKUpE$7luUO9oVsLD5t8OoZHuLdthQAdEi57XLbSKiCLR4Yb3Au0rSs062zeIFH06s71/JgS3d5nhZxWYNtqF94e.Xh0";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
@@ -158,22 +158,37 @@ moduleArgs@{
   programs.uwsm = {
     enable = false;
   };
-
-  services.homepage-dashboard = {
-    enable = true;
-  };
   environment.systemPackages = [
     pkgs.fprintd
   ];
-  environment.sessionVariables = {
-    AQ_NO_MODIFIERS = "1";
-  };
+
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
   security.pam.services.gtklock = { };
   security.polkit.enable = true;
 
   services.udev.packages = [ pkgs.yubikey-personalization ];
 
   peppidesu.neovim.enable = true;
+
+  # Septabee's options and their defaults
+  programs.septabee = {
+      enable = true;
+      wayland-deps = true; # Install wayland only dependencies
+      version = "latest"; # like [ "latest" "B_T1" "B_T2" ... ]
+      offline = true; # Doesn't require downloading LLVM stuff
+  };
+
+  age.secrets."attic/anemone" = {
+    file = ../../secrets/attic-anemone.age;
+    mode = "600";
+  };
+
+  services.attic-toggler = {
+    enable = true;
+    force = true;
+    token = config.age.secrets."attic/anemone".path;
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "26.05";

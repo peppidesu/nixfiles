@@ -19,7 +19,6 @@
             ./patches/nwg-drawer-valign.patch
           ];
         });
-
     everforest-gtk-theme = final.lib.makeOverridable (
       {
         themes ? [ ],

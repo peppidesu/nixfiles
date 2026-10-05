@@ -10,6 +10,7 @@ moduleArgs@{
 {
   # You can import other NixOS modules here
   imports = [
+
     # If you want to use modules your own flake exports (from modules/nixos):
     # inputs.self.nixosModules.example
     inputs.self.nixosModules.neovim
@@ -17,14 +18,14 @@ moduleArgs@{
     inputs.self.nixosModules.netbird
 
     # Or modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
+    inputs.agenix.nixosModules.default
+    inputs.hardware.nixosModules.framework-amd-ai-300-series
+    inputs.pepoapkgs.nixosModules.attic-toggler
 
     ./hardening.nix
     ./hardware-configuration.nix
     ./disk-config.nix
     ../../common/profiles.nix
-    ../../common/attic
   ];
 
   peppidesu.greeter.enable = true;
@@ -114,10 +115,7 @@ moduleArgs@{
 
   users.users = {
     peppidesu = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "correcthorsebatterystaple";
+      hashedPassword = "$6$rounds=65536$4ThO3NN9RGctx4AS$yHdWnFLnhtnrWqeDEenmXpZvPa17iS23QRRfjReLtOPc6uDJF9ME7jejNCL5dNomyOrUKkSZKNpk7eb3ZPsaT1";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
@@ -132,10 +130,7 @@ moduleArgs@{
 
     };
     daklab = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "correcthorsebatterystaple";
+      hashedPassword = "$6$rounds=65536$eaTdQillKfGMPItP$bYMBZiIygfnCL5lb1xdmpoQyVStRNYSfq.ySQCVo0ql8XO4M3dDtj9Ypp0xXjZxHgoERFP5TAWSva5mNFHPZZ1";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
@@ -165,10 +160,6 @@ moduleArgs@{
     enable = false;
   };
 
-  services.homepage-dashboard = {
-    enable = true;
-  };
-
   services.fprintd.enable = true;
 
   environment.systemPackages = [
@@ -177,7 +168,10 @@ moduleArgs@{
   environment.sessionVariables = {
     AQ_NO_MODIFIERS = "1";
   };
+
+  services.gnome.gnome-keyring.enable = true;
   security.pam.services.greetd.fprintAuth = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
   security.pam.services.gtklock = { };
   security.polkit.enable = true;
 
@@ -215,6 +209,11 @@ moduleArgs@{
       /run/current-system/sw/bin/modprobe snd_acp_pci
       /run/current-system/sw/bin/modprobe snd_acp70
     '';
+  };
+
+  services.attic-toggler = {
+    enable = true;
+    token = config.age.secrets."attic/anemone".path;
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

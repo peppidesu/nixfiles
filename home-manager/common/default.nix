@@ -34,10 +34,8 @@
     pkgs.gnome-calendar
     pkgs.wl-clipboard
     pkgs.swappy
+    pkgs.spotify
   ];
-
-
-  services.gnome-keyring.enable = true;
 
   # xdg desktop portal
   xdg.portal = {
@@ -47,4 +45,6 @@
     ];
     xdgOpenUsePortal = true;
   };
+
+
 }

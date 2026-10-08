@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }: {
   home.packages = [
-    pkgs.codex
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex-acp
+    # pkgs.codex
+    # inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex-acp
     pkgs.claude-code
     pkgs.claude-agent-acp
   ];
@@ -48,15 +48,15 @@
         };
       };
       agent_servers = {
-        "Codex" = {
-          type = "custom";
-          command = "codex-acp";
-          args = [ ];
-          env = {
-            # optional: preload API key via a secret manager
-            # OPENAI_API_KEY = "...";
-          };
-        };
+        # "Codex" = {
+        #   type = "custom";
+        #   command = "codex-acp";
+        #   args = [ ];
+        #   env = {
+        #     # optional: preload API key via a secret manager
+        #     # OPENAI_API_KEY = "...";
+        #   };
+        # };
         "Claude Code" = {
           type = "custom";
           command = "claude-agent-acp";

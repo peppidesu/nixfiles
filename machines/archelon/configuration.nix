@@ -64,7 +64,6 @@ moduleArgs@{
   home-manager.extraSpecialArgs = { inherit inputs; };
   hardware.bluetooth.enable = true;
 
-
   nix =
     let
       flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
@@ -214,6 +213,11 @@ moduleArgs@{
   services.attic-toggler = {
     enable = true;
     token = config.age.secrets."attic/anemone".path;
+    publicKey = "anemone:f/wBQ8yB5geTn96NjwRfbcoEvr8QuykN0iu0Rf2zUC8=";
+    homeSsids = [ "niet-bestaand-netwerk" ];
+    watchStore = {
+      enable = true;
+    };
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

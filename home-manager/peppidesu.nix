@@ -14,15 +14,13 @@
     # inputs.self.homeManagerModules.example
 
     # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
+    inputs.pepoapkgs.homeModules.osu
+
     ./common
   ]
   ++ lib.optionals osConfig.profiles.graphical.enable [
     ./common/discord
     ./common/obsidian
-  ]
-  ++ lib.optionals osConfig.profiles.graphical.games [
-    inputs.pepoapkgs.homeModules.osu
   ];
 
   config = {
@@ -71,9 +69,9 @@
     ];
 
     programs.osu = {
-      enable = true;
+      enable = osConfig.profiles.graphical.games;
       nativeWayland = true;
-      pipewireLatency = "32/44100";
+      pipewireLatency = "64/44100";
     };
 
     # Nicely reload system units when changing configs

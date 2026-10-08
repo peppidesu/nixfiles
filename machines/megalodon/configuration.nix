@@ -69,7 +69,6 @@ moduleArgs@{
   home-manager.extraSpecialArgs = { inherit inputs; };
   hardware.bluetooth.enable = true;
 
-
   nix =
     let
       flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
@@ -173,10 +172,10 @@ moduleArgs@{
 
   # Septabee's options and their defaults
   programs.septabee = {
-      enable = true;
-      wayland-deps = true; # Install wayland only dependencies
-      version = "latest"; # like [ "latest" "B_T1" "B_T2" ... ]
-      offline = true; # Doesn't require downloading LLVM stuff
+    enable = true;
+    wayland-deps = true; # Install wayland only dependencies
+    version = "latest"; # like [ "latest" "B_T1" "B_T2" ... ]
+    offline = true; # Doesn't require downloading LLVM stuff
   };
 
   age.secrets."attic/anemone" = {
@@ -188,7 +187,14 @@ moduleArgs@{
     enable = true;
     force = true;
     token = config.age.secrets."attic/anemone".path;
+    publicKey = "anemone:f/wBQ8yB5geTn96NjwRfbcoEvr8QuykN0iu0Rf2zUC8=";
+    watchStore = {
+      enable = true;
+    };
   };
+
+  hardware.opentabletdriver.enable = true;
+  hardware.opentabletdriver.daemon.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "26.05";

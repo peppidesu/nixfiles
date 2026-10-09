@@ -3,4 +3,5 @@
 pkgs: {
   bluetooth-manager-sidebar = pkgs.callPackage ./bluetooth-manager-sidebar { };
   hyprlandPlugins = pkgs.callPackage ./hyprland-plugins { };
+  samiam = pkgs.callPackage ./samiam { };
 }

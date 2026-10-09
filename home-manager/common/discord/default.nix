@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ config, inputs, ... }: {
   imports = [ inputs.nixcord.homeModules.nixcord ];
 
   programs.nixcord = {
@@ -26,5 +26,15 @@
       };
     };
   };
+  xdg.desktopEntries.discord-minimized = {
+    name = "Discord";
+    exec = "${config.programs.nixcord.discord.package}/bin/discord --start-minimized";
+    icon = "discord";
+    terminal = false;
+    type = "Application";
+  };
 
+  xdg.autostart.entries = [
+    "${config.xdg.dataHome}/applications/discord-minimized.desktop"
+  ];
 }

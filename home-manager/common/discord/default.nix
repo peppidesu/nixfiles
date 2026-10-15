@@ -27,11 +27,14 @@
     };
   };
   xdg.desktopEntries.discord-minimized = {
-    name = "Discord";
-    exec = "${config.programs.nixcord.discord.package}/bin/discord --start-minimized";
-    icon = "discord";
+    name = "Vesktop minimized";
+    exec = "${config.programs.nixcord.vesktop.package}/bin/vesktop --start-minimized";
+    icon = "vesktop";
     terminal = false;
     type = "Application";
+    settings = {
+      Hidden = "true";
+    };
   };
 
   xdg.autostart.entries = [

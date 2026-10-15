@@ -46,4 +46,21 @@ in
     peppidesu-dreadnought
     peppidesu-archelon
   ];
+
+  "sonarr-api-key.age".publicKeys = [
+    lagoon
+    peppidesu-archelon
+  ];
+  "radarr-api-key.age".publicKeys = [
+    lagoon
+    peppidesu-archelon
+  ];
+  "sonarr-api-key-raw.age".publicKeys = [
+    lagoon
+    peppidesu-archelon
+  ];
+  "radarr-api-key-raw.age".publicKeys = [
+    lagoon
+    peppidesu-archelon
+  ];
 }

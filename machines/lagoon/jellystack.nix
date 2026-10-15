@@ -53,6 +53,55 @@ in
       services.prowlarr.enable = true;
       services.flaresolverr.enable = true;
       services.qbittorrent.enable = true;
+      services.recyclarr.enable = true;
+
+
+      age.secrets.sonarr-api-key = {
+        file = "${inputs.self.outPath}/secrets/sonarr-api-key.age";
+        mode = "640";
+      };
+      age.secrets.sonarr-api-key-raw = {
+        file = "${inputs.self.outPath}/secrets/sonarr-api-key-raw.age";
+        mode = "640";
+      };
+      age.secrets.radarr-api-key = {
+        file = "${inputs.self.outPath}/secrets/radarr-api-key.age";
+        mode = "640";
+      };
+      age.secrets.radarr-api-key-raw = {
+        file = "${inputs.self.outPath}/secrets/radarr-api-key-raw.age";
+        mode = "640";
+      };
+
+      services.sonarr.environmentFiles = [ config.age.secrets.sonarr-api-key.path ];
+      services.radarr.environmentFiles = [ config.age.secrets.radarr-api-key.path ];
+
+      services.recyclarr.configuration = {
+        radarr.radarr-main = {
+          api_key = {
+            _secret = "${config.age.secrets.radarr-api-key-raw.path}";
+          };
+          base_url = "http://localhost:7878";
+          delete_old_custom_formats = true;
+          quality_definition.type = "movie";
+          quality_profiles = [
+            { trash_id = "d1d67249d3890e49bc12e275d989a7e9";  # HD Bluray + WEB
+              reset_unmatched_scores.enabled = true; }
+            { trash_id = "64fb5f9858489bdac2af690e27c8f42f";  # UHD Bluray + WEB
+              reset_unmatched_scores.enabled = true; }
+            { trash_id = "722b624f9af1e492284c4bc842153a38";  # Anime Remux
+              reset_unmatched_scoress.enabled = true; }
+          ];
+        };
+        sonarr.sonarr-main = {
+          api_key = {
+            _secret = "${config.age.secrets.sonarr-api-key-raw.path}";
+          };
+          base_url = "http://localhost:8989";
+        };
+      };
+
+
       services.qbittorrent.serverConfig = {
         Preferences = {
           WebUI = {
@@ -155,6 +204,7 @@ in
       "prowlarr"
       "flaresolverr"
       "qbittorrent"
+      "recyclarr"
     ])
   ];
 }

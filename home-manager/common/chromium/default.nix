@@ -16,6 +16,7 @@
     ];
     commandLineArgs = [
       "--password-store=gnome-libsecret"  # or "gnome-libsecret" / "kwallet5"
+      "--disable-features=WaylandWpColorManagerV1"
     ];
   };
 }

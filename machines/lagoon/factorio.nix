@@ -2,7 +2,7 @@
 
   services.factorio = {
 
-    enable = true;
+    enable = false;
     openFirewall = true;
     package = (
       pkgs.factorio-headless.overrideAttrs (oldAttrs: {

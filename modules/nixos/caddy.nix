@@ -12,7 +12,6 @@
   config =
     let
       cfg = config.peppidesu.caddy;
-      host = config.networking.hostName;
       mkConfigForAddress =
         c:
         c.extraConfig or ''
@@ -26,9 +25,8 @@
           "${name}.pbbl.dev".extraConfig = mkConfigForAddress val;
         }) cfg.publicServices)
         (lib.concatMapAttrs (name: val: {
-          "http://${name}.${host}.reef.arpa".extraConfig = mkConfigForAddress val;
-          "http://${name}.${host}.reef".extraConfig = mkConfigForAddress val;
-        }) (cfg.publicServices // cfg.privateServices))
+          "http://${name}.reef".extraConfig = mkConfigForAddress val;
+        }) cfg.privateServices)
       ];
     };
 }

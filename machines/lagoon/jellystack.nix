@@ -29,11 +29,12 @@ in
           "jelly".proxy = "http://localhost:8096";
         };
         privateServices = {
-          "seerr".proxy = "http://10.200.1.1:5055";
-          "sonarr".proxy = "http://10.200.1.1:8989";
-          "radarr".proxy = "http://10.200.1.1:7878";
-          "prowlarr".proxy = "http://10.200.1.1:9696";
-          "qbt".proxy = "http://10.200.1.1:8080";
+          "jelly".proxy = "http://localhost:8096";
+          "seerr.jelly".proxy = "http://10.200.1.1:5055";
+          "sonarr.jelly".proxy = "http://10.200.1.1:8989";
+          "radarr.jelly".proxy = "http://10.200.1.1:7878";
+          "prowlarr.jelly".proxy = "http://10.200.1.1:9696";
+          "qbt.jelly".proxy = "http://10.200.1.1:8080";
         };
       };
 
@@ -46,7 +47,7 @@ in
       };
 
       # servarr
-      services.jellyseerr.enable = true;
+      services.seerr.enable = true;
       services.sonarr.enable = true;
       services.radarr.enable = true;
       services.prowlarr.enable = true;
@@ -148,7 +149,7 @@ in
 
     # Confine servarr services to VPN namespace
     (confineServices [
-      "jellyseerr"
+      "seerr"
       "sonarr"
       "radarr"
       "prowlarr"

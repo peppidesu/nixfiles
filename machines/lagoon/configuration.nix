@@ -152,6 +152,11 @@ moduleArgs@{
     };
   };
 
+  services.roon-server = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.caddy = {
     enable = true;
     # package = pkgs.caddy.withPlugins {

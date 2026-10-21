@@ -11,6 +11,7 @@
   lua,
   mkHyprlandPlugin,
   nix-update-script,
+  gpu-screen-recorder,
   nlohmann_json,
   pipewire,
   qt6,
@@ -48,6 +49,7 @@ mkHyprlandPlugin (finalAttrs: {
     qt6.qtwayland
     libultrahdr
     opencv
+    gpu-screen-recorder
   ];
 
   cmakeFlags = [

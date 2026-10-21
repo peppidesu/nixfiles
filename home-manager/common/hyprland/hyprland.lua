@@ -44,7 +44,7 @@ hl.config({
 		border_size = 1,
 		["col.active_border"] = "rgb(e57e80)",
 		["col.inactive_border"] = "rgb(829181)",
-		layout = "dwindle",
+		layout = "scrolling",
 		allow_tearing = true,
 
 		snap = {
@@ -68,14 +68,14 @@ hl.config({
 
 		blur = {
 			enabled = true,
-			size = 4,
+			size = 3,
 			passes = 3,
 			noise = 0,
 			xray = false,
 			special = false,
-			brightness = 0.9,
-			contrast = 1.2,
-			vibrancy = 0.25,
+			brightness = 0.95,
+			contrast = 1.35,
+			vibrancy = 0.2,
 			popups = true,
 			ignore_opacity = true,
 		},
@@ -111,7 +111,7 @@ hl.animation({ leaf = "border", enabled = true, speed = 2, bezier = "default" })
 hl.animation({ leaf = "fade", enabled = true, speed = 2, bezier = "default" })
 hl.animation({ leaf = "fadeSwitch", enabled = true, speed = 9, bezier = "default" })
 hl.animation({ leaf = "fadeLayers", enabled = true, speed = 2, bezier = "default" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 2, bezier = "default", style = "slidefade 50%" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 2, bezier = "default", style = "slidefadevert 50%" })
 hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 2, bezier = "default", style = "slidefadevert -20%" })
 
 -- ---------------------------------------------------------------------------
@@ -121,6 +121,12 @@ hl.config({
 	dwindle = {
 		preserve_split = true,
 		smart_resizing = true,
+	},
+	scrolling = {
+		follow_focus = false,
+		fullscreen_on_one_column = false,
+		follow_min_visible = 0.1,
+		column_width = 0.45,
 	},
 })
 
@@ -153,7 +159,11 @@ hl.config({
 		workspace_swipe_distance = 300,
 	},
 })
-hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
+hl.gesture({ fingers = 3, direction = "horizontal", action = "scroll_move" })
+hl.gesture({ fingers = 3, direction = "vertical", action = "workspace" })
+hl.gesture({ fingers = 4, direction = "swipe", action = "move" })
+hl.gesture({ fingers = 4, direction = "swipe", mods = "CTRL", action = "resize" }) 
+hl.gesture({ fingers = 4, direction = "pinchout", action = "fullscreen", mode = "maximized" })
 
 -- ---------------------------------------------------------------------------
 -- MISC
@@ -419,10 +429,10 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%"), { locke
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { locked = true, repeating = true })
 
 hl.bind("print", function()
-	hl.plugin.hyprcapture.open()
+	hl.plugin.hyprcapture.open_editor()
 end)
 hl.bind("SHIFT + print", function()
-	hl.plugin.hyprcapture.open("fullscreen")
+	hl.plugin.hyprcapture.open_editor("fullscreen")
 end)
 
 -- Hyper (Caps lock) layer ------------------------------------------------------

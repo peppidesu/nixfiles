@@ -120,7 +120,7 @@
       initialPassword = "correcthorsebatterystaple";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO97Yve7hz7krbWA2FOgEihMAoGNmb2PhiwrUB3vXPzS peppidesu@dreadnought"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHDmqN9vOXKI8lgVdmUQF2Bg7yZ6lz5tNZmSJN+syr1w peppidesu@archelon"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqaiJUEzKbdGcIPzQwPFvTn1Gh5E00a/6MDs5JtBwOC peppidesu@megalodon"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINwFC0NHKRy8ceAQWdxGHncauk7zf0UWQSaQsR1pF73k root@lagoon"
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect

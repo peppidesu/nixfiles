@@ -6,7 +6,7 @@
 }:
 {
   services.flurry = {
-    enable = true;
+    enable = false;
     package = inputs.flurry.packages.${pkgs.stdenv.hostPlatform.system}.default;
     host = "0.0.0.0";
     web_host = "0.0.0.0:44902";

@@ -79,6 +79,17 @@
     fsType = "nfs4";
   };
 
+  fileSystems."/mnt/nfs/synology/music" = {
+    device = "192.168.1.101:/volume2/music";
+    fsType = "nfs4";
+  };
+
+  fileSystems."/mnt/nfs/synology/hi-res-audio" = {
+    device = "192.168.1.101:/volume2/hi-res-audio";
+    fsType = "nfs";
+    options = [ "vers=3" ];
+  };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

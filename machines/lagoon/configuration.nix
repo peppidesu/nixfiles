@@ -157,6 +157,7 @@ moduleArgs@{
     enable = true;
     openFirewall = true;
   };
+  services.avahi.enable = true;
 
   services.caddy = {
     enable = true;

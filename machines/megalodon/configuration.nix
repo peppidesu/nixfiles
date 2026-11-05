@@ -60,9 +60,6 @@ moduleArgs@{
   };
 
   boot = {
-    # required so Plymouth can own the graphical LUKS prompt
-    initrd.systemd.enable = true;
-
     plymouth = {
       enable = true;
       theme = "rings";                     # the theme name you picked
@@ -75,7 +72,6 @@ moduleArgs@{
 
     # keep the boot quiet so the splash isn't fighting text output
     consoleLogLevel = 3;
-    initrd.verbose = false;
     kernelParams = [ "quiet" "splash" "rd.udev.log_level=3" "rd.systemd.show_status=auto" ];
   };
 

@@ -123,7 +123,7 @@ in
             AnonymousModeEnabled = true;
             GlobalMaxRatio = 2;
             GlobalMaxInactiveSeedingMinutes = 10080;
-            ShareLimitAction = "RemoveWithContent";
+            ShareLimitAction = "Stop";
           };
         };
         Application = {

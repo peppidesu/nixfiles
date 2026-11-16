@@ -119,6 +119,18 @@ moduleArgs@{
     tempAddresses = "disabled";
   };
 
+  services.beesd.filesystems.root = {
+    spec = "/";
+    hashTableSizeMB = 2048;
+    verbosity = "info";
+    extraOptions = [
+      "--thread-count"
+      "2"
+      "--loadavg-target"
+      "4"
+    ];
+  };
+
   programs.zsh.enable = true;
   services.pcscd.enable = true;
   programs.gnupg.agent = {

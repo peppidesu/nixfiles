@@ -4,4 +4,5 @@ pkgs: {
   bluetooth-manager-sidebar = pkgs.callPackage ./bluetooth-manager-sidebar { };
   hyprlandPlugins = pkgs.callPackage ./hyprland-plugins { };
   samiam = pkgs.callPackage ./samiam { };
+  jellyfin-ffmpeg-shim = pkgs.callPackage ./jellyfin-ffmpeg-shim { };
 }

@@ -21,13 +21,13 @@
 
 mkHyprlandPlugin (finalAttrs: {
   pluginName = "hyprcapture";
-  version = "0.4.2-0.56.2";
+  version = "0.6.0-v0.57.0";
 
   src = fetchFromGitHub {
     owner = "gfhdhytghd";
     repo = "HyprCapture";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-uTcUsV/sEkZ1TbAuto05eeVT2kQ++wkbs4a/5Pw3z3g=";
+    hash = "sha256-M3YB76XNiuN37ARgicl5ImEhiRHgNvxWu9OtxyhunsI=";
   };
 
   nativeBuildInputs = [

@@ -9,19 +9,16 @@ let
   confineServices =
     xs:
     lib.mkMerge (
-      [
-        {
-        }
-      ]
-      ++ (builtins.map (name: {
+      map (name: {
         systemd.services.${name}.vpnConfinement = {
           enable = true;
           vpnNamespace = "wgmv";
         };
-      }) xs)
+      }) xs
     );
 in
 {
+  imports = [ inputs.self.nixosModules.jellyfin-ffmpeg-shim ];
   config = lib.mkMerge [
     {
       peppidesu.caddy = {
@@ -83,6 +80,7 @@ in
           };
           base_url = "http://localhost:7878";
           delete_old_custom_formats = true;
+
           quality_definition.type = "movie";
           quality_profiles = [
             { trash_id = "d1d67249d3890e49bc12e275d989a7e9";  # HD Bluray + WEB
@@ -90,7 +88,7 @@ in
             { trash_id = "64fb5f9858489bdac2af690e27c8f42f";  # UHD Bluray + WEB
               reset_unmatched_scores.enabled = true; }
             { trash_id = "722b624f9af1e492284c4bc842153a38";  # Anime Remux
-              reset_unmatched_scoress.enabled = true; }
+              reset_unmatched_scores.enabled = true; }
           ];
         };
         sonarr.sonarr-main = {
@@ -100,7 +98,6 @@ in
           base_url = "http://localhost:8989";
         };
       };
-
 
       services.qbittorrent.serverConfig = {
         Preferences = {

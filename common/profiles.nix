@@ -29,8 +29,10 @@
         enableWsi = true;
         capSysNice = false;
       };
+      hardware.graphics.extraPackages = [ pkgs.vkbasalt ];
       programs.steam.extraCompatPackages = [
         pkgs.proton-ge-bin
+        pkgs.mangohud
       ];
     })
   ];

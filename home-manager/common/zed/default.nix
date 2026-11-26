@@ -32,19 +32,11 @@
       diff_view_style = "unified";
       icon_theme = "Zed (Default)";
       context_servers = {
-        atlassian = {
-          enabled = true;
-          command = "npx";
-          args = [
-            "-y"
-            "mcp-remote@latest"
-            "https://mcp.atlassian.com/v1/mcp/authv2"
-            "--transport"
-            "http-only"
-          ];
-        };
         chrome-devtools-mcp-zed = {
           enabled = true;
+          settings = {
+            executable_path = "chromium";
+          };
         };
       };
       agent_servers = {

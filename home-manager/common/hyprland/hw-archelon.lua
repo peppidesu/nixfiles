@@ -5,10 +5,16 @@
 
 hl.monitor({
     output               = "eDP-1",
-    mode                 = "2560x1600@165",
+    mode                 = "2560x1600@60",
     position             = "0x0",
     scale                = 1.33,
     vrr                  = true,
+})
+hl.monitor({
+    output = "desc:Optoma Corporation Optoma UHD Q7G6",
+    mode = "3840x2160@24",
+    cm = "hdr",
+    bitdepth = 10,
 })
 
 -------------------------------

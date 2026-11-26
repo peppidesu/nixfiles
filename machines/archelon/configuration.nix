@@ -225,6 +225,22 @@ moduleArgs@{
     };
   };
 
+  boot = {
+    plymouth = {
+      enable = true;
+      theme = "rings";                     # the theme name you picked
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "rings" ];   # install ONLY this one
+        })
+      ];
+    };
+
+    # keep the boot quiet so the splash isn't fighting text output
+    consoleLogLevel = 3;
+    kernelParams = [ "quiet" "splash" "rd.udev.log_level=3" "rd.systemd.show_status=auto" ];
+  };
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "26.05";
 }

@@ -63,19 +63,19 @@ hl.config({
 	decoration = {
 		rounding = 5,
 		dim_special = 0.3,
-		active_opacity = 0.9,
-		inactive_opacity = 0.8,
+		active_opacity = 0.75,
+		inactive_opacity = 0.6,
 
 		blur = {
 			enabled = true,
-			size = 3,
+			size = 10,
 			passes = 3,
 			noise = 0,
 			xray = false,
 			special = false,
-			brightness = 0.95,
-			contrast = 1.35,
-			vibrancy = 0.2,
+			brightness = 1.00,
+			contrast = 0.8,
+			vibrancy = 0.1,
 			popups = true,
 			ignore_opacity = true,
 		},
@@ -162,7 +162,7 @@ hl.config({
 hl.gesture({ fingers = 3, direction = "horizontal", action = "scroll_move" })
 hl.gesture({ fingers = 3, direction = "vertical", action = "workspace" })
 hl.gesture({ fingers = 4, direction = "swipe", action = "move" })
-hl.gesture({ fingers = 4, direction = "swipe", mods = "CTRL", action = "resize" }) 
+hl.gesture({ fingers = 4, direction = "swipe", mods = "CTRL", action = "resize" })
 hl.gesture({ fingers = 4, direction = "pinchout", action = "fullscreen", mode = "maximized" })
 
 -- ---------------------------------------------------------------------------
@@ -317,7 +317,7 @@ local forceOpaque = hl.window_rule({
 })
 
 forceOpaque:set_enabled(false)
-_G.hyprpickerOpaque = function(on)
+_G.forceOpaque = function(on)
     hl.animation({ leaf = "fadeSwitch", enabled = on == false, speed = 9, bezier = "default" })
     forceOpaque:set_enabled(on == true)
 end
@@ -336,7 +336,7 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(menu))
 
 -- Widgets
-hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprctl eval '_G.hyprpickerOpaque(true)'; hyprpicker -nra; hyprctl eval '_G.hyprpickerOpaque(false)'"))
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprctl eval '_G.forceOpaque(true)'; hyprpicker -nra; hyprctl eval '_G.forceOpaque(false)'"))
 hl.bind(mainMod .. " + backspace", hl.dsp.exec_cmd("nwg-bar -f"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("killall -SIGUSR1 waybar"))
 
